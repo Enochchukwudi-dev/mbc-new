@@ -155,12 +155,12 @@ export default function HomePage() {
               </button>
 
               <div className="absolute inset-x-0 bottom-6 flex justify-center">
-                <button className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full font-semibold shadow-lg">
+                <Link href="/Gallery#videos" className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full font-semibold shadow-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path d="M4.5 3.5a1 1 0 011.5-.86l10 6.5a1 1 0 010 1.72l-10 6.5A1 1 0 014.5 16.5V3.5z" />
                   </svg>
                   Watch Reels
-                </button>
+                </Link>
               </div>
             </article>
           </div>

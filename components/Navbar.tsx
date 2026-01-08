@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 function Navbar() {
@@ -15,22 +16,8 @@ function Navbar() {
               href="/"
               className="flex items-center text-xl font-bold text-gray-900"
             >
-              <svg
-                className="h-8 w-8 mr-2 text-indigo-600"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-              <span>MyLogo</span>
+              <Image src="/rew.png" alt="MyLogo" width={79} height={79} className="h-10 w-30  object-contain" />
+             
             </Link>
           </div>
 
@@ -55,7 +42,7 @@ function Navbar() {
             <button
               onClick={() => setOpen(!open)}
               aria-label="Toggle menu"
-              className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 relative z-60"
             >
               {open ? (
                 <X className="h-6 w-6 text-gray-800" />
@@ -68,12 +55,12 @@ function Navbar() {
 
         {/* Mobile menu (md:hidden) - fixed off-canvas panel that slides in from the right */}
         <div
-          className={`md:hidden fixed top-16 right-0 z-50 w-full  bottom-0 bg-white shadow-lg transform transition-transform duration-400 ease-in-out ${
+          className={`md:hidden fixed top-0  pt-15 right-0 z-50 w-full  bottom-0 bg-white shadow-lg transform transition-transform  duration-700 ease-in-out ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
           aria-hidden={!open}
         >
-          <div className="py-4 px-4 space-y-1">
+          <div className="py-4 px-7 space-y-5">
             <Link
               href="/"
               onClick={() => setOpen(false)}
@@ -100,7 +87,7 @@ function Navbar() {
               onClick={() => setOpen(false)}
               className="block px-2 py-2 text-gray-700 hover:bg-gray-100 rounded"
             >
-              Contact
+             Book Us
             </Link>
           </div>
         </div>
