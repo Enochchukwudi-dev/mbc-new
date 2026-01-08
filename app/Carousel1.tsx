@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import Image from "next/image";
 
 const slides = [
   {
@@ -50,7 +51,7 @@ const slides = [
   },
 ];
 
-export default function Carousel(): JSX.Element {
+export default function Carousel() {
   const [index, setIndex] = useState(0);
   const startX = useRef<number | null>(null);
 
@@ -101,10 +102,11 @@ export default function Carousel(): JSX.Element {
             key={s.id}
             className="flex-shrink-0 w-full h-full relative rounded-2xl overflow-hidden"
           >
-            <img
+            <Image
               src={s.image}
               alt={s.alt}
-              className="w-full h-full object-cover block rounded-2xl"
+              fill
+              className="object-cover rounded-2xl"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
             <div className="absolute bottom-6 left-0 w-full px-4">
