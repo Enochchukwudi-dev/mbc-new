@@ -2,14 +2,18 @@
 export const dynamic = "force-dynamic";
 
 import Carousel from "./Carousel";
+import Carousel1 from "./Carousel1";
 import Image from "next/image";
-import Menu from "../components/Menu";
+import Link from 'next/link'
+
+import Navbar from "../components/Navbar";
 import Footer from "../pages/Footer";
 
 export default function HomePage() {
   return (
     <>
-    <main className="min-h-screen py-8 bg-gray-200 dark:bg-gray-900 pt-20">
+      <Navbar />
+      <main className="min-h-screen py-8 pt-25 bg-gray-200 dark:bg-gray-900 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         {/* Header */}
         <header className="flex items-start justify-between gap-4 ">
@@ -23,17 +27,17 @@ export default function HomePage() {
             />
 
             <div className="flex flex-col ">
-              <span className="text-sm text-gray-500">Good morning</span>
-              <span className="text-lg font-semibold">Enoch Chukwudi</span>
+              <span className="text-sm text-gray-500">   Welcome to MBC Const. Company Ltd</span>
+              <span className="text-lg font-semibold">Explore,</span>
             </div>
           </div>
 
-          <Menu />
+   
         </header>
         
 
         {/* Search */}
-        <div className="mt-6">
+        <div className="mt-6 mb-10">
           <label htmlFor="search" className="sr-only">Search</label>
           <div className="relative">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
@@ -48,11 +52,17 @@ export default function HomePage() {
             />
           </div>
         </div>
-
+         {/* Search */}
+        <Carousel1 />
+      
         {/* Section header */}
         <div className="mt-8 flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Popular For you</h2>
-          <a className="text-sm text-gray-500 hover:underline cursor:hover" >View all</a>
+          <div>
+            <h2 className="text-xl font-semibold">Gallery</h2>
+            <p className="text-xs text-gray-500">Completed projects and architectural Design</p>
+          </div>
+          
+          <Link href="/Gallery" className="text-sm text-gray-500 hover:underline">View all</Link>
         </div>
 
         {/* Cards grid */}
@@ -86,6 +96,15 @@ export default function HomePage() {
               <p className="mt-1 text-sm text-white/90">Cinematic showcase for tropical living.</p>
             </div>
           </article>
+        </div>
+           {/* Home */}
+         <div className="mt-8 flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-semibold">Our Services</h2>
+            <p className="text-xs text-gray-500">Completed projects and architectural Design</p>
+          </div>
+          
+          <Link href="/Gallery" className="text-sm text-gray-500 hover:underline">View all</Link>
         </div>
       </div>
     </main>
