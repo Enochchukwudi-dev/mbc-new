@@ -29,9 +29,9 @@ export default function HomePage() {
               <div className="flex flex-col ">
                 <span className="text-sm text-gray-500">
                   {" "}
-                  Welcome to MBC Const. Company Ltd
+                  Welcome,
                 </span>
-                <span className="text-lg font-semibold">Explore,</span>
+                <span className="text-lg font-semibold">Enoch Chukwudi</span>
               </div>
             </div>
           </header>
@@ -66,7 +66,7 @@ export default function HomePage() {
           {/* Search */}
           <Carousel1 />
 
-          {/* Section header */}
+          {/* Gallery */}
           <div className="mt-8 flex items-center justify-between">
             <div>
               <h2 className="text-xl font-semibold">Gallery</h2>
@@ -126,21 +126,58 @@ export default function HomePage() {
               </div>
             </article>
           </div>
-          {/* Home */}
-          <div className="mt-8 flex items-center justify-between">
+
+
+          {/* Services */}
+          <div className="mt-8 flex items-center justify-between mt-15 ">
             <div>
               <h2 className="text-xl font-semibold">Our Services</h2>
               <p className="text-xs text-gray-500">
-                Completed projects and architectural Design
+                What we offer
               </p>
             </div>
+          </div>
 
-            <Link
-              href="/Gallery"
-              className="text-sm text-gray-500 hover:underline"
-            >
-              View all
-            </Link>
+          {/* Services grid */}
+          <div className="mt-6 grid grid-cols-2 h-154  sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                img: "/w1.jpeg",
+                title: "Structural Building Construction",
+              },
+              {
+                img: "/w2.jpeg",
+                title: "Roofing Systems Installation",
+   
+              },
+              {
+                img: "/w3.jpeg",
+                title: "Felting & Waterproofing Solutions",
+       
+              },
+              {
+                img: "/w4.jpeg",
+                title: "Concrete & Reinforcement Works",
+   
+              },
+            ].map((s, i) => (
+              <article
+                key={i}
+                className="bg-gray-300 text-white rounded-2xl shadow-lg overflow-hidden border border-gray-200"
+              >
+                <div className="relative h-48 w-full  shadow-lg">
+                  <Image src={s.img} alt={s.title} fill className="object-cover" />
+                </div>
+                <div className="p-3">
+                  <h3 className="text-xs font-semibold text-black">{s.title}</h3>
+                  <div className="mt-4">
+                    <button className="inline-flex items-center px-3 py-2 bg-slate-700/95 hover:bg-slate-600 rounded-md text-xs text-white">
+                      View full image
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </main>
