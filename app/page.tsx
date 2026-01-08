@@ -3,29 +3,34 @@ export const dynamic = "force-dynamic";
 
 import Carousel from "./Carousel";
 import Image from "next/image";
+import Menu from "../components/Menu";
+import Footer from "../pages/Footer";
 
 export default function HomePage() {
   return (
+    <>
     <main className="min-h-screen py-8 bg-gray-200 dark:bg-gray-900 pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         {/* Header */}
         <header className="flex items-start justify-between gap-4 ">
           <div className="flex items-center gap-4 ">
+            <Image
+              src="/enoch.jpeg"
+              alt="Enoch Chukwudi"
+              width={56}
+              height={40}
+              className="h-12 w-12 rounded-full object-cover shadow-sm"
+            />
+
             <div className="flex flex-col ">
               <span className="text-sm text-gray-500">Good morning</span>
-              <span className="text-lg font-semibold">Shahzaib Ahmad</span>
+              <span className="text-lg font-semibold">Enoch Chukwudi</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              aria-label="Notifications"
-              className="p-2 rounded-lg bg-white/80 dark:bg-gray-800 shadow-sm"
-            >
-              <Image src="/bell.svg" width={22} height={22} className="h-6 w-6" alt="Notifications" />
-            </button>
-          </div>
+          <Menu />
         </header>
+        
 
         {/* Search */}
         <div className="mt-6">
@@ -39,7 +44,7 @@ export default function HomePage() {
             <input
               id="search"
               placeholder="Find something now"
-              className="block w-full rounded-xl border border-transparent bg-white/90 dark:bg-gray-800 py-3 pl-10 pr-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:border-gray-900"
+              className="block w-full rounded-xl border border-transparent bg-white/90 dark:bg-gray-800 py-3 pl-10 pr-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-gray-900/10"
             />
           </div>
         </div>
@@ -67,7 +72,7 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
             <div className="absolute top-4 left-4">
-              <div className="inline-flex items-center bg-white text-sm font-semibold px-3 py-1 rounded-full shadow">$1,500</div>
+              <div className="inline-flex items-center bg-white text-sm font-semibold px-3 py-1 rounded-full shadow">₦66,000 per night</div>
             </div>
 
             <button className="absolute top-4 right-4 p-2 rounded-lg bg-white/80">
@@ -84,5 +89,7 @@ export default function HomePage() {
         </div>
       </div>
     </main>
+      <Footer />
+    </>
   );
 }

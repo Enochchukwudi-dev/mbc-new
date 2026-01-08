@@ -6,7 +6,7 @@ const slides = [
   {
     id: 1,
     title: "Aurora Retreat",
-    price: "$3,500,000",
+    price: "₦50,000 per night",
     subtitle:
       "A sanctuary with timeless design and exceptional craftsmanship to inspire your next chapter.",
     image: "/a1.JPG",
@@ -15,7 +15,7 @@ const slides = [
   {
     id: 2,
     title: "Chuzzy Home Retreat",
-    price: "$500,000",
+    price: "₦75,000 per night",
     subtitle:
       "A sanctuary with timeless design and exceptional craftsmanship to inspire your next chapter.",
     image: "/a2.JPG",
@@ -78,7 +78,7 @@ export default function Carousel() {
             <div className="absolute bottom-0 left-0 w-full px-4">
               <div className="w-full md:w-3/4 lg:w-1/2 bg-gradient-to-b from-green-950/60 to-green-950/60 text-white px-4 py-3 rounded-2xl shadow-lg backdrop-blur-md">
                 <h3 className="text-base md:text-lg font-semibold">{s.title}</h3>
-                <p className="mt-1 text-xs text-gray-300 font-light">{s.subtitle}</p>
+                <p className="mt-1 text-xs text-gray-300 font-medium">{s.subtitle}</p>
               </div>
             </div>
           </article>
