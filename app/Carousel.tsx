@@ -9,7 +9,7 @@ const slides = [
     price: "₦50,000 per night",
     subtitle:
       "A sanctuary with timeless design and exceptional craftsmanship to inspire your next chapter.",
-    image: "/a1.JPG",
+    image: "/w2copy.jpeg",
     alt: "Aurora Retreat",
   },
   {
@@ -18,7 +18,7 @@ const slides = [
     price: "₦75,000 per night",
     subtitle:
       "A sanctuary with timeless design and exceptional craftsmanship to inspire your next chapter.",
-    image: "/a2.JPG",
+    image: "/w3copy.jpeg",
     alt: "Chuzzy Home Retreat",
   },
 ];

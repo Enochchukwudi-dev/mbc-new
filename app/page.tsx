@@ -90,16 +90,54 @@ export default function HomePage() {
               <Carousel />
             </div>
 
-            {/* Secondary card */}
-            <article
-              className="relative rounded-2xl overflow-hidden shadow-lg h-56 md:h-72 bg-cover bg-center"
-              style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1200&q=60')`,
-              }}
-              role="img"
-              aria-label="Palmview Estate"
+             {/* Videos */}
+          <div className="mt-8 flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-semibold">Reels</h2>
+              <p className="text-xs text-gray-500">
+               Videos of Completed projects 
+              </p>
+            </div>
+
+            <Link
+              href="/Gallery"
+              className="text-sm text-gray-500 hover:underline"
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              View all
+            </Link>
+          </div>
+
+            {/* video card (two autoplaying reels) */}
+            <article
+              className="relative rounded-2xl overflow-hidden shadow-lg h-56 md:h-72"
+              role="region"
+              aria-label="Palmview Estate videos"
+            >
+              <div className="grid grid-cols-2 h-full">
+                <div className="relative w-full h-56 md:h-72">
+                  <video
+                    src="/house1.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="relative w-full h-56 md:h-72">
+                  <video
+                    src="/podcast2.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                    preload="metadata"
+                  />
+                </div>
+              </div>
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
               <div className="absolute top-4 left-4">
                 <div className="inline-flex items-center bg-white text-sm font-semibold px-3 py-1 rounded-full shadow">
@@ -120,9 +158,7 @@ export default function HomePage() {
 
               <div className="absolute bottom-6 left-6 text-white">
                 <h3 className="text-xl font-bold">Palmview Estate</h3>
-                <p className="mt-1 text-sm text-white/90">
-                  Cinematic showcase for tropical living.
-                </p>
+                <p className="mt-1 text-sm text-white/90">Cinematic showcase for tropical living.</p>
               </div>
             </article>
           </div>
@@ -139,25 +175,45 @@ export default function HomePage() {
           </div>
 
           {/* Services grid */}
-          <div className="mt-6 grid grid-cols-2 h-154  sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="mt-6 grid grid-cols-2 h-full  sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                img: "/w1.jpeg",
+                img: "/conc7.jpeg",
                 title: "Structural Building Construction",
               },
               {
-                img: "/w2.jpeg",
+                img: "/roof2.jpeg",
                 title: "Roofing Systems Installation",
    
               },
               {
-                img: "/w3.jpeg",
+                img: "/felt2.jpeg",
                 title: "Felting & Waterproofing Solutions",
        
               },
               {
-                img: "/w4.jpeg",
+                img: "/conc2.jpeg",
                 title: "Concrete & Reinforcement Works",
+   
+              },
+               {
+                img: "/conc1.jpeg",
+                title: "Mansory & Block Works",
+   
+              },
+               {
+                img: "/inte3.jpeg",
+                title: "Interior & Exterior Finishing",
+   
+              },
+               {
+                img: "/inte4.jpeg",
+                title: "Flooring, Tiling & Paving",
+   
+              },
+               {
+                img: "/inte6.jpeg",
+                title: "Construction Project Supervision",
    
               },
             ].map((s, i) => (
