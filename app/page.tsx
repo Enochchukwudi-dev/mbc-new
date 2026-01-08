@@ -140,9 +140,7 @@ export default function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
               <div className="absolute top-4 left-4">
-                <div className="inline-flex items-center bg-white text-sm font-semibold px-3 py-1 rounded-full shadow">
-                  ₦66,000 per night
-                </div>
+               
               </div>
 
               <button className="absolute top-4 right-4 p-2 rounded-lg bg-white/80">
@@ -156,9 +154,13 @@ export default function HomePage() {
                 </svg>
               </button>
 
-              <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-xl font-bold">Palmview Estate</h3>
-                <p className="mt-1 text-sm text-white/90">Cinematic showcase for tropical living.</p>
+              <div className="absolute inset-x-0 bottom-6 flex justify-center">
+                <button className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full font-semibold shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M4.5 3.5a1 1 0 011.5-.86l10 6.5a1 1 0 010 1.72l-10 6.5A1 1 0 014.5 16.5V3.5z" />
+                  </svg>
+                  Watch Reels
+                </button>
               </div>
             </article>
           </div>
