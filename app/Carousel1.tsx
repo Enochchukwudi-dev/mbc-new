@@ -9,7 +9,7 @@ const slides = [
     title: "MBC Building Construction Enterprise",
     title2: "RC NO: 3492332",
     subtitle:
-      "A sanctuary with timeless design and exceptional craftsmanship to inspire your next chapter.",
+      "Led by Engr. Chukwudi Uchemba",
     image: "/enginner.jpeg",
     alt: "Aurora Retreat",
   },
@@ -127,7 +127,7 @@ export default function Carousel() {
                     {s.title2}
                   </p>
                 )}
-                <p className={`mt-1 text-xs font-medium ${s.title.includes("MBC") ? "text-white/90" : "text-gray-300"}`}>
+                <p className={`mt-1 text-base font-medium ${s.title.includes("MBC") ? "text-white/90" : "text-gray-300"}`}>
                   {s.subtitle}
                 </p>
               </div>
