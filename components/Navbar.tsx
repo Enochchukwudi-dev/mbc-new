@@ -11,13 +11,13 @@ function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex  items-center justify-between h-16">
           {/* Logo (left) */}
-          <div className="flex items-center flex-col pt-8 ">
+          <div className="flex items-center  flex-col pt-8 ">
             <Link
               href="/"
               className="flex flex-col items-center text-gray-900"
             >
-              <Image src="/gala.png" alt="MyLogo" width={79} height={79} className="h-8 w-28 object-contain" />
-              <div className="mt-1 items-start">
+              <Image src="/gala.png" alt="MyLogo" width={79} height={79} className="h-7 w-28 object-contain" />
+              <div className="mt-1 text-center md:text-left">
                 <span className="block" style={{ fontSize: '10px', lineHeight: 1 }}>
                   MAROCK BUILDING CONST.
                 </span>
