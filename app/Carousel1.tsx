@@ -119,7 +119,7 @@ export default function Carousel() {
                   } text-white px-4 py-3 rounded-2xl shadow-lg backdrop-blur-md w-full md:w-3/4 lg:w-1/2`
                 }
               >
-                <h3 className="text-base md:text-lg font-semibold bg-blue-500 py-1 rounded-lg ">
+                <h3 className="text-base md:text-lg font-semibold bg-slate-700 py-1 rounded-lg ">
                   {s.title}
                 </h3>
                 {s.title2 && (
