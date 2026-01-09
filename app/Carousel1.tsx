@@ -86,7 +86,7 @@ export default function Carousel() {
 
   return (
     <div
-      className="relative w-full h-106 md:h-72 overflow-hidden rounded-2xl shadow-lg mb-12"
+      className="relative w-full h-106 md:h-72 overflow-hidden  mb-12"
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
       onTouchStart={onTouchStart}
@@ -103,13 +103,16 @@ export default function Carousel() {
             key={s.id}
             className="flex-shrink-0 w-full h-full relative rounded-2xl overflow-hidden"
           >
-            <Image
-              src={s.image}
-              alt={s.alt}
-              fill
-              className="object-cover rounded-2xl"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+            <div className="relative w-full h-full flex items-center justify-center ">
+              <Image
+                src={s.image}
+                alt={s.alt}
+                width={1200}
+                height={800}
+                className="object-contain max-w-full max-h-full rounded-2xl"
+              />
+            </div>
+            <div className="absolute inset-0 " />
             <div className="absolute bottom-6 left-0 w-full px-4">
               <div
                 className={
@@ -120,15 +123,15 @@ export default function Carousel() {
                   } text-white px-4 py-3 rounded-2xl shadow-lg backdrop-blur-md w-full md:w-3/4 lg:w-1/2`
                 }
               >
-                <h3 className="text-lg md:text-lg font-semibold bg-black/20 py-1 rounded-lg ">
+                <h3 className="text-base md:text-lg font-semibold bg-black/20 py-1 rounded-lg ">
                   {s.title}
                 </h3>
                 {s.title2 && (
-                  <p className={`mt-1 text-base font-medium ${s.title.includes("MBC") ? "text-white/90" : "text-gray-300"}`}>
+                  <p className={`mt-1 text-sm font-medium ${s.title.includes("MBC") ? "text-white/90" : "text-gray-300"}`}>
                     {s.title2}
                   </p>
                 )}
-                <p className={`mt-1 text-sm font-light ${s.title.includes("MBC") ? "text-white/96" : "text-gray-300"}`}>
+                <p className={`mt-1 text-xs font-light ${s.title.includes("MBC") ? "text-white/96" : "text-gray-300"}`}>
                   {s.subtitle}
                 </p>
               </div>
