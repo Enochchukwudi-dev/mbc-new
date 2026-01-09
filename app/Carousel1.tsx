@@ -2,11 +2,12 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const slides = [
   {
     id: 1,
-    title: "MBC Building Construction Enterprise",
+    title: "MBC Building Const. Enterprise",
     title2: "RC NO: 3492332",
     subtitle:
       "Led by Engr. Chukwudi Uchemba",
@@ -85,7 +86,7 @@ export default function Carousel() {
 
   return (
     <div
-      className="relative w-full h-116 md:h-72 overflow-hidden rounded-2xl shadow-lg mb-12"
+      className="relative w-full h-126 md:h-72 overflow-hidden rounded-2xl shadow-lg mb-12"
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
       onTouchStart={onTouchStart}
@@ -119,18 +120,27 @@ export default function Carousel() {
                   } text-white px-4 py-3 rounded-2xl shadow-lg backdrop-blur-md w-full md:w-3/4 lg:w-1/2`
                 }
               >
-                <h3 className="text-base md:text-lg font-semibold bg-blue-500 py-1 rounded-lg ">
+                <h3 className="text-lg md:text-lg font-semibold bg-black/20 py-1 rounded-lg ">
                   {s.title}
                 </h3>
                 {s.title2 && (
-                  <p className={`mt-1 text-lg font-medium ${s.title.includes("MBC") ? "text-white/90" : "text-gray-300"}`}>
+                  <p className={`mt-1 text-base font-medium ${s.title.includes("MBC") ? "text-white/90" : "text-gray-300"}`}>
                     {s.title2}
                   </p>
                 )}
-                <p className={`mt-1 text-base font-medium ${s.title.includes("MBC") ? "text-white/90" : "text-gray-300"}`}>
+                <p className={`mt-1 text-sm font-light ${s.title.includes("MBC") ? "text-white/96" : "text-gray-300"}`}>
                   {s.subtitle}
                 </p>
               </div>
+              <div className="mt-4 flex flex-row items-center gap-1 mb-4">
+                {s.title.includes("MBC") && (
+                  <Link href="/projects" className="w-45 mx-auto text-center px-3 py-2 bg-blue-600/10 border border-gray-200 hover:bg-blue-700 text-white text-sm font-semibold rounded-md shadow inline-flex items-center justify-center">
+                    <Image src="/build.svg" alt="Build" width={18} height={18} className="inline-block mr-2 filter invert" />
+                    View Our Projects
+                  </Link>
+                )}
+               
+                </div>
             </div>
           </div>
         ))}

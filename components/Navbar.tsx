@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -49,13 +48,20 @@ function Navbar() {
             <button
               onClick={() => setOpen(!open)}
               aria-label="Toggle menu"
-              className="p-2 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 relative z-60"
+              className="p-1 rounded-full relative z-60 flex items-center justify-center"
             >
               {open ? (
-                <X className="h-6 w-6 text-gray-800" />
-              ) : (
-                <Menu className="h-6 w-6 text-gray-800" />
-              )}
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-gray-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <circle cx="12" cy="12" r="9" className=" stroke-current" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.5 9.5l5 5M14.5 9.5l-5 5" />
+                </svg>
+              ) : ( 
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-gray-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <circle cx="12" cy="12" r="9" className=" stroke-current" />
+                  <line x1="8" y1="10.5" x2="16" y2="10.5" strokeLinecap="round" />
+                  <line x1="8" y1="13.5" x2="16" y2="13.5" strokeLinecap="round" />
+                </svg>
+              )} 
             </button>
           </div>
         </div>

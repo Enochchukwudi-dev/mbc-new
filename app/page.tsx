@@ -15,7 +15,29 @@ export default function HomePage() {
       <Navbar />
       <main className="min-h-screen py-8 pt-28 bg-stone-300 dark:bg-gray-900 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-       
+           <section className="mt-5 mb-4 grid md:grid-cols-2 gap-6 items-center">
+            <div className="max-w-xl">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white" style={{ lineHeight: '1.05' }}>
+                Building 
+              <span className="text-black font-bold"> reliable</span> homes and structures
+              </h1>
+              <p className="mt-3 text-sm text-gray-700 dark:text-gray-300">
+                We design and build durable, beautiful homes and commercial structures on time and within budget.
+              </p>
+
+              <div className="mt-4 flex gap-3">
+                <Link href="/Booking" className="inline-flex border border-gray-400 items-center px-4 py-2 bg-green-600 hover:text-green-900  hover:border-green-900 text-gray-50 rounded-md font-semibold shadow">
+                  Get a Quote
+                </Link>
+              </div>
+            </div>
+
+            <div className="hidden md:block">
+              <div className="relative h-60 sm:h-72 md:h-80 rounded-xl overflow-hidden shadow-lg">
+                <Image src="/conc7.jpeg" alt="Completed project" fill className="object-cover" />
+              </div>
+            </div>
+          </section>
 
           {/* Carosuel */}
           <Carousel1 />
