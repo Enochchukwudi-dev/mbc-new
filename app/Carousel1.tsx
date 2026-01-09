@@ -86,7 +86,7 @@ export default function Carousel() {
 
   return (
     <div
-      className="relative w-full h-126 md:h-72 overflow-hidden rounded-2xl shadow-lg mb-12"
+      className="relative w-full h-106 md:h-72 overflow-hidden rounded-2xl shadow-lg mb-12"
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
       onTouchStart={onTouchStart}
@@ -145,47 +145,6 @@ export default function Carousel() {
           </div>
         ))}
       </div>
-
-      {/* Left / Right nav buttons */}
-      <button
-        type="button"
-        aria-label="Previous slide"
-        onClick={() => setIndex((i) => (i - 1 + slides.length) % slides.length)}
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 bg-white/80 hover:bg-white rounded-full shadow"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 text-gray-800 rotate-180"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            d="M12.293 16.293a1 1 0 010-1.414L15.586 11H5a1 1 0 110-2h10.586l-3.293-3.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </button>
-
-      <button
-        type="button"
-        aria-label="Next slide"
-        onClick={() => setIndex((i) => (i + 1) % slides.length)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 bg-white/80 hover:bg-white rounded-full shadow"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 text-gray-800"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            d="M12.293 16.293a1 1 0 010-1.414L15.586 11H5a1 1 0 110-2h10.586l-3.293-3.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </button>
 
       {/* Dots */}
       <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-20">
