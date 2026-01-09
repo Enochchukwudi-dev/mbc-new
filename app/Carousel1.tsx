@@ -6,11 +6,11 @@ import Image from "next/image";
 const slides = [
   {
     id: 1,
-    title: "Aurora Retreat",
-    price: "",
+    title: "MBC Building Construction Enterprise",
+    title2: "RC NO: 3492332",
     subtitle:
       "A sanctuary with timeless design and exceptional craftsmanship to inspire your next chapter.",
-    image: "/w1.jpeg",
+    image: "/enginner.jpeg",
     alt: "Aurora Retreat",
   },
   {
@@ -110,11 +110,24 @@ export default function Carousel() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
             <div className="absolute bottom-6 left-0 w-full px-4">
-              <div className="mx-auto text-center bg-gradient-to-b from-green-950/60 to-green-950/60 text-white px-4 py-3 rounded-2xl shadow-lg backdrop-blur-md w-full md:w-3/4 lg:w-1/2">
-                <h3 className="text-base md:text-lg font-semibold">
+              <div
+                className={
+                  `mx-auto text-center ${
+                    s.title.includes("MBC")
+                      ? "bg-blue-gray/20"
+                      : "bg-gradient-to-b from-green-950/60 to-green-950/60"
+                  } text-white px-4 py-3 rounded-2xl shadow-lg backdrop-blur-md w-full md:w-3/4 lg:w-1/2`
+                }
+              >
+                <h3 className="text-base md:text-lg font-semibold bg-blue-500 py-1 rounded-lg ">
                   {s.title}
                 </h3>
-                <p className="mt-1 text-xs text-gray-300 font-medium">
+                {s.title2 && (
+                  <p className={`mt-1 text-lg font-medium ${s.title.includes("MBC") ? "text-white/90" : "text-gray-300"}`}>
+                    {s.title2}
+                  </p>
+                )}
+                <p className={`mt-1 text-xs font-medium ${s.title.includes("MBC") ? "text-white/90" : "text-gray-300"}`}>
                   {s.subtitle}
                 </p>
               </div>

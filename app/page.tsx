@@ -13,57 +13,11 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen py-8 pt-28 bg-gray-200 dark:bg-gray-900 ">
+      <main className="min-h-screen py-8 pt-28 bg-stone-100 dark:bg-gray-900 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-          {/* Header */}
-          <header className="flex items-start justify-between gap-4 ">
-            <div className="flex items-center gap-4 ">
-              <Image
-                src="/enoch.jpeg"
-                alt="Enoch Chukwudi"
-                width={56}
-                height={40}
-                className="h-12 w-12 rounded-full object-cover shadow-sm"
-              />
+       
 
-              <div className="flex flex-col ">
-                <span className="text-sm text-gray-500">
-                  {" "}
-                  Welcome,
-                </span>
-                <span className="text-lg font-semibold">Enoch Chukwudi</span>
-              </div>
-            </div>
-          </header>
-
-          {/* Search */}
-          <div className="mt-6 mb-10">
-            <label htmlFor="search" className="sr-only">
-              Search
-            </label>
-            <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.386-1.414 1.415-4.387-4.387zM8 14a6 6 0 100-12 6 6 0 000 12z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-              <input
-                id="search"
-                placeholder="Find something now"
-                className="block w-full rounded-xl border border-transparent bg-white/90 dark:bg-gray-800 py-3 pl-10 pr-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-gray-900/10"
-              />
-            </div>
-          </div>
-          {/* Search */}
+          {/* Carosuel */}
           <Carousel1 />
 
           {/* Gallery */}
