@@ -15,15 +15,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#392828] text-gray-100">
+    <footer className="bg-gray-300 ">
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand + Description + Socials */}
           <div>
-            <h3 className="text-2xl font-bold tracking-tight text-white">Follow
+            <h3 className="text-2xl font-bold tracking-tight text-blue-950">Follow
               <span className="block text-indigo-900 font-extrabold">God</span>
             </h3>
-            <p className="mt-3 text-gray-200 text-sm max-w-[18rem]">
+            <p className="mt-3 text-black text-sm max-w-[18rem]">
               Faith-inspired fashion for everyday wear, shop curated collections made
               with care.
             </p>
@@ -43,28 +43,28 @@ export default function Footer() {
 
           {/* Shop */}
           <div>
-            <h4 className="text-sm font-semibold text-gray-100 uppercase">Shop</h4>
-            <ul className="mt-4 space-y-2 text-gray-200">
+            <h4 className="text-sm font-semibold text-black uppercase">Shop</h4>
+            <ul className="mt-4 space-y-2 text-gray-600">
               <li><a href="#" className="hover:underline">All Products</a></li>
               <li><a href="#" className="hover:underline">Best Sellers</a></li>
             </ul>
 
-            <h4 className="mt-6 text-sm font-semibold text-gray-100 uppercase">Company</h4>
-            <ul className="mt-4 space-y-2 text-gray-200">
+            <h4 className="mt-6 text-sm font-semibold text-black uppercase">Company</h4>
+            <ul className="mt-4 space-y-2 text-gray-600">
               <li><a href="#" className="hover:underline">About Us</a></li>
             </ul>
           </div>
 
           {/* Support */}
           <div>
-            <h4 className="text-sm font-semibold text-gray-100 uppercase">Support</h4>
-            <ul className="mt-4 space-y-2 text-gray-200">
+            <h4 className="text-sm font-semibold text-black uppercase">Support</h4>
+            <ul className="mt-4 space-y-2 text-gray-600">
               <li><a href="#" className="hover:underline">FAQs</a></li>
             </ul>
 
             <div className="mt-6">
-              <h4 className="text-sm font-semibold text-gray-100 uppercase">Stay in touch</h4>
-              <p className="mt-2 text-sm text-gray-200">Sign Up For Exclusive Offers And New Drops.</p>
+              <h4 className="text-sm font-semibold text-black uppercase">Stay in touch</h4>
+              <p className="mt-2 text-sm text-gray-600">Sign Up For Exclusive Offers And New Drops.</p>
 
               <form onSubmit={handleSubmit} className="mt-3 flex gap-2">
                 <input
@@ -83,8 +83,8 @@ export default function Footer() {
 
           {/* Contact list */}
           <div>
-            <h4 className="text-sm font-semibold text-gray-100 uppercase">Contact</h4>
-            <ul className="mt-4 space-y-3 text-gray-200 text-sm">
+            <h4 className="text-sm font-semibold text-black uppercase">Contact</h4>
+            <ul className="mt-4 space-y-3 text-gray-600 text-sm">
               <li className="flex items-center gap-2">
                 <span className="text-red-400">📍</span>
                 <span>Online Store</span>
@@ -104,13 +104,13 @@ export default function Footer() {
         <hr className="my-8 border-white/10" />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4 text-sm text-gray-200">
+          <div className="flex items-center gap-4 text-sm text-gray-600">
             <a href="#" className="hover:underline">Terms</a>
             <a href="#" className="hover:underline">Privacy</a>
             <a href="#" className="hover:underline">Returns</a>
           </div>
 
-          <div className="text-sm text-gray-200">© MBC Const. — 2026</div>
+          <div className="text-sm text-gray-600">© MBC Const. — 2026</div>
 
           <div className="flex items-center gap-4 flex-col">
             <div className="text-xs text-gray-300">built with -</div>

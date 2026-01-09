@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen py-8 pt-25 bg-gray-200 dark:bg-gray-900 ">
+      <main className="min-h-screen py-8 pt-28 bg-gray-200 dark:bg-gray-900 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           {/* Header */}
           <header className="flex items-start justify-between gap-4 ">

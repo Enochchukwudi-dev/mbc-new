@@ -7,17 +7,24 @@ function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0  z-40 bg-gray-200 shadow">
+    <nav className="fixed top-0 left-0 right-0 h-22 z-40 bg-stone-200 shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex  items-center justify-between h-16">
           {/* Logo (left) */}
-          <div className="flex items-center">
+          <div className="flex items-center flex-col pt-8 ">
             <Link
               href="/"
-              className="flex items-center text-xl font-bold text-gray-900"
+              className="flex flex-col items-center text-gray-900"
             >
-              <Image src="/rew.png" alt="MyLogo" width={79} height={79} className="h-10 w-30  object-contain" />
-             
+              <Image src="/gala.png" alt="MyLogo" width={79} height={79} className="h-8 w-28 object-contain" />
+              <div className="mt-1 items-start">
+                <span className="block" style={{ fontSize: '10px', lineHeight: 1 }}>
+                  MAROCK BUILDING CONST.
+                </span>
+                <span className="block" style={{ fontSize: '10px', lineHeight: 1 }}>
+                  ENTERPRISES
+                </span>
+              </div>
             </Link>
           </div>
 
@@ -38,11 +45,11 @@ function Navbar() {
           </div>
 
           {/* Hamburger (shown on small, hidden on md) */}
-          <div className="md:hidden">
+          <div className="md:hidden mt-6">
             <button
               onClick={() => setOpen(!open)}
               aria-label="Toggle menu"
-              className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 relative z-60"
+              className="p-2 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 relative z-60"
             >
               {open ? (
                 <X className="h-6 w-6 text-gray-800" />
