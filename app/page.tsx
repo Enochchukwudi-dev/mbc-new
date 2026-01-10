@@ -15,13 +15,14 @@ export default function HomePage() {
       <Navbar />
       <main className="min-h-screen py-8 pt-28 bg-stone-200 dark:bg-gray-900 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-           <section className="mt-5 mb-4 grid md:grid-cols-2 gap-6 items-center">
+          <div className="mt-5 mb-4 md:mt-7 grid md:grid-cols-2 md:gap-2 gap-6 items-start">
+            <section className="grid md:grid-cols-1 gap-6 items-center">
             <div className="max-w-xl">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white" style={{ lineHeight: '1.05' }}>
+              <h1 className="text-3xl sm:text-4xl md:text-4xl  lg:text-5xl font-semibold text-gray-900 dark:text-white" style={{ lineHeight: '1.05' }}>
                 Quality 
               <span className="text-black font-bold"> Construction</span> Delivered On Time & On Budget
               </h1>
-              <p className="mt-3 text-sm text-gray-700 dark:text-gray-300">
+              <p className="mt-3 text-sm md:text-xl md:mt-16 text-gray-700 dark:text-gray-300">
             With 10+ years of experience, we deliver residential and commercial projects that meet all safety standards, completed on time and within budget.
               </p>
 
@@ -31,16 +32,13 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-
-            <div className="hidden md:block">
-              <div className="relative h-60 sm:h-72 md:h-80 rounded-xl overflow-hidden shadow-lg">
-                <Image src="/conc7.jpeg" alt="Completed project" fill className="object-cover" />
-              </div>
-            </div>
           </section>
 
-          {/* Carosuel */}
-          <Carousel1 />
+            {/* Carosuel */}
+            <div>
+              <Carousel1 />
+            </div>
+          </div>
 
           {/* Gallery */}
           <div className="mt-8 flex items-center justify-between">

@@ -23,10 +23,10 @@ export default function Carousel() {
   const s = slides[0];
 
   return (
-    <div className="relative w-full h-116 md:h-96 lg:h-[32rem] overflow-hidden mb-12 px-5" >
-      <div className="w-full h-full relative rounded-2xl overflow-hidden">
-        <div className="relative w-full h-full">
-          <Image src={s.image} alt={s.alt} fill className="object-cover rounded-2xl" />
+    <div className="relative w-full md:w-auto h-116 md:h-auto lg:h-[32rem] overflow-hidden mb-12 px-5">
+      <div className="w-full md:w-auto h-full md:h-auto relative rounded-2xl overflow-hidden">
+        <div className="relative md:w-auto w-full md:h-auto">
+          <Image src={s.image} alt={s.alt} width={1600} height={600} className="rounded-2xl block mx-auto object-cover" />
         </div>
         <div className="absolute inset-0 " />
         <div className="absolute bottom-6 left-0 w-full px-4">
@@ -36,7 +36,7 @@ export default function Carousel() {
                 s.title.includes("MBC")
                   ? "bg-black/60"
                   : "bg-black/60"
-              } text-white px-4 py-3 rounded-2xl shadow-lg backdrop-blur-md w-full md:w-3/4 lg:w-1/2`
+              } text-white px-8 py-3 rounded-2xl shadow-lg backdrop-blur-md w-full md:w-4/4 lg:w-4/4`
             }
           >
             <h3 className="text-base md:text-lg font-semibold  py-1 rounded-lg ">
@@ -52,7 +52,7 @@ export default function Carousel() {
              </p>
             )}
              
-            <p className={`mt-5 text-sm font-light italic ${s.title.includes("MBC") ? "text-white/96" : "text-gray-300"}`}>
+            <p className={`mt-4 text-sm font-light italic ${s.title.includes("MBC") ? "text-white/96" : "text-gray-300"}`}>
               {s.subtitle1}
             </p>
            
