@@ -28,8 +28,15 @@ export default function Trust() {
   }, [showCerts])
 
   return (
-    <section aria-labelledby="trust-heading" className="py-12 bg-white/10 dark:bg-gray-900">
+    <section aria-labelledby="trust-heading" className="py-2 bg-white/10 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-9 w-45 h-56  overflow-hidden border border-gray-200 dark:border-gray-700 bg-white/6 p-3 shadow-md flex items-center justify-center">
+          <button onClick={() => setShowCerts(true)} aria-label="Open certificates" className="w-full h-full flex items-center justify-center">
+            <img src="/cac.jpg" alt="CAC Certificate" className="w-full h-full object-contain cursor-pointer" />
+          </button>
+        </div>
+        <button>View full certificate</button>
+        
         <div className="text-center">
           <p className="text-sm text-green-600 font-semibold">Trusted & Verified</p>
           <h2 id="trust-heading" className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -62,30 +69,7 @@ export default function Trust() {
           ))}
         </div>
 
-        {showCerts && (
-          <div ref={overlayRef} onClick={(e) => { if (e.target === overlayRef.current) setShowCerts(false) }} role="dialog" aria-modal="true" aria-label="Certificates" className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-auto">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white m-0">Scanned Certificates</h3>
-                <button ref={closeBtnRef} onClick={() => setShowCerts(false)} aria-label="Close certificates" className="ml-4 inline-flex items-center justify-center rounded-md p-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">✕</button>
-              </div>
-
-              <p className="text-sm text-gray-500 dark:text-gray-300">Tap an image to open full-size. Replace the sample files in <span className="font-mono">/public/certs/</span> with your real scans.</p>
-
-              <div className="grid gap-4 sm:grid-cols-3 mt-4">
-                {[
-                  { src: '/certs/coren.jpg', alt: 'COREN certificate' },
-                  { src: '/certs/rc.jpg', alt: 'RC certificate' },
-                  { src: '/certs/insurance.jpg', alt: 'Insurance certificate' },
-                ].map((img) => (
-                  <a key={img.src} href={img.src} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 transform hover:scale-105 transition-transform">
-                    <img src={img.src} alt={img.alt} className="w-full h-44 object-cover" />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+    
       </div>
     </section>
   )

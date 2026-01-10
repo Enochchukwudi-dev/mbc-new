@@ -68,10 +68,10 @@ export default function Featured() {
   }
 
   return (
-    <section className="py-12 bg-gray-50 dark:bg-gray-900">
+    <section className="py-12 bg-gray-50/40 dark:bg-gray-900 rounded-2xl ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">FEATURED PROJECTS</h2>
+          <h2 className="mt-2 text-3xl sm:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Featured Projects</h2>
         </div>
 
         <div ref={sliderRef} className="relative">
