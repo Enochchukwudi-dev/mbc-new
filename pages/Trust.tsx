@@ -6,7 +6,8 @@ export default function Trust() {
   const overlayRef = useRef<HTMLDivElement | null>(null)
   const closeBtnRef = useRef<HTMLButtonElement | null>(null)
 
-  const features = [
+  type Feature = { id: string; icon: string; title: string; why: string; clickable?: boolean; link?: string }
+  const features: Feature[] = [
     { id: 'experience', icon: '🏗️', title: '10+ Years Experience', why: "Longevity = stability = won't disappear with deposit" },
     { id: 'licensing', icon: '📋', title: 'Licensed & Insured', why: 'Legal proof separates professionals from roadside builders', clickable: true },
     { id: 'projects', icon: '🏠', title: '50+ Projects Completed', why: 'Volume proves you deliver consistently' },
@@ -49,7 +50,7 @@ export default function Trust() {
                     <button onClick={() => setShowCerts(true)} className="text-gray-900 dark:text-white font-semibold text-sm hover:text-green-600 transition-colors" aria-haspopup="dialog">
                       {f.title}
                     </button>
-                  ) : f.link ? (
+                  ) : 'link' in f && f.link ? (
                     <a href={f.link} className="text-gray-900 dark:text-white font-semibold text-sm hover:text-green-600 transition-colors" target="_blank" rel="noopener noreferrer">{f.title}</a>
                   ) : (
                     <div className="font-semibold text-sm text-gray-900 dark:text-white">{f.title}</div>

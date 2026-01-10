@@ -38,7 +38,7 @@ export default function Featured() {
   function onPointerDown(e: React.PointerEvent) {
     isDown.current = true
     startX.current = e.clientX
-    setDragOffset(0)
+    setDragOffset(0);
     (e.target as Element).setPointerCapture?.(e.pointerId)
   }
 
@@ -52,14 +52,14 @@ export default function Featured() {
     if (!isDown.current) return
     isDown.current = false
     const delta = dragOffset
-    setDragOffset(0)
+    setDragOffset(0);
     const threshold = 50 // px
     if (delta < -threshold) next()
     else if (delta > threshold) prev()
   }
 
   function onPointerUp(e: React.PointerEvent) {
-    endDrag(e)
+    endDrag(e);
     (e.target as Element).releasePointerCapture?.(e.pointerId)
   }
 
