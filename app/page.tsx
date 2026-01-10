@@ -18,16 +18,16 @@ export default function HomePage() {
            <section className="mt-5 mb-4 grid md:grid-cols-2 gap-6 items-center">
             <div className="max-w-xl">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white" style={{ lineHeight: '1.05' }}>
-                Building 
-              <span className="text-black font-bold"> reliable</span> homes and structures
+                Quality 
+              <span className="text-black font-bold"> Construction</span> Delivered On Time & On Budget
               </h1>
               <p className="mt-3 text-sm text-gray-700 dark:text-gray-300">
-                We design and build durable, beautiful homes and commercial structures on time and within budget.
+            With 10+ years of experience, we deliver residential and commercial projects that meet all safety standards, completed on time and within budget.
               </p>
 
-              <div className="mt-4 flex gap-3">
+              <div className="mt-4 mb-3 flex gap-3">
                 <Link href="/Booking" className="inline-flex border border-gray-400 items-center px-4 py-2 bg-green-600 hover:text-green-900  hover:border-green-900 text-gray-50 rounded-md font-semibold shadow">
-                  Get a Quote
+                  Request a Free Quote
                 </Link>
               </div>
             </div>

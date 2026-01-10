@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Menu, X } from "lucide-react";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -15,13 +16,13 @@ function Navbar() {
               href="/"
               className="flex flex-col items-center text-gray-900"
             >
-              <Image src="/gala.png" alt="MyLogo" width={79} height={79} className="h-7 w-28 object-contain" />
+              <Image src="/gala.png" alt="MyLogo" width={79} height={79} className="h-9 w-28 object-contain filter brightness-102" />
               <div className="mt-1 text-center md:text-left">
-                <span className="block" style={{ fontSize: '10px', lineHeight: 1 }}>
-                  MAROCK BUILDING CONST.
+                <span className="block font-bold" style={{ fontSize: '11px', lineHeight: 1 }}>
+                  MAROCK BUILDING CONSTRUCTION
                 </span>
-                <span className="block" style={{ fontSize: '10px', lineHeight: 1 }}>
-                  ENTERPRISES
+                <span className="block font-bold" style={{ fontSize: '11px', lineHeight: 1 }}>
+                  ENTERPRISE
                 </span>
               </div>
             </Link>
@@ -43,25 +44,18 @@ function Navbar() {
             </Link>
           </div>
 
-          {/* Hamburger (shown on small, hidden on md) */}
-          <div className="md:hidden mt-6">
+          {/* Menu (shown on small, hidden on md) */}
+          <div className="md:hidden mt-7 mr-3">
             <button
               onClick={() => setOpen(!open)}
-              aria-label="Toggle menu"
-              className="p-1 rounded-full relative z-60 flex items-center justify-center"
+              aria-label={open ? "Close menu" : "Open menu"}
+              className="p-1 rounded-full relative z-60  flex items-center justify-center"
             >
               {open ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-gray-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                  <circle cx="12" cy="12" r="9" className=" stroke-current" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.5 9.5l5 5M14.5 9.5l-5 5" />
-                </svg>
-              ) : ( 
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-gray-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                  <circle cx="12" cy="12" r="9" className=" stroke-current" />
-                  <line x1="8" y1="10.5" x2="16" y2="10.5" strokeLinecap="round" />
-                  <line x1="8" y1="13.5" x2="16" y2="13.5" strokeLinecap="round" />
-                </svg>
-              )} 
+                <X className="h-10 w-12 text-gray-700" strokeWidth={1.5} />
+              ) : (
+                <Menu className="h-10 w-12 text-gray-700" strokeWidth={1.5} />
+              )}
             </button>
           </div>
         </div>
