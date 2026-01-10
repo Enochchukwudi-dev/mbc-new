@@ -8,6 +8,11 @@ import Link from "next/link";
 
 import Navbar from "../components/Navbar";
 import Footer from "../pages/Footer";
+import Trust from "@/pages/Trust";
+import Featured from "@/pages/Featured";
+import Cert from "@/pages/Cert";
+import Services from "@/pages/Services";
+
 
 export default function HomePage() {
   return (
@@ -39,6 +44,23 @@ export default function HomePage() {
               <Carousel1 />
             </div>
           </div>
+          <div>
+            <Trust />
+          </div>
+          <div>
+            <Featured />
+          </div>
+          <div>
+            <Cert /> 
+          </div>
+          <div>
+            <Services /> 
+          </div>
+          
+          
+
+
+
 
           {/* Gallery */}
           <div className="mt-8 flex items-center justify-between">
