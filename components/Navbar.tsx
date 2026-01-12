@@ -111,6 +111,21 @@ function Navbar() {
                 <span>Services</span>
                 <ChevronRight className="h-5 w-5 text-gray-900" />
               </Link>
+
+
+
+               <Link
+                href="/Contact"
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-between px-4 py-5 text-lg font-semibold text-gray-900 hover:bg-gray-100 rounded"
+              >
+                <span>Contact</span>
+                <ChevronRight className="h-5 w-5 text-gray-900" />
+              </Link>
+
+
+
+
               <div className="mt-6">
               <Link
                 href="/Booking"

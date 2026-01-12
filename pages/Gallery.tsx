@@ -15,6 +15,148 @@ type MediaItem =
       poster?: string;
     };
 
+// Component: extract first video frame to use as a thumbnail when a poster isn't provided
+function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; alt?: string }) {
+  const [thumb, setThumb] = useState<string | null>(poster ?? null);
+
+  useEffect(() => {
+    if (poster) return; // already have a poster image
+    if (typeof window === "undefined") return;
+
+    let cancelled = false;
+    let objectUrl: string | null = null;
+
+    const makePlaceholder = () => {
+      // simple SVG placeholder with play icon to avoid black boxes
+      const svg = `<?xml version='1.0' encoding='utf-8'?><svg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360'><rect width='100%' height='100%' fill='%23111827'/><circle cx='320' cy='180' r='44' fill='%23000000' fill-opacity='0.35'/><polygon points='300,160 300,200 340,180' fill='%23ffffff' /></svg>`;
+      return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+    };
+
+    const v = document.createElement("video");
+    v.preload = "metadata";
+    v.muted = true;
+    v.playsInline = true;
+    v.crossOrigin = "anonymous";
+
+    const drawFrame = (): string | null => {
+      try {
+        const w = (v as any).videoWidth || 480;
+        const h = (v as any).videoHeight || 270;
+        if (!w || !h) return null;
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return null;
+        ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
+        // toDataURL may throw if canvas is tainted by cross-origin video
+        return canvas.toDataURL("image/jpeg", 0.8);
+      } catch (err) {
+        return null;
+      }
+    };
+
+    const attemptCapture = async (url: string) => {
+      return new Promise<string | null>((resolve) => {
+        let settled = false;
+        const timeout = window.setTimeout(() => {
+          if (!settled) {
+            settled = true;
+            resolve(null);
+          }
+        }, 2500);
+
+        const cleanup = () => {
+          window.clearTimeout(timeout);
+          v.removeEventListener("loadedmetadata", onMeta);
+          v.removeEventListener("seeked", onSeeked);
+          v.removeEventListener("error", onError);
+        };
+
+        const onError = () => {
+          if (!settled) {
+            settled = true;
+            cleanup();
+            resolve(null);
+          }
+        };
+
+        const onMeta = () => {
+          // try seeking slightly to ensure a frame is available
+          try {
+            v.currentTime = Math.min(0.1, (v.duration || 0) / 2 || 0.1);
+          } catch (e) {
+            // ignore
+          }
+        };
+
+        const onSeeked = () => {
+          if (!settled) {
+            const data = drawFrame();
+            settled = true;
+            cleanup();
+            resolve(data);
+          }
+        };
+
+        v.addEventListener("loadedmetadata", onMeta);
+        v.addEventListener("seeked", onSeeked);
+        v.addEventListener("error", onError);
+
+        v.src = url;
+        // try to trigger loading
+        try {
+          v.load();
+        } catch {}
+      });
+    };
+
+    (async () => {
+      // first try direct capture
+      let data = await attemptCapture(src);
+
+      // if that failed, try fetching the file as a blob and use object URL (can help when server requires range requests)
+      if (!data) {
+        try {
+          const res = await fetch(src, { method: "GET" });
+          if (res.ok) {
+            const blob = await res.blob();
+            objectUrl = URL.createObjectURL(blob);
+            data = await attemptCapture(objectUrl);
+          }
+        } catch (err) {
+          // fetch may fail due to CORS; fall through to placeholder
+        }
+      }
+
+      if (!cancelled) {
+        if (data) setThumb(data);
+        else setThumb(makePlaceholder());
+      }
+
+      // cleanup video src to stop network activity
+      try {
+        v.src = "";
+      } catch {}
+    })();
+
+    return () => {
+      cancelled = true;
+      try {
+        v.src = "";
+      } catch {}
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    };
+  }, [src, poster]);
+
+  return thumb ? (
+    // Use a plain <img> for data URLs / generated thumbnails
+    <img src={thumb} alt={alt ?? "video thumbnail"} className="w-full h-full object-cover" />
+  ) : (
+    <div className="w-full h-full bg-gray-800" />
+  );
+}
+
 function Gallery() {
   const media = useMemo<MediaItem[]>(
     () => [
@@ -133,7 +275,8 @@ function Gallery() {
   const [isDraggingState, setIsDraggingState] = useState(false);
   const startXRef = useRef(0);
 
-  const projects = shuffledMedia
+  // Use original `media` (unshuffled) so carousels have a consistent ordering
+  const projects = media
     .filter((m) => m.type === "image")
     .map((m, i) => ({
       src: m.src,
@@ -182,7 +325,8 @@ function Gallery() {
   const [isDraggingState2, setIsDraggingState2] = useState(false);
   const startXRef2 = useRef(0);
 
-  const projects2 = shuffledMedia
+  // Second carousel also uses original `media` (unshuffled) so it remains consistent
+  const projects2 = media
     .filter((m) => m.type === "image")
     .slice()
     .reverse()
@@ -481,15 +625,9 @@ function Gallery() {
                             <Image src={m.src} alt={m.alt} fill className="object-cover" />
                           ) : (
                             <>
-                              <video
-                                src={m.src}
-                                className="w-full h-full object-cover"
-                                preload="metadata"
-                                poster={m.poster}
-                                muted
-                                playsInline
-                                aria-label={`video thumbnail ${i + 1}`}
-                              />
+                              <div className="w-full h-full">
+                                <VideoThumbnail src={m.src} poster={m.poster} alt={`video thumbnail ${i + 1}`} />
+                              </div>
 
                               {/* Play overlay */}
                               <button
