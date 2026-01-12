@@ -39,7 +39,7 @@ export default function Trust() {
           <button
             onClick={() => setShowCerts(true)}
             aria-label="View full certificate"
-            className="mt-3 px-4 py-2 bg-green-700 text-white rounded-md text-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="mt-3 px-4 py-2 bg-green-700 text-white rounded-md text-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 whitespace-nowrap"
           >
             View full certificate
           </button>
