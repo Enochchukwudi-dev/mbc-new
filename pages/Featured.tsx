@@ -19,6 +19,26 @@ export default function Featured() {
   const isDown = useRef(false)
   const [dragOffset, setDragOffset] = useState(0)
 
+  // track whether page is in dark mode (from document class or prefers-color-scheme)
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const m = window.matchMedia('(prefers-color-scheme: dark)')
+    const check = () => setIsDark(document.documentElement.classList.contains('dark') || m.matches)
+    check()
+    const handler = () => check()
+    if (m.addEventListener) m.addEventListener('change', handler)
+    else m.addListener(handler)
+    const observer = new MutationObserver(check)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => {
+      if (m.removeEventListener) m.removeEventListener('change', handler)
+      else m.removeListener(handler)
+      observer.disconnect()
+    }
+  }, [])
+
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'ArrowRight') setIndex((i) => (i + 1) % slides)
@@ -68,11 +88,11 @@ export default function Featured() {
   }
 
   return (
-    <section className="py-12 bg-gray-50/40 dark:bg-gray-900 rounded-2xl ">
+    <section className={`py-12 bg-gray-50/40 ${isDark ? 'bg-slate-900' : 'bg-gray-50/40'} rounded-2xl`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center mb-6">
-          <h2 className="mt-2 text-3xl sm:text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Featured Projects</h2>
-          <p className="mt-3 max-w-2xl mx-auto text-sm text-gray-500 dark:text-gray-300">Real projects that reflect our attention to detail, clear communication, and the measurable value we deliver from first sketch to final handover.</p>
+          <h2 className={`mt-2 text-3xl sm:text-2xl font-semibold tracking-tight ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>Featured Projects</h2>
+          <p className={`mt-3 max-w-2xl mx-auto text-sm ${isDark ? 'text-gray-400' : 'text-gray-900'}`}>Real projects that reflect our attention to detail, clear communication, and the measurable value we deliver from first sketch to final handover.</p>
         </div>
 
         <div ref={sliderRef} className="relative">
@@ -86,7 +106,7 @@ export default function Featured() {
                       <div className="font-semibold text-lg text-gray-900 dark:text-white">{p.title}</div>
                       <div className="text-sm text-gray-500 dark:text-gray-300 mt-1">{p.desc}</div>
                       <div className="mt-4">
-                        <a href={p.src} target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-green-700">View project</a>
+                        <a href={p.src} target="_blank" rel="noopener noreferrer" className={`inline-block px-4 py-2 ${isDark ? 'bg-blue-500' : 'bg-gray-900'}  text-white rounded-md hover:bg-green-700`}>View project</a>
                       </div>
                     </div>
                   </div>

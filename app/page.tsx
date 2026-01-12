@@ -71,7 +71,7 @@ export default function HomePage() {
                   style={{ lineHeight: "1.05" }}
                 >
                   Quality
-                  <span className={`${isDark ? 'text-blue-400' : 'text-black'} font-bold`}>
+                  <span className={`${isDark ? 'text-blue-400' : 'text-black'} font-extrabold`}>
                     {" "}
                     Construction
                   </span>{" "}
@@ -86,7 +86,7 @@ export default function HomePage() {
                 <div className="mt-4 mb-3 flex gap-3">
                   <Link
                     href="/Booking"
-                    className={`inline-flex border border-gray-400 items-center px-4 py-2 ${isDark ? 'bg-blue-500' : 'bg-gray-900'} hover:text-green-900  hover:border-green-900 text-gray-50 rounded-md font-semibold shadow`}
+                    className={`inline-flex items-center px-4 py-2 ${isDark ? 'bg-blue-500' : 'bg-blue-700'} hover:text-green-900  hover:border-green-900 text-gray-50 rounded-md font-semibold shadow`}
                   >
                     Request a Free Quote
                   </Link>
@@ -108,8 +108,8 @@ export default function HomePage() {
 
           {/* Services */}
           <div id="services" className="mt-8  scroll-mt-28 flex flex-col items-center text-center mb-6">
-            <h2 className="mt-2 text-3xl sm:text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Our Services</h2>
-            <p className="mt-3 max-w-2xl mx-auto text-sm text-gray-500 dark:text-gray-300">We manage every phase of a project with experienced oversight, quality materials, and clear communication so your build is durable and completed on time.</p>
+            <h2 className={`mt-2 text-3xl sm:text-2xl font-semibold tracking-tight ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>Our Services</h2>
+            <p className={`mt-3 max-w-2xl mx-auto text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>We manage every phase of a project with experienced oversight, quality materials, and clear communication so your build is durable and completed on time.</p>
           </div>
 
           {/* Services grid */}
@@ -150,7 +150,7 @@ export default function HomePage() {
             ].map((s, i) => (
               <article
                 key={i}
-                className="bg-[hsl(20,22%,95%)] text-white rounded-2xl shadow-lg overflow-hidden border border-[hsl(20,22%,85%)]"
+                className={` ${isDark ? 'bg-slate-700' : 'bg-[hsl(20,22%,85%)]'} text-white rounded-sm shadow-lg overflow-hidden border ${isDark ? 'border-slate-600' : 'border-[hsl(20,22%,85%)]'} `}
               >
                 <div className="relative h-48 w-full  shadow-lg">
                   <Image
@@ -161,11 +161,11 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="p-3">
-                    <h3 className="text-xs font-semibold text-black">
+                    <h3 className={`text-xs font-semibold ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>
                       {s.title}
                     </h3>
                     <div className="mt-4">
-                      <button onClick={() => setLightboxSrc(s.img)} className="inline-flex items-center px-3 py-2 bg-gray-900 hover:bg-slate-600 rounded-md text-xs text-white">
+                      <button onClick={() => setLightboxSrc(s.img)} className={`inline-flex items-center px-3 py-2 ${isDark ? 'bg-blue-500' : 'bg-gray-900'} hover:bg-slate-600 rounded-md text-xs text-white`}>
                         View full image
                       </button>
                     </div>
@@ -184,7 +184,7 @@ export default function HomePage() {
                   if (e.target === lightboxOverlayRef.current) setLightboxSrc(null)
                 }}
               >
-                <div className="max-w-4xl w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                <div className={`max-w-4xl w-full ${isDark ? 'bg-slate-800/10' : 'bg-white/5'} dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden`}>
                   <div className="flex justify-end p-2">
                     <button
                       ref={lightboxCloseRef}

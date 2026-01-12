@@ -76,7 +76,25 @@ function Navbar() {
 
       
           {/* Links (hidden on small, shown on md+) */}
-          <div className="hidden md:flex space-x-6">
+          <div className="hidden md:flex items-center space-x-6">
+            <div className="mr-4">
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); toggleTheme(); }}
+                role="switch"
+                aria-checked={isDark}
+                aria-label={isDark ? "Dark mode" : "Light mode"}
+                className="flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-gray-200/1 dark:bg-slate-200/2"
+              >
+                <span className={`font-medium ${isDark ? 'text-cyan-400' : 'text-gray-900'}`}>{isDark ? 'Dark mode' : 'Light mode'}</span>
+
+                <div className={`relative inline-flex items-center w-14 h-7 rounded-full p-1 transition-colors duration-300 ${isDark ? 'bg-gradient-to-r from-slate-600 to-slate-600' : 'bg-gray-300'}`}>
+                  <Sun className={`absolute left-2 w-4 h-4 text-yellow-400 transform transition-all duration-300 ${isDark ? 'opacity-0 -translate-x-2 scale-75' : 'opacity-100 translate-x-0 scale-100'}`} />
+                  <Moon className={`absolute right-2 w-4 h-4 text-white transform transition-all duration-300 ${isDark ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-2 scale-75'}`} />
+                  <span className={`inline-block w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-300 ease-in-out ${isDark ? 'translate-x-7' : 'translate-x-0'}`} />
+                </div>
+              </button>
+            </div>
             {menu.map(item => (
               <Link key={item.href} href={item.href} className={linkClass}>{item.label}</Link>
             ))}
@@ -131,7 +149,7 @@ function Navbar() {
                   aria-label={isDark ? "Dark mode" : "Light mode"}
                   className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-gray-200 dark:bg-slate-800"
                 >
-                  <span className="font-medium">{isDark ? 'Dark mode' : 'Light mode'}</span>
+                  <span className={`font-medium ${isDark ? 'text-amber-300' : 'text-gray-900'}`}>{isDark ? 'Dark mode' : 'Light mode'}</span>
 
                   <div className={`relative inline-flex items-center w-14 h-7 rounded-full p-1 transition-colors duration-300 ${isDark ? 'bg-gradient-to-r from-indigo-600 to-purple-600' : 'bg-gray-300'}`}>
                     <Sun className={`absolute left-2 w-4 h-4 text-yellow-400 transform transition-all duration-300 ${isDark ? 'opacity-0 -translate-x-2 scale-75' : 'opacity-100 translate-x-0 scale-100'}`} />
