@@ -24,9 +24,9 @@ export default function Carousel() {
 
   return (
     <div className="relative w-full md:w-auto h-116 md:h-auto lg:h-[32rem] overflow-hidden  px-5">
-      <div className="w-full md:w-auto h-full md:h-auto relative rounded-2xl overflow-hidden">
+      <div className="w-full md:w-auto h-full md:h-auto relative rounded-sm overflow-hidden">
         <div className="relative md:w-auto w-full md:h-auto">
-          <Image src={s.image} alt={s.alt} width={1600} height={600} className="rounded-2xl block mx-auto object-cover" />
+          <Image src={s.image} alt={s.alt} width={1600} height={600} className="rounded-sm block mx-auto object-cover" />
         </div>
         <div className="absolute inset-0 " />
         <div className="absolute bottom-5 left-0 w-full px-1 ">

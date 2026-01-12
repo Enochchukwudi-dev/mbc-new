@@ -57,7 +57,7 @@ export default function HomePage() {
                 <div className="mt-4 mb-3 flex gap-3">
                   <Link
                     href="/Booking"
-                    className="inline-flex border border-gray-400 items-center px-4 py-2 bg-[hsl(20,22%,15%)] hover:text-green-900  hover:border-green-900 text-gray-50 rounded-md font-semibold shadow"
+                    className="inline-flex border border-gray-400 items-center px-4 py-2 bg-gray-900 hover:text-green-900  hover:border-green-900 text-gray-50 rounded-md font-semibold shadow"
                   >
                     Request a Free Quote
                   </Link>
@@ -78,7 +78,7 @@ export default function HomePage() {
           </div>
 
           {/* Services */}
-          <div className="mt-8 flex flex-col items-center text-center mb-6">
+          <div id="services" className="mt-8  scroll-mt-28 flex flex-col items-center text-center mb-6">
             <h2 className="mt-2 text-3xl sm:text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Our Services</h2>
             <p className="mt-3 max-w-2xl mx-auto text-sm text-gray-500 dark:text-gray-300">We manage every phase of a project with experienced oversight, quality materials, and clear communication so your build is durable and completed on time.</p>
           </div>
@@ -136,7 +136,7 @@ export default function HomePage() {
                       {s.title}
                     </h3>
                     <div className="mt-4">
-                      <button onClick={() => setLightboxSrc(s.img)} className="inline-flex items-center px-3 py-2 bg-[hsl(20,22%,15%)] hover:bg-slate-600 rounded-md text-xs text-white">
+                      <button onClick={() => setLightboxSrc(s.img)} className="inline-flex items-center px-3 py-2 bg-gray-900 hover:bg-slate-600 rounded-md text-xs text-white">
                         View full image
                       </button>
                     </div>

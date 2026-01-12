@@ -86,7 +86,7 @@ function Gallery() {
         } bg-gray-100 dark:bg-gray-900`}
       >
         <div className="max-w-7xl mx-auto px-4 py-8">
-          <h1 className="text-2xl font-bold">Gallery</h1>
+          <h1 className="text-2xl font-bold">Projects</h1>
           <p className="mt-4 text-gray-600">
             A mix of images and short reels from completed projects.
           </p>

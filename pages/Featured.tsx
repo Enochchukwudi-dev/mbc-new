@@ -86,7 +86,7 @@ export default function Featured() {
                       <div className="font-semibold text-lg text-gray-900 dark:text-white">{p.title}</div>
                       <div className="text-sm text-gray-500 dark:text-gray-300 mt-1">{p.desc}</div>
                       <div className="mt-4">
-                        <a href={p.src} target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 bg-[hsl(20,22%,15%)] text-white rounded-md hover:bg-green-700">View project</a>
+                        <a href={p.src} target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-green-700">View project</a>
                       </div>
                     </div>
                   </div>

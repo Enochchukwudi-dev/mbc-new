@@ -39,7 +39,7 @@ export default function Trust() {
           <button
             onClick={() => setShowCerts(true)}
             aria-label="View full certificate"
-            className="mt-3 px-4 py-2 bg-[hsl(20,22%,15%)] text-white rounded-md text-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 whitespace-nowrap"
+            className="mt-3 px-4 py-2 bg-[#106891] text-white rounded-md text-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 whitespace-nowrap"
           >
             View full certificate
           </button>
@@ -73,7 +73,7 @@ export default function Trust() {
           </div>
         )}
         <div className="text-center">
-          <p className="text-sm text-green-800 font-semibold">Trusted & Verified</p>
+          <p className="text-sm text-green-500 font-semibold">Trusted & Verified</p>
           <h2 id="trust-heading" className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
             Built on Reputation
           </h2>
@@ -82,7 +82,7 @@ export default function Trust() {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (
-            <div key={f.id} className="relative  bg-[hsl(20,22%,88%)] dark:from-gray-800 dark:to-gray-800/60 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 shadow hover:shadow-lg transition-shadow">
+            <div key={f.id} className="relative  bg-[hsl(20,22%,95%)] dark:from-gray-800 dark:to-gray-800/60 border border-gray-100 dark:border-gray-700 rounded-sm p-5 shadow hover:shadow-lg transition-shadow">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
                   <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[hsl(20,22%,95%)] text-xl shadow-inner">{f.icon}</div>

@@ -8,24 +8,25 @@ function About() {
       <Navbar />
 
       <main className="min-h-screen pt-20 bg-gray-50 flex items-start justify-center">
-        <div className="w-full max-w-md px-4 py-12">
+        <div className="w-full max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
-            <div className="bg-gradient-to-b from-blue-400 to-white pt-6 pb-10 flex flex-col items-center">
-              <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-md">
-                <Image src="/conc1.jpeg" alt="hero" width={320} height={320} className="object-cover" />
-              </div>
-              <h2 className="mt-4 text-lg text-white/90">About Us</h2>
-            </div>
-
-            <div className="px-6 py-8 text-center">
-              <h1 className="text-xl font-semibold text-gray-900">About Us</h1>
-              <p className="mt-3 text-sm text-gray-500">Enjoy a seamless and transparent auction experience where users can explore exclusive assets.</p>
-
-              <div className="mt-6">
-                <button className="w-48 mx-auto block px-4 py-2 bg-blue-600 text-white rounded-full shadow">Get Started</button>
+            <div className="md:flex md:items-stretch">
+              <div className="md:w-1/2 bg-[hsl(20,22%,98%)] p-6 flex items-center justify-center">
+                <div className="w-full max-w-sm overflow-hidden rounded-xl shadow-md">
+                  <Image src="/team.jpeg" alt="hero" width={640} height={480} className="w-full h-64 sm:h-72 md:h-80 object-cover" />
+                </div>
               </div>
 
-              <p className="mt-6 text-xs text-gray-400">Swipe up for filters</p>
+              <div className="md:w-1/2 px-6 py-8 bg-[hsl(20,22%,98%)] text-left">
+                <h2 className="text-lg font-medium text-gray-700">MBC group, Anambra State, 2024</h2>
+                <h1 className="mt-2 text-2xl sm:text-3xl font-semibold text-gray-900">About Us</h1>
+                <p className="mt-3 text-sm sm:text-base text-gray-700">
+                  Marock Building Construction Enterprise (MBC) is a full-service construction firm with over a decade of experience delivering high-quality residential and commercial projects across Anambra State and the surrounding regions.<br /><br />
+                  We manage every phase of the build process, from initial planning and permitting through structural works, roofing, waterproofing, interior/exterior finishing, and final inspections, ensuring projects are completed on time and within budget.<br /><br />
+                  Our team of experienced project managers, engineers, and skilled tradespeople prioritize safety, durability, and long-term value by using proven methods and premium materials. We pride ourselves on transparent pricing, responsive communication, and collaborative partnerships with clients, architects, and subcontractors.<br /><br />
+                  Whether you need a new build, renovation, or specialist structural and waterproofing work, MBC brings local expertise, professional oversight, and a commitment to excellence to every project. Contact us to schedule a consultation and let us help bring your vision to life.
+                </p>
+              </div>
             </div>
           </div>
         </div>
