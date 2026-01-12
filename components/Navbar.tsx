@@ -7,7 +7,7 @@ function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 h-22 z-40 bg-stone-200 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 h-22 z-40 bg-[hsl(20,22%,88%)] shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex  items-center justify-between h-16">
           {/* Logo (left) */}

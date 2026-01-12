@@ -70,8 +70,9 @@ export default function Featured() {
   return (
     <section className="py-12 bg-gray-50/40 dark:bg-gray-900 rounded-2xl ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="mt-2 text-3xl sm:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Featured Projects</h2>
+        <div className="flex flex-col items-center text-center mb-6">
+          <h2 className="mt-2 text-3xl sm:text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Featured Projects</h2>
+          <p className="mt-3 max-w-2xl mx-auto text-sm text-gray-500 dark:text-gray-300">Real projects that reflect our attention to detail, clear communication, and the measurable value we deliver from first sketch to final handover.</p>
         </div>
 
         <div ref={sliderRef} className="relative">
@@ -85,7 +86,7 @@ export default function Featured() {
                       <div className="font-semibold text-lg text-gray-900 dark:text-white">{p.title}</div>
                       <div className="text-sm text-gray-500 dark:text-gray-300 mt-1">{p.desc}</div>
                       <div className="mt-4">
-                        <a href={p.src} target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">View project</a>
+                        <a href={p.src} target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 bg-[hsl(20,22%,15%)] text-white rounded-md hover:bg-green-700">View project</a>
                       </div>
                     </div>
                   </div>

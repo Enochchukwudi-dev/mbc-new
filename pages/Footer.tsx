@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -15,30 +17,33 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-300 ">
+    <footer className="bg-[hsl(20,22%,95%)]">
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand + Description + Socials */}
           <div>
-            <h3 className="text-2xl font-bold tracking-tight text-blue-950">Follow
-              <span className="block text-indigo-900 font-extrabold">God</span>
-            </h3>
+
+    <div className="flex items-start  flex-col pt-0 ">
+    <Link
+      href="/"
+      className="flex flex-col items-start text-gray-900"
+    >
+      <Image src="/gala.png" alt="MyLogo" width={79} height={79} className="h-9 w-28 object-contain filter brightness-102" />
+      <div className="mt-1 text-left md:text-left">
+        <span className="block font-bold" style={{ fontSize: '11px', lineHeight: 1 }}>
+          MAROCK BUILDING CONSTRUCTION
+        </span>
+        <span className="block font-bold" style={{ fontSize: '11px', lineHeight: 1 }}>
+          ENTERPRISE
+        </span>
+      </div>
+    </Link>
+  </div>
+  
             <p className="mt-3 text-black text-sm max-w-[18rem]">
               Faith-inspired fashion for everyday wear, shop curated collections made
               with care.
             </p>
-
-            <div className="flex gap-3 mt-4">
-              <a href="#" aria-label="Instagram" className="p-2 rounded-md bg-white/10 hover:bg-white/20">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 6.5a4 4 0 100 8 4 4 0 000-8zM17.8 6.2a1 1 0 11-1.4-1.4 1 1 0 011.4 1.4z"/></svg>
-              </a>
-              <a href="#" aria-label="TikTok" className="p-2 rounded-md bg-white/10 hover:bg-white/20">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2v10.5A4.5 4.5 0 1016.5 16V6h3V2h-7z"/></svg>
-              </a>
-              <a href="#" aria-label="Snapchat" className="p-2 rounded-md bg-white/10 hover:bg-white/20">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C9.2 2 7.1 3.9 6.2 6.3C5.5 7 4 7.2 3 8c1 1.4 1.1 3.1.5 4.8-.4 1.1.2 1.8 1.3 1.6 1.9-.6 3.1-1 4.6-1 1.1 0 1.8.6 2.1 1.5.8 2.5 3 4.2 5.4 4.2s4.7-1.8 5.4-4.2c.3-.9 1-1.5 2.1-1.5 1.5 0 2.7.4 4.6 1 .9.3 1.7-.6 1.3-1.6-.6-1.7-.5-3.4.5-4.8-1-1-2.5-1-3.2-1.7C20.9 3.9 18.8 2 16 2H12z"/></svg>
-              </a>
-            </div>
           </div>
 
           {/* Shop */}
@@ -62,7 +67,7 @@ export default function Footer() {
               <li><a href="#" className="hover:underline">FAQs</a></li>
             </ul>
 
-            <div className="mt-6">
+            <div className="mt-6 ">
               <h4 className="text-sm font-semibold text-black uppercase">Stay in touch</h4>
               <p className="mt-2 text-sm text-gray-600">Sign Up For Exclusive Offers And New Drops.</p>
 
@@ -72,7 +77,7 @@ export default function Footer() {
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 rounded-md border border-white/20 bg-transparent px-3 py-2 text-sm placeholder:text-gray-300 focus:outline-none"
+                  className="flex-1 rounded-md border border-white/20 bg-transparent px-3 py-2 text-sm placeholder:text-gray-300 block focus:outline-none"
                 />
                 <button type="submit" className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium hover:bg-gray-800">Subscribe</button>
               </form>

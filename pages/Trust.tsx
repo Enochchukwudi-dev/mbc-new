@@ -39,7 +39,7 @@ export default function Trust() {
           <button
             onClick={() => setShowCerts(true)}
             aria-label="View full certificate"
-            className="mt-3 px-4 py-2 bg-green-700 text-white rounded-md text-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 whitespace-nowrap"
+            className="mt-3 px-4 py-2 bg-[hsl(20,22%,15%)] text-white rounded-md text-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 whitespace-nowrap"
           >
             View full certificate
           </button>
@@ -73,7 +73,7 @@ export default function Trust() {
           </div>
         )}
         <div className="text-center">
-          <p className="text-sm text-green-600 font-semibold">Trusted & Verified</p>
+          <p className="text-sm text-green-800 font-semibold">Trusted & Verified</p>
           <h2 id="trust-heading" className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
             Built on Reputation
           </h2>
@@ -82,10 +82,10 @@ export default function Trust() {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (
-            <div key={f.id} className="relative bg-gradient-to-br from-white/60 to-green-50 dark:from-gray-800 dark:to-gray-800/60 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 shadow hover:shadow-lg transition-shadow">
+            <div key={f.id} className="relative  bg-[hsl(20,22%,88%)] dark:from-gray-800 dark:to-gray-800/60 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 shadow hover:shadow-lg transition-shadow">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-green-50 text-xl shadow-inner">{f.icon}</div>
+                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[hsl(20,22%,95%)] text-xl shadow-inner">{f.icon}</div>
                 </div>
                 <div className="flex-1">
                   {f.clickable ? (
@@ -95,9 +95,9 @@ export default function Trust() {
                   ) : 'link' in f && f.link ? (
                     <a href={f.link} className="text-gray-900 dark:text-white font-semibold text-sm hover:text-green-600 transition-colors" target="_blank" rel="noopener noreferrer">{f.title}</a>
                   ) : (
-                    <div className="font-semibold text-sm text-gray-900 dark:text-white">{f.title}</div>
+                    <div className="font-bold text-sm text-gray-900 dark:text-white">{f.title}</div>
                   )}
-                  <div className="mt-1 text-xs text-gray-500 dark:text-gray-300">{f.why}</div>
+                  <div className="mt-1 text-xs text-gray-600 dark:text-gray-300">{f.why}</div>
                 </div>
               </div>
             </div>
