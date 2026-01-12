@@ -40,7 +40,7 @@ export default function HomePage() {
                 <div className="mt-4 mb-3 flex gap-3">
                   <Link
                     href="/Booking"
-                    className="inline-flex border border-gray-400 items-center px-4 py-2 bg-green-600 hover:text-green-900  hover:border-green-900 text-gray-50 rounded-md font-semibold shadow"
+                    className="inline-flex border border-gray-400 items-center px-4 py-2 bg-green-700 hover:text-green-900  hover:border-green-900 text-gray-50 rounded-md font-semibold shadow"
                   >
                     Request a Free Quote
                   </Link>

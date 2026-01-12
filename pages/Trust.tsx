@@ -28,15 +28,50 @@ export default function Trust() {
   }, [showCerts])
 
   return (
-    <section aria-labelledby="trust-heading" className="py-2 bg-white/10 dark:bg-gray-900">
+    <section aria-labelledby="trust-heading" className="py-8 bg-white/2 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-9 w-45 h-56  overflow-hidden border border-gray-200 dark:border-gray-700 bg-white/6 p-3 shadow-md flex items-center justify-center">
-          <button onClick={() => setShowCerts(true)} aria-label="Open certificates" className="w-full h-full flex items-center justify-center">
-            <img src="/cac.jpg" alt="CAC Certificate" className="w-full h-full object-contain cursor-pointer" />
+        <div className="mx-auto mb-9 w-45 h-68 overflow-hidden border border-gray-200 dark:border-gray-700 bg-white/6 p-3 shadow-md flex flex-col items-center justify-center">
+          <div className="w-full flex-1 flex items-center justify-center">
+            <button onClick={() => setShowCerts(true)} aria-label="Open certificates" className="w-full h-full flex items-center justify-center">
+              <img src="/cac.jpg" alt="CAC Certificate" className="w-full h-full object-contain cursor-pointer" />
+            </button>
+          </div>
+          <button
+            onClick={() => setShowCerts(true)}
+            aria-label="View full certificate"
+            className="mt-3 px-4 py-2 bg-green-700 text-white rounded-md text-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+          >
+            View full certificate
           </button>
         </div>
-        <button>View full certificate</button>
         
+        {showCerts && (
+          <div
+            ref={overlayRef}
+            role="dialog"
+            aria-modal="true"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+            onClick={(e) => {
+              if (e.target === overlayRef.current) setShowCerts(false)
+            }}
+          >
+            <div className="max-w-3xl w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+              <div className="flex justify-end p-2">
+                <button
+                  ref={closeBtnRef}
+                  onClick={() => setShowCerts(false)}
+                  aria-label="Close certificate"
+                  className="px-3 py-1 text-sm rounded bg-red-400 text-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none"
+                >
+                  Close
+                </button>
+              </div>
+              <div className="p-4 flex items-center justify-center">
+                <img src="/cac.jpg" alt="CAC Certificate" className="w-full h-auto object-contain max-h-[80vh]" />
+              </div>
+            </div>
+          </div>
+        )}
         <div className="text-center">
           <p className="text-sm text-green-600 font-semibold">Trusted & Verified</p>
           <h2 id="trust-heading" className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
