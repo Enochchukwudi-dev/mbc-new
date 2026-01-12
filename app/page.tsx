@@ -29,26 +29,55 @@ export default function HomePage() {
     if (lightboxSrc) lightboxCloseRef.current?.focus()
   }, [lightboxSrc])
 
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    const stored = localStorage.getItem('theme');
+    if (stored) return stored === 'dark';
+    return typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const update = () => setIsDark(document.documentElement.classList.contains('dark'));
+    // initialize from document element in case Navbar already set it
+    update();
+
+    // observe class changes on <html> so we pick up toggles from Navbar
+    const observer = new MutationObserver(() => update());
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    // also handle theme changes from other tabs
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'theme') update();
+    };
+    window.addEventListener('storage', onStorage);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('storage', onStorage);
+    };
+  }, []);
+
   return (
     <>
       <Navbar />
-      <main className="min-h-screen py-8 pt-28 bg-amber-600/3 dark:bg-gray-900 ">
+      <main className={`min-h-screen py-8 pt-28 ${isDark ? 'bg-slate-900' : 'bg-amber-600/3'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="mt-5 mb-4 md:mt-7 grid md:grid-cols-2 md:gap-2 gap-6 items-start">
             <section className="grid md:grid-cols-1 gap-6 items-center">
               <div className="max-w-xl">
                 <h1
-                  className="text-3xl sm:text-4xl md:text-4xl  lg:text-5xl font-semibold text-gray-900 dark:text-white"
+                  className={`text-3xl sm:text-4xl md:text-4xl  lg:text-5xl font-semibold ${isDark ? 'text-gray-200' : 'text-gray-900'}`}
                   style={{ lineHeight: "1.05" }}
                 >
                   Quality
-                  <span className="text-black font-bold">
+                  <span className={`${isDark ? 'text-blue-400' : 'text-black'} font-bold`}>
                     {" "}
                     Construction
                   </span>{" "}
                   Delivered On Time & On Budget
                 </h1>
-                <p className="mt-3 text-sm md:text-xl md:mt-16 text-gray-700 dark:text-gray-300">
+                <p className={`mt-3 text-sm md:text-xl md:mt-16 ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>
                   With 10+ years of experience, we deliver residential and
                   commercial projects that meet all safety standards, completed
                   on time and within budget.
@@ -57,7 +86,7 @@ export default function HomePage() {
                 <div className="mt-4 mb-3 flex gap-3">
                   <Link
                     href="/Booking"
-                    className="inline-flex border border-gray-400 items-center px-4 py-2 bg-gray-900 hover:text-green-900  hover:border-green-900 text-gray-50 rounded-md font-semibold shadow"
+                    className={`inline-flex border border-gray-400 items-center px-4 py-2 ${isDark ? 'bg-blue-500' : 'bg-gray-900'} hover:text-green-900  hover:border-green-900 text-gray-50 rounded-md font-semibold shadow`}
                   >
                     Request a Free Quote
                   </Link>
