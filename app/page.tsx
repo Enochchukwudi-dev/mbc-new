@@ -68,7 +68,7 @@ export default function HomePage() {
                   style={{ lineHeight: "1.05" }}
                 >
                   Quality
-                  <span className={`${isDark ? 'text-blue-300/90' : 'text-black'} font-extrabold`}>
+                  <span className={`${isDark ? 'text-blue-300/90' : 'text-amber-600'} font-extrabold`}>
                     {" "}
                     Construction
                   </span>{" "}
@@ -182,13 +182,13 @@ export default function HomePage() {
                   if (e.target === lightboxOverlayRef.current) setLightboxSrc(null)
                 }}
               >
-                <div className={`max-w-4xl w-full ${isDark ? 'bg-slate-800/10' : 'bg-white/5'} dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden`}>
+                <div className={`max-w-4xl w-full ${isDark ? 'bg-slate-800/10' : 'bg-white/5'}  rounded-lg shadow-lg overflow-hidden`}>
                   <div className="flex justify-end p-2">
                     <button
                       ref={lightboxCloseRef}
                       onClick={() => setLightboxSrc(null)}
                       aria-label="Close image"
-                      className="px-3 py-1 text-sm rounded bg-red-400 text-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none"
+                      className="px-3 py-1 text-sm rounded bg-red-400 text-white  hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none"
                     >
                       Close
                     </button>

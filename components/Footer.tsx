@@ -55,11 +55,11 @@ export default function Footer() {
                 className="flex flex-col items-start  md:mb-5"
               >
                 <Image
-                  src="/buju.png"
-                  alt="MyLogo"
+                  src={isDark ? "/buju.png" : "/orangelog.png"}
+                  alt="MBC Logo"
                   width={79}
                   height={79}
-                  className="h-9 w-28 object-contain filter brightness-97 contrast-150"
+                  className={`h-9 w-28 object-contain filter ${isDark ? 'brightness-100 contrast-150' : 'brightness-120 contrast-70'}`}
                 />
                 <div className="mt-1 text-left md:text-left">
                   <span
@@ -134,14 +134,12 @@ export default function Footer() {
             </h4>
             <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-800'}`}>
               <li>
-                <a
-                  href="https://wa.me/2349162919586?text=Good%20Day%20Mr%20Mbc%20contacting%20from%20your%20website"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/Contact"
                   className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}
                 >
                   Contact Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

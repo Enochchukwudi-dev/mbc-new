@@ -115,10 +115,10 @@ export default function Featured() {
             </div>
 
             {/* overlay controls */}
-            <button aria-label="Previous" onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80 dark:bg-gray-800/80 shadow z-10 hover:bg-white dark:hover:bg-gray-700">
+            <button aria-label="Previous" onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80  shadow z-10 hover:bg-white dark:hover:bg-gray-700">
               ‹
             </button>
-            <button aria-label="Next" onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80 dark:bg-gray-800/80 shadow z-10 hover:bg-white dark:hover:bg-gray-700">
+            <button aria-label="Next" onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80 shadow z-10 hover:bg-white dark:hover:bg-gray-700">
               ›
             </button>
           </div>

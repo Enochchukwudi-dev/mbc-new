@@ -96,11 +96,11 @@ function Navbar() {
                 className="flex flex-col items-start  md:mb-5"
               >
                 <Image
-                  src="/buju.png"
+                   src={isDark ? "/buju.png" : "/orangelog.png"}
                   alt="MyLogo"
                   width={79}
                   height={79}
-                  className="h-9 w-28 object-contain filter brightness-90 contrast-150"
+                  className={`h-9 w-28 object-contain filter ${isDark ? 'brightness-90 contrast-150' : 'brightness-120 contrast-70'}`}
                 />
                 <div className="mt-1 text-left md:text-left">
                   <span
@@ -122,7 +122,7 @@ function Navbar() {
       
           {/* Links (hidden on small, shown on md+) */}
           <div className="hidden md:flex items-center space-x-6">
-            <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} wrapperClass="mr-4" buttonClass="bg-gray-200/1 dark:bg-slate-200/2" />
+            <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} wrapperClass="mr-4" buttonClass="bg-gray-200/1 " />
             {menu.map(item => (
               <Link key={item.href} href={item.href} className={linkClass} onClick={(e) => handleAnchorClick(e, item.href)}>{item.label}</Link>
             ))}
@@ -195,7 +195,7 @@ function Navbar() {
 
 
 
-              <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} wrapperClass="mt-4 px-4" buttonClass={isDark ? "w-full bg-slate-950/10" : "w-full bg-gray-200 dark:bg-slate-800"} />
+              <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} wrapperClass="mt-4 px-4" buttonClass={isDark ? "w-full bg-slate-950/10" : "w-full bg-gray-200 "} />
 
               <div className="mt-6">
               <Link
