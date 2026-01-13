@@ -99,7 +99,7 @@ export default function Trust() {
             <div key={f.id} className={`relative ${isDark ? 'bg-slate-900' : 'bg-[hsl(20,22%,95%)]'} border-gray-100 dark:border-gray-700 rounded-lg p-5 shadow hover:shadow-lg transition-shadow`}>
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
-                  <div className={`w-12 h-12 flex items-center justify-center rounded-full ${isDark ? 'bg-slate-900/07' : 'bg-[hsl(20,22%,95%)]'} text-xl shadow-inner`}>{f.icon}</div>
+                  <div className={`w-12 h-12 flex items-center justify-center rounded-full ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,95%)]'} text-xl shadow-inner`}>{f.icon}</div>
                 </div>
                 <div className="flex-1">
                   {f.clickable ? (
