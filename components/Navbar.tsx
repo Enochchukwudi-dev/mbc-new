@@ -2,7 +2,7 @@
 import { useState, useEffect, MouseEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ChevronRight, Sun, Moon } from "lucide-react";
+import { Menu, X, ChevronRight, Sun, Moon, House, UsersRound, FolderOpenDot, HandHelping, PhoneIncoming } from "lucide-react";
 
 function ThemeToggle({ isDark, toggleTheme, wrapperClass, buttonClass }: { isDark: boolean; toggleTheme: () => void; wrapperClass?: string; buttonClass?: string }) {
   return (
@@ -86,7 +86,7 @@ function Navbar() {
 
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 h-22 z-40 ${isDark ? 'bg-slate-950 shadow-[0_2px_8px_rgba(255,255,255,0.06)]' : 'bg-[hsl(20,22%,94%)] shadow-sm'}`}>
+    <nav className={`fixed top-0 left-0 right-0 h-22 z-40 ${isDark ? 'bg-slate-950 shadow-[0_2px_8px_rgba(255,255,255,0.06)]' : 'bg-[hsl(20,22%,85%)] shadow-sm'}`}>
       <div className="container mx-auto px-4 py-3">
         <div className="flex  items-center justify-between h-16">
           {/* Logo (left) */}
@@ -146,7 +146,7 @@ function Navbar() {
 
         {/* Mobile menu (md:hidden) - fixed off-canvas panel that slides in from the right */}
         <div
-          className={`md:hidden fixed top-0  pt-15 right-0 z-50 w-full  bottom-0 ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,94%)]'} shadow-lg transform transition-transform  duration-700 ease-in-out ${
+          className={`md:hidden fixed top-0  pt-15 right-0 z-50 w-full  bottom-0 ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,85%)]'} shadow-lg transform transition-transform  duration-700 ease-in-out ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
           aria-hidden={!open}
@@ -160,7 +160,34 @@ function Navbar() {
                   onClick={(e) => handleAnchorClick(e, item.href)}
                   className={`flex items-center justify-between px-4 py-5 text-lg font-semibold ${isDark ? 'text-slate-300 hover:bg-slate-700' : 'text-gray-900 hover:bg-gray-100'} rounded`}
                 >
-                  <span>{item.label}</span>
+                  {item.href === '/' ? (
+                    <div className="flex items-center">
+                      <House className={`mr-3 ${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-5 w-5`} />
+                      <span>{item.label}</span>
+                    </div>
+                  ) : item.href === '/About' ? (
+                    <div className="flex items-center">
+                      <UsersRound className={`mr-3 ${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-5 w-5`} />
+                      <span>{item.label}</span>
+                    </div>
+                  ) : item.href === '/Gallery' ? (
+                    <div className="flex items-center">
+                      <FolderOpenDot className={`mr-3 ${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-5 w-5`} />
+                      <span>{item.label}</span>
+                    </div>
+                  ) : item.href === '/#services' ? (
+                    <div className="flex items-center">
+                      <HandHelping className={`mr-3 ${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-5 w-5`} />
+                      <span>{item.label}</span>
+                    </div>
+                  ) : item.href === '/Contact' ? (
+                    <div className="flex items-center">
+                      <PhoneIncoming className={`mr-3 ${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-5 w-5`} />
+                      <span>{item.label}</span>
+                    </div>
+                  ) : (
+                    <span>{item.label}</span>
+                  )}
                   <ChevronRight className={`h-5 w-5 ${isDark ? 'text-slate-50' : 'text-gray-900'}`} />
                 </Link>
               ))}
@@ -174,7 +201,7 @@ function Navbar() {
               <Link
                 href="/Booking"
                 onClick={() => setOpen(false)}
-                className={`block w-full text-white ${isDark ? 'bg-slate-900' : 'bg-gray-900'} py-3 rounded-md text-center font-semibold shadow-sm`}
+                className={`block w-full  ${isDark ? 'bg-yellow-200/80' : 'bg-amber-700'} ${isDark ? 'text-slate-950' : 'text-white'} py-3 rounded-md text-center font-semibold shadow-sm`}
               >
                 Book Us
               </Link>

@@ -100,7 +100,7 @@ export default function Featured() {
             <div className="flex transition-transform duration-500" style={{ transform: `translateX(calc(-${index * 100}% + ${dragOffset}px))` }}>
               {projects.map((p) => (
                 <figure key={p.src} className="min-w-full flex-shrink-0 p-4">
-                  <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-md">
+                  <div className={`relative overflow-hidden rounded-2xl ${isDark ? 'bg-slate-900/40' : 'bg-[hsl(20,22%,85%)]'}  shadow-md`}>
                     <img src={p.src} alt={p.title} className="w-full h-72 object-cover" draggable={false} />
                     <div className="p-4">
                       <div className="font-semibold text-lg text-gray-900 dark:text-white">{p.title}</div>
