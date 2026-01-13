@@ -5,13 +5,25 @@ function Booking() {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
-  const [description, setDescription] = useState('')
+  const [service, setService] = useState('')
+  const services = [
+    "Structural Building Construction",
+    "Roofing Systems Installation",
+    "Felting & Waterproofing Solutions",
+    "Concrete & Reinforcement Works",
+    "Mansory & Block Works",
+    "Interior & Exterior Finishing",
+    "Flooring, Tiling & Paving",
+    "Construction Project Supervision",
+  ]
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [success, setSuccess] = useState(false)
   const [isDark, setIsDark] = useState<boolean>(false)
+  const [submitting, setSubmitting] = useState(false)
   const phoneErrorTimeoutRef = useRef<number | null>(null)
   const nameErrorTimeoutRef = useRef<number | null>(null)
-  const descriptionErrorTimeoutRef = useRef<number | null>(null)
+  const serviceErrorTimeoutRef = useRef<number | null>(null)
+  const sentToWhatsAppRef = useRef<boolean>(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -35,23 +47,38 @@ function Booking() {
         clearTimeout(nameErrorTimeoutRef.current)
         nameErrorTimeoutRef.current = null
       }
-      if (descriptionErrorTimeoutRef.current) {
-        clearTimeout(descriptionErrorTimeoutRef.current)
-        descriptionErrorTimeoutRef.current = null
+      if (serviceErrorTimeoutRef.current) {
+        clearTimeout(serviceErrorTimeoutRef.current)
+        serviceErrorTimeoutRef.current = null
       }
     }
   }, [])
 
-  const wordCount = description.trim() === '' ? 0 : description.trim().split(/\s+/).length
+  // Mark when we've opened WhatsApp so we can show success when the user returns
+  useEffect(() => {
+    const handleReturn = () => {
+      if (sentToWhatsAppRef.current && document.visibilityState === 'visible') {
+        sentToWhatsAppRef.current = false
+        setSuccess(true)
+        // Hide success after 5s
+        setTimeout(() => setSuccess(false), 5000)
+      }
+    }
+    document.addEventListener('visibilitychange', handleReturn)
+    window.addEventListener('focus', handleReturn)
+    return () => {
+      document.removeEventListener('visibilitychange', handleReturn)
+      window.removeEventListener('focus', handleReturn)
+    }
+  }, [])
 
   // Phone helpers: count digits, check allowed characters, and whether to show the tick
   const phoneDigits = phone.replace(/\D/g, '').length
   const phoneAllowed = phone === '' ? false : /^[0-9()+\-\s]+$/.test(phone)
   const showPhoneTick = phoneAllowed && phoneDigits >= 11 && phoneDigits <= 15 && !errors.phone
 
-  // Name and Description ticks: show when minimums are met and no error
+  // Name tick: show when minimum is met and no error
   const showNameTick = name.trim().length >= 3 && /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/.test(name.trim()) && !errors.name
-  const showDescTick = description.trim().length >= 5 && !errors.description
 
   // Ensure input only contains digits and allowed special characters (filter on input)
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +97,7 @@ function Booking() {
         phoneErrorTimeoutRef.current = null
       }
       setErrors(prev => {
-        const { phone, ...rest } = prev
+        const rest = Object.fromEntries(Object.entries(prev).filter(([k]) => k !== 'phone')) as Record<string,string>
         return rest
       })
     }
@@ -90,25 +117,24 @@ function Booking() {
         nameErrorTimeoutRef.current = null
       }
       setErrors(prev => {
-        const { name, ...rest } = prev
+        const rest = Object.fromEntries(Object.entries(prev).filter(([k]) => k !== 'name')) as Record<string,string>
         return rest
       })
     }
   }
 
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleServiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value
-    setDescription(val)
+    setService(val)
 
-    // auto-clear description error when length >= 5 (user requested)
-    const trimmed = val.trim()
-    if (errors.description && trimmed.length >= 5) {
-      if (descriptionErrorTimeoutRef.current) {
-        clearTimeout(descriptionErrorTimeoutRef.current)
-        descriptionErrorTimeoutRef.current = null
+    // auto-clear service error when a service is chosen
+    if (errors.service && val) {
+      if (serviceErrorTimeoutRef.current) {
+        clearTimeout(serviceErrorTimeoutRef.current)
+        serviceErrorTimeoutRef.current = null
       }
       setErrors(prev => {
-        const { description, ...rest } = prev
+        const rest = Object.fromEntries(Object.entries(prev).filter(([k]) => k !== 'service')) as Record<string,string>
         return rest
       })
     }
@@ -136,8 +162,7 @@ function Booking() {
       const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       if (!re.test(email)) e.email = 'Email address looks invalid.'
     }
-    if (!description.trim()) e.description = 'Description is required.'
-    else if (wordCount > 250) e.description = 'Description exceeds 250 words.'
+    if (!service) e.service = 'Please select a service.'
     setErrors(e)
 
     // Auto-clear phone error after 3 seconds
@@ -147,7 +172,7 @@ function Booking() {
       }
       phoneErrorTimeoutRef.current = window.setTimeout(() => {
         setErrors(prev => {
-          const { phone, ...rest } = prev
+          const rest = Object.fromEntries(Object.entries(prev).filter(([k]) => k !== 'phone')) as Record<string,string>
           return rest
         })
         phoneErrorTimeoutRef.current = null
@@ -161,24 +186,24 @@ function Booking() {
       }
       nameErrorTimeoutRef.current = window.setTimeout(() => {
         setErrors(prev => {
-          const { name, ...rest } = prev
+          const rest = Object.fromEntries(Object.entries(prev).filter(([k]) => k !== 'name')) as Record<string,string>
           return rest
         })
         nameErrorTimeoutRef.current = null
       }, 3000)
     }
 
-    // Auto-clear description error after 3 seconds
-    if (e.description) {
-      if (descriptionErrorTimeoutRef.current) {
-        clearTimeout(descriptionErrorTimeoutRef.current)
+    // Auto-clear service error after 3 seconds
+    if (e.service) {
+      if (serviceErrorTimeoutRef.current) {
+        clearTimeout(serviceErrorTimeoutRef.current)
       }
-      descriptionErrorTimeoutRef.current = window.setTimeout(() => {
+      serviceErrorTimeoutRef.current = window.setTimeout(() => {
         setErrors(prev => {
-          const { description, ...rest } = prev
+          const rest = Object.fromEntries(Object.entries(prev).filter(([k]) => k !== 'service')) as Record<string,string>
           return rest
         })
-        descriptionErrorTimeoutRef.current = null
+        serviceErrorTimeoutRef.current = null
       }, 3000)
     }
 
@@ -188,33 +213,65 @@ function Booking() {
   const handleSubmit = (ev: React.FormEvent) => {
     ev.preventDefault()
     if (!validate()) return
-    // Replace with real submit logic as needed
-    console.log({ name, phone, email, description })
-    setSuccess(true)
-    setName('')
-    setPhone('')
-    setEmail('')
-    setDescription('')
-    setErrors({})
-    if (phoneErrorTimeoutRef.current) {
-      clearTimeout(phoneErrorTimeoutRef.current)
-      phoneErrorTimeoutRef.current = null
-    }
-    if (nameErrorTimeoutRef.current) {
-      clearTimeout(nameErrorTimeoutRef.current)
-      nameErrorTimeoutRef.current = null
-    }
-    if (descriptionErrorTimeoutRef.current) {
-      clearTimeout(descriptionErrorTimeoutRef.current)
-      descriptionErrorTimeoutRef.current = null
-    }
-    setTimeout(() => setSuccess(false), 5000)
+    setSubmitting(true)
+    // Simulate submit delay
+    setTimeout(() => {
+      setSubmitting(false)
+      // Prepare message and open WhatsApp with prefilled text
+      const phoneNumber = '2349162919586'
+      const text = `Booking request\nName: ${name}\nPhone: ${phone}\nService: ${service}`
+      const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`
+      // Open WhatsApp in a new tab/window (fallback if popup is blocked)
+      try {
+        const opened = window.open(waUrl, '_blank')
+        if (!opened) {
+          // Likely blocked — navigate directly
+          window.location.href = waUrl
+        }
+        sentToWhatsAppRef.current = true
+      } catch {
+        // Fallback: navigate
+        window.location.href = waUrl
+        sentToWhatsAppRef.current = true
+      }
+
+      // Clear the form immediately after opening WhatsApp
+      setName('')
+      setPhone('')
+      setEmail('')
+      setService('')
+      setErrors({})
+      if (phoneErrorTimeoutRef.current) {
+        clearTimeout(phoneErrorTimeoutRef.current)
+        phoneErrorTimeoutRef.current = null
+      }
+      if (nameErrorTimeoutRef.current) {
+        clearTimeout(nameErrorTimeoutRef.current)
+        nameErrorTimeoutRef.current = null
+      }
+      if (serviceErrorTimeoutRef.current) {
+        clearTimeout(serviceErrorTimeoutRef.current)
+        serviceErrorTimeoutRef.current = null
+      }
+    }, 3000)
   }
 
   return (
     <>
       <Navbar />
       <main className={`min-h-screen pt-20 flex items-start ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,91%)]'}`}>
+        {/* Centered success message overlay */}
+        {success && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
+            <div role="status" aria-live="polite" className="inline-flex items-center gap-3 px-6 py-3 rounded-lg bg-green-50 text-green-800 border border-green-100 shadow-lg animate-fadeIn">
+              <svg className="w-6 h-6 text-green-600 tick-animate" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="10" strokeWidth="2" fill="white" />
+                <path d="M7 12l3 3 7-7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              </svg>
+              <span className="text-sm">Request submitted — we will contact you soon.</span>
+            </div>
+          </div>
+        )}
         <div className="max-w-3xl mx-auto px-6 py-12 w-full">
           <div className={`rounded-2xl shadow-lg ring-1 p-8 ${isDark ? 'bg-slate-900/40 ring-gray-800' : 'bg-[hsl(20,22%,93%)] ring-gray-200'}`}>
             <div className="flex items-center justify-between gap-4 ">
@@ -239,7 +296,7 @@ function Booking() {
                     onChange={handleNameChange}
                     aria-invalid={!!errors.name}
                     aria-describedby={errors.name ? 'name-error' : undefined}
-                    className={`mt-2 block w-full rounded-lg px-4 py-2 pr-10 border ${errors.name ? 'border-red-400 ring-1 ring-red-500' : 'border-gray-200'} ${isDark ? 'bg-slate-800/40' : 'bg-white/60'} ${isDark ? 'border-slate-800' : 'bg-white/80'} ${isDark ? 'text-gray-100' : 'text-gray-700'} placeholder-gray-400 focus:outline-none focus:ring-1 ${isDark ? 'focus:ring-slate-700' : 'focus:ring-gray-300'} transition`}
+                    className={`mt-3 block w-full rounded-lg px-4 py-2 pr-10 border ${errors.name ? 'border-red-400 ring-1 ring-red-500' : 'border-gray-200'} ${isDark ? 'bg-slate-800/40' : 'bg-white/60'} ${isDark ? 'border-slate-800' : 'bg-white/80'} ${isDark ? 'text-gray-100' : 'text-gray-700'} placeholder-gray-400 focus:outline-none focus:ring-1 ${isDark ? 'focus:ring-slate-700' : 'focus:ring-gray-300'} transition`}
                   />
                   {showNameTick && (
                     <img src="/teek.svg" alt="valid" className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" />
@@ -260,7 +317,7 @@ function Booking() {
                     onChange={handlePhoneChange}
                     aria-invalid={!!errors.phone}
                     aria-describedby={errors.phone ? 'phone-error' : undefined}
-                    className={`mt-2 block w-full rounded-lg px-4 py-2 pr-10 border ${errors.phone ? 'border-red-400 ring-1 ring-red-500' : 'border-gray-200'} ${isDark ? 'bg-slate-800/40' : 'bg-white/60'} ${isDark ? 'border-slate-800' : 'bg-white/80'} ${isDark ? 'text-gray-100' : 'text-gray-700'} placeholder-gray-400 focus:outline-none focus:ring-1  ${isDark ? 'focus:ring-slate-700' : 'focus:ring-gray-300'} transition`}
+                    className={`mt-3 block w-full rounded-lg px-4 py-2 pr-10 border ${errors.phone ? 'border-red-400 ring-1 ring-red-500' : 'border-gray-200'} ${isDark ? 'bg-slate-800/40' : 'bg-white/60'} ${isDark ? 'border-slate-800' : 'bg-white/80'} ${isDark ? 'text-gray-100' : 'text-gray-700'} placeholder-gray-400 focus:outline-none focus:ring-1  ${isDark ? 'focus:ring-slate-700' : 'focus:ring-gray-300'} transition`}
                   />
                   {showPhoneTick && (
                     <img src="/teek.svg" alt="valid" className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" />
@@ -278,52 +335,69 @@ function Booking() {
                   onChange={(e) => setEmail(e.target.value)}
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? 'email-error' : undefined}
-                  className={`mt-2 block w-full rounded-lg px-4 py-2 border ${errors.email ? 'border-red-400 ring-1 ring-red-200' : 'border-gray-200'} ${isDark ? 'bg-slate-800/40' : 'bg-white/60'} ${isDark ? 'border-slate-800' : 'bg-white/80'}  ${isDark ? 'text-gray-100' : 'text-gray-700'} placeholder-gray-400 focus:outline-none focus:ring-1 ${isDark ? 'focus:ring-slate-700' : 'focus:ring-gray-300'} transition`}
+                  className={`mt-3 block w-full rounded-lg px-4 py-2 border ${errors.email ? 'border-red-400 ring-1 ring-red-200' : 'border-gray-200'} ${isDark ? 'bg-slate-800/40' : 'bg-white/60'} ${isDark ? 'border-slate-800' : 'bg-white/80'}  ${isDark ? 'text-gray-100' : 'text-gray-700'} placeholder-gray-400 focus:outline-none focus:ring-1 ${isDark ? 'focus:ring-slate-700' : 'focus:ring-gray-300'} transition`}
                 />
                 {errors.email && <p id="email-error" className="text-sm text-red-600 mt-2">{errors.email}</p>}
               </div>
 
               <div className="md:col-span-2">
-                <label className={`block text-sm font-semibold ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>Description <span className="text-gray-500">(250 words max)</span></label>
+                <label className={`block text-sm font-semibold ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>Service <span className="text-red-500">*</span></label>
                 <div className="relative">
-                  <textarea
-                    placeholder="Briefly describe your request (max 250 words)"
-                    value={description}
-                    onChange={handleDescriptionChange}
-                    rows={6}
-                    aria-invalid={!!errors.description}
-                    aria-describedby={errors.description ? 'desc-error' : undefined}
-                    className={`mt-2 block w-full rounded-lg px-4 py-3 pr-10 border ${errors.description ? 'border-red-400 ring-1 ring-red-500' : 'border-gray-200'} ${isDark ? 'bg-slate-800/40' : 'bg-white/60'} ${isDark ? 'border-slate-800' : 'bg-white/80'} ${isDark ? 'text-gray-100' : 'text-gray-700'} placeholder-gray-400 focus:outline-none focus:ring-1  ${isDark ? 'focus:ring-slate-700' : 'focus:ring-gray-300'} transition resize-none`}
-                  />
-                  {showDescTick && (
-                    <img src="/teek.svg" alt="valid" className="absolute right-3 top-3 w-4 h-4" />
-                  )}
+                  <select
+                    value={service}
+                    onChange={handleServiceChange}
+                    aria-invalid={!!errors.service}
+                    aria-describedby={errors.service ? 'service-error' : undefined}
+                    className={`mt-4 block w-full rounded-lg px-4 py-3 pr-10 border ${errors.service ? 'border-red-400 ring-1 ring-red-500' : (isDark ? 'border-slate-800' : 'border-gray-200')} ${isDark ? 'bg-slate-950 text-gray-300' : 'bg-white/60 text-gray-700'} placeholder-gray-400 focus:outline-none focus:ring-1 ${isDark ? 'focus:ring-slate-700' : 'focus:ring-gray-300'} transition`}
+                  >
+                    <option value="">Select a service</option>
+                    {services.map((s, idx) => (
+                      <option key={idx} value={s}>{s}</option>
+                    ))}
+                  </select>
                 </div>
-                <div className="flex items-center justify-between mt-2">
-                  <p className="text-sm text-gray-500">Words: {wordCount}/250</p>
-                  {errors.description && <p id="desc-error" className="text-sm text-red-600">{errors.description}</p>}
-                </div>
+                {errors.service && <p id="service-error" className="text-sm text-red-600 mt-4">{errors.service}</p>}
               </div>
 
               <div className="md:col-span-2 flex items-center gap-4">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg shadow-md hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-indigo-200 transition"
+                  disabled={submitting}
+                  className={`inline-flex items-center justify-center px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg shadow-md hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-indigo-200 transition ${submitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                 >
-                  Submit Request
+                  {submitting ? 'Submitting....' : 'Submit Request'}
                 </button>
-
-                {success && (
-                  <div role="status" className="inline-flex items-center gap-3 px-4 py-2 rounded-md bg-green-50 text-green-700 border border-green-100">
-                    <span className="text-lg">✅</span>
-                    <span className="text-sm">Request submitted — we will contact you soon.</span>
-                  </div>
-                )}
               </div>
             </form>
           </div>
         </div>
       </main>
+      {/* Animation keyframes */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.25s ease;
+        }
+        .tick-animate path {
+          stroke-dasharray: 40;
+          stroke-dashoffset: 40;
+          animation: draw 0.6s ease forwards;
+        }
+        .tick-animate circle {
+          transform-origin: 12px 12px;
+          animation: pop 0.4s ease;
+        }
+        @keyframes draw {
+          to { stroke-dashoffset: 0; }
+        }
+        @keyframes pop {
+          from { transform: scale(0.8); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+      `}</style>
     </>
   )
 }
