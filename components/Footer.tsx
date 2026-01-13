@@ -67,8 +67,7 @@ export default function Footer() {
             </div>
 
             <p className={`mt-3 lg:mr-5 ${isDark ? 'text-gray-400' : 'text-black'} text-sm max-w-[18rem]`}>
-              Faith-inspired fashion for everyday wear, shop curated collections
-              made with care.
+              Mooto: Your home your passion
             </p>
           </div>
 

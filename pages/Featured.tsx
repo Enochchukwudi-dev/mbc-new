@@ -88,7 +88,7 @@ export default function Featured() {
   }
 
   return (
-    <section className={`py-12 bg-gray-50/40 ${isDark ? 'bg-slate-900' : 'bg-gray-50/40'} rounded-2xl`}>
+    <section className={`py-12 bg-gray-50/40 ${isDark ? 'bg-slate-900/2' : 'bg-gray-50/40'} rounded-2xl`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center mb-6">
           <h2 className={`mt-2 text-3xl sm:text-2xl font-semibold tracking-tight ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>Featured Projects</h2>

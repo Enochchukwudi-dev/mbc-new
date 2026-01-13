@@ -1,5 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react'
+import { FileText, Building2, ShieldCheck, CalendarClock, TrendingUp } from 'lucide-react'
 
 export default function Trust() {
   const [showCerts, setShowCerts] = useState(false)
@@ -20,13 +21,13 @@ export default function Trust() {
     return () => { observer.disconnect(); window.removeEventListener('storage', onStorage); };
   }, []);
 
-  type Feature = { id: string; icon: string; title: string; why: string; clickable?: boolean; link?: string }
+  type Feature = { id: string; icon: React.ReactNode; title: string; why: string; clickable?: boolean; link?: string }
   const features: Feature[] = [
-    { id: 'experience', icon: '🏗️', title: '10+ Years Experience', why: "Longevity = stability = won't disappear with deposit" },
-    { id: 'licensing', icon: '📋', title: 'Licensed & Insured', why: 'Legal proof separates professionals from roadside builders', clickable: true },
-    { id: 'projects', icon: '🏠', title: '50+ Projects Completed', why: 'Volume proves you deliver consistently' },
-    { id: 'warranty', icon: '🛡️', title: '2-Year Work Warranty', why: 'Shows you stand behind your work' },
-    { id: 'ontime', icon: '⏱️', title: '95% On-Time Completion', why: "Addresses biggest client fear (delays)" },
+    { id: 'experience', icon:  <TrendingUp className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} w-6 h-6`} />, title: '10+ Years Experience', why: "Longevity = stability = won't disappear with deposit" },
+    { id: 'licensing', icon: <FileText className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} w-6 h-6`} />, title: 'Licensed & Insured', why: 'Legal proof separates professionals from roadside builders', clickable: true },
+    { id: 'projects', icon: <Building2  className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} w-6 h-6`} />, title: '50+ Projects Completed', why: 'Volume proves you deliver consistently' },
+    { id: 'warranty', icon:  <ShieldCheck  className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} w-6 h-6`} />, title: '2-Year Work Warranty', why: 'Shows you stand behind your work' },
+    { id: 'ontime', icon:  <CalendarClock  className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} w-6 h-6`} />, title: '95% On-Time Completion', why: "Addresses biggest client fear (delays)" },
   ]
 
   useEffect(() => {
@@ -96,7 +97,7 @@ export default function Trust() {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (
-            <div key={f.id} className={`relative ${isDark ? 'bg-slate-900' : 'bg-[hsl(20,22%,95%)]'} border-gray-100 dark:border-gray-700 rounded-lg p-5 shadow hover:shadow-lg transition-shadow`}>
+            <div key={f.id} className={`relative ${isDark ? 'bg-slate-900/40' : 'bg-[hsl(20,22%,95%)]'} border-gray-100 dark:border-gray-700 rounded-lg p-5 shadow hover:shadow-lg transition-shadow`}>
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
                   <div className={`w-12 h-12 flex items-center justify-center rounded-full ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,95%)]'} text-xl shadow-inner`}>{f.icon}</div>
