@@ -100,18 +100,18 @@ function Navbar() {
                   alt="MyLogo"
                   width={79}
                   height={79}
-                  className={`h-9 w-28 object-contain filter ${isDark ? 'brightness-90 contrast-150' : 'brightness-120 contrast-70'}`}
+                  className={`h-7 w-28 object-contain filter ${isDark ? 'brightness-95 contrast-160' : 'brightness-120 contrast-70'}`}
                 />
                 <div className="mt-1 text-left md:text-left">
                   <span
-                    className={`block font-extrabold ${isDark ? 'text-blue-200' : 'text-gray-900'}`}
-                    style={{ fontSize: "11px", lineHeight: 1 }}
+                    className={`block font-extrabold ${isDark ? 'text-gray-200' : 'text-gray-900'}`}
+                    style={{ fontSize: "10px", lineHeight: 1 }}
                   >
                     MAROCK BUILDING CONST.
                   </span>
                   <span
-                    className={`block font-bold ${isDark ? 'text-blue-300/60' : 'text-gray-700'}`}
-                    style={{ fontSize: "11px", lineHeight: 1 }}
+                    className={`block font-bold ${isDark ? 'text-blue-100/60' : 'text-gray-700'}`}
+                    style={{ fontSize: "10px", lineHeight: 1 }}
                   >
                     ENTERPRISE
                   </span>
