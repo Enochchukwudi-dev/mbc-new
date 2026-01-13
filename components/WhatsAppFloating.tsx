@@ -135,10 +135,10 @@ export default function WhatsAppFloating() {
       onClick={handleClick}
       aria-label="Chat on WhatsApp"
       title="Chat on WhatsApp"
-      className="fixed z-50 flex items-center justify-center w-16 h-16 rounded-full shadow-lg bg-green-600 hover:scale-105 transition-transform focus:outline-none touch-none cursor-grab select-none"
+      className="fixed z-50 flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full shadow-lg bg-green-600 hover:scale-105 transition-transform focus:outline-none touch-none cursor-grab select-none"
       style={style}
     >
-      <Image src="/whatsapp.svg" alt="WhatsApp" width={32} height={32} className="w-8 h-8" />
+      <Image src="/whatsapp.svg" alt="WhatsApp" width={32} height={32} className="w-6 h-6 sm:w-8 sm:h-8" />
     </button>
   )
 }

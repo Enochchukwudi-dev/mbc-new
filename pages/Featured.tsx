@@ -106,7 +106,7 @@ export default function Featured() {
                       <div className="font-semibold text-lg text-gray-900 dark:text-white">{p.title}</div>
                       <div className="text-sm text-gray-500 dark:text-gray-300 mt-1">{p.desc}</div>
                       <div className="mt-4">
-                        <a href={p.src} target="_blank" rel="noopener noreferrer" className={`inline-block px-4 py-2 ${isDark ? 'bg-blue-500' : 'bg-gray-900'}  text-white rounded-md hover:bg-green-700`}>View project</a>
+                        <a href={p.src} target="_blank" rel="noopener noreferrer" className={`inline-block px-4 py-2  ${isDark ? 'bg-yellow-200/80' : 'bg-amber-700'} ${isDark ? 'text-slate-950' : 'text-white'} ${isDark ? 'hover:bg-yellow-200' : 'hover:bg-amber-600' } rounded-md font-semibold`}>View project</a>
                       </div>
                     </div>
                   </div>
@@ -125,7 +125,7 @@ export default function Featured() {
 
           <div className="flex justify-center gap-2 mt-4">
             {projects.map((_, i) => (
-              <button key={i} onClick={() => setIndex(i)} aria-label={`Go to slide ${i + 1}`} className={`w-2 h-2 rounded-full ${i === index ? 'bg-green-600' : 'bg-gray-300 dark:bg-gray-600'}`}></button>
+              <button key={i} onClick={() => setIndex(i)} aria-label={`Go to slide ${i + 1}`} className={`w-2 h-2 rounded-full ${i === index ? (isDark ? 'bg-yellow-200/80' : 'bg-amber-700') : 'bg-gray-300'}`}></button>
             ))}
           </div>
         </div>

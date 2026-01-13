@@ -7,10 +7,7 @@ export default function Trust() {
   const closeBtnRef = useRef<HTMLButtonElement | null>(null)
 
   // Track whether the page is in dark mode (derived from <html>.classList)
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return document.documentElement.classList.contains('dark');
-  });
+  const [isDark, setIsDark] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -45,7 +42,7 @@ export default function Trust() {
   }, [showCerts])
 
   return (
-    <section aria-labelledby="trust-heading" className="py-8 bg-white/2 dark:bg-gray-900">
+    <section aria-labelledby="trust-heading" className="py-8  ${isDark ? 'bg-slate-950' : 'bg-white/2'}">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`mx-auto mb-9 w-45 h-68 overflow-hidden border ${isDark ? 'border-gray-900' : 'border-gray-200'}  bg-white/6 p-3 shadow-md flex flex-col items-center justify-center`}>
           <div className="w-full flex-1 flex items-center justify-center">
@@ -56,7 +53,7 @@ export default function Trust() {
           <button
             onClick={() => setShowCerts(true)}
             aria-label="View full certificate"
-            className={`mt-3 px-4 py-2 ${isDark ? 'bg-blue-500' : 'bg-gray-900'} text-white rounded-md text-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 whitespace-nowrap`}
+            className={`mt-3 px-4 py-2 ${isDark ? 'bg-yellow-200/80' : 'bg-gray-900'}  ${isDark ? 'text-slate-950' : 'text-white'} rounded-md text-sm hover:bg-green-700 focus:outline-none font-semibold focus:ring-2 focus:ring-green-400 whitespace-nowrap`}
           >
             View full certificate
           </button>
@@ -72,13 +69,13 @@ export default function Trust() {
               if (e.target === overlayRef.current) setShowCerts(false)
             }}
           >
-            <div className="max-w-3xl w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+            <div className="max-w-3xl w-full bg-white  rounded-lg shadow-lg overflow-hidden">
               <div className="flex justify-end p-2">
                 <button
                   ref={closeBtnRef}
                   onClick={() => setShowCerts(false)}
                   aria-label="Close certificate"
-                  className="px-3 py-1 text-sm rounded bg-red-400 text-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none"
+                  className="px-3 py-1 text-sm rounded bg-red-400 text-white hover:bg-gray-200 focus:outline-none"
                 >
                   Close
                 </button>
@@ -90,7 +87,7 @@ export default function Trust() {
           </div>
         )}
         <div className="text-center">
-          <p className="text-sm text-green-500 font-semibold">Trusted & Verified</p>
+          <p className={`text-sm ${isDark ? 'text-yellow-100' : 'text-green-500'} font-semibold`}>Trusted & Verified</p>
           <h2 id="trust-heading" className={`mt-2 text-3xl sm:text-4xl font-bold tracking-tight ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>
             Built on Reputation
           </h2>
@@ -99,10 +96,10 @@ export default function Trust() {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (
-            <div key={f.id} className={`relative ${isDark ? 'bg-slate-800' : 'bg-[hsl(20,22%,95%)]'} border-gray-100 dark:border-gray-700 rounded-sm p-5 shadow hover:shadow-lg transition-shadow`}>
+            <div key={f.id} className={`relative ${isDark ? 'bg-slate-900' : 'bg-[hsl(20,22%,95%)]'} border-gray-100 dark:border-gray-700 rounded-lg p-5 shadow hover:shadow-lg transition-shadow`}>
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
-                  <div className={`w-12 h-12 flex items-center justify-center rounded-full ${isDark ? 'bg-slate-700' : 'bg-[hsl(20,22%,95%)]'} text-xl shadow-inner`}>{f.icon}</div>
+                  <div className={`w-12 h-12 flex items-center justify-center rounded-full ${isDark ? 'bg-slate-900/07' : 'bg-[hsl(20,22%,95%)]'} text-xl shadow-inner`}>{f.icon}</div>
                 </div>
                 <div className="flex-1">
                   {f.clickable ? (

@@ -15,7 +15,7 @@ function ThemeToggle({ isDark, toggleTheme, wrapperClass, buttonClass }: { isDar
         aria-label={isDark ? "Dark mode" : "Light mode"}
         className={`flex items-center justify-between gap-2 px-4 py-3 rounded-md ${buttonClass}`}
       >
-        <span className={`font-medium ${isDark ? 'text-amber-300' : 'text-gray-900'}`}>{isDark ? 'Dark mode' : 'Light mode'}</span>
+        <span className={`font-medium ${isDark ? 'text-yellow-200/80' : 'text-gray-900'}`}>{isDark ? 'Dark mode' : 'Light mode'}</span>
 
         <div className={`relative inline-flex items-center w-14 h-7 rounded-full p-1 transition-colors duration-300 ${isDark ? 'bg-gray-400/10 ' : 'bg-gray-300'}`}>
           <Sun className={`absolute left-2 w-4 h-4 text-yellow-400 transform transition-all duration-300 ${isDark ? 'opacity-0 -translate-x-2 scale-75' : 'opacity-100 translate-x-0 scale-100'}`} />
@@ -40,12 +40,16 @@ const menu = [
 function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
+  const [isDark, setIsDark] = useState<boolean>(false);
+
+  // Determine theme preferences on the client only (avoid reading browser APIs during SSR)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
     const stored = localStorage.getItem('theme');
-    const prefersDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return stored ? stored === 'dark' : !!prefersDark;
-  });
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initial = stored ? stored === 'dark' : !!prefersDark;
+    setIsDark(initial);
+  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -83,25 +87,37 @@ function Navbar() {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 h-22 z-40 ${isDark ? 'bg-slate-950 shadow-[0_2px_8px_rgba(255,255,255,0.06)]' : 'bg-[hsl(20,22%,94%)] shadow-sm'}`}>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex  items-center justify-between h-16">
           {/* Logo (left) */}
-          <div className="flex items-center  flex-col pt-8 ">
-            <Link
-              href="/"
-              className="flex flex-col items-center "
-            >
-              <Image src={isDark ? '/blu.png' : '/gala.png'} alt="MyLogo" width={79} height={79} className="h-9 w-28 object-contain filter brightness-102" />
-              <div className="mt-1 text-center md:text-left">
-                <span className={`block font-bold ${isDark ? 'text-cyan-100' : 'text-gray-900'}`} style={{ fontSize: '9px', lineHeight: 1 }}>
-                  MAROCK BUILDING CONST.
-                </span>
-                <span className={`block font-bold ${isDark ? 'text-cyan-100' : 'text-gray-900'}`} style={{ fontSize: '8px', lineHeight: 1 }}>
-                  ENTERPRISE
-                </span>
-              </div>
-            </Link>
-          </div>
+          <div className="flex items-center  flex-col pt-4 ">
+              <Link
+                href="/"
+                className="flex flex-col items-start  md:mb-5"
+              >
+                <Image
+                  src="/buju.png"
+                  alt="MyLogo"
+                  width={79}
+                  height={79}
+                  className="h-9 w-28 object-contain filter brightness-90 contrast-150"
+                />
+                <div className="mt-1 text-left md:text-left">
+                  <span
+                    className={`block font-extrabold ${isDark ? 'text-amber-200' : 'text-gray-600'}`}
+                    style={{ fontSize: "11px", lineHeight: 1 }}
+                  >
+                    MAROCK BUILDING CONST.
+                  </span>
+                  <span
+                    className={`block font-bold ${isDark ? 'text-amber-100/60' : 'text-gray-600'}`}
+                    style={{ fontSize: "11px", lineHeight: 1 }}
+                  >
+                    ENTERPRISE
+                  </span>
+                </div>
+              </Link>
+            </div>
 
       
           {/* Links (hidden on small, shown on md+) */}

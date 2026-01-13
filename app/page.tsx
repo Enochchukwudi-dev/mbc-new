@@ -68,7 +68,7 @@ export default function HomePage() {
                   style={{ lineHeight: "1.05" }}
                 >
                   Quality
-                  <span className={`${isDark ? 'text-orange-500' : 'text-black'} font-extrabold`}>
+                  <span className={`${isDark ? 'text-blue-300/90' : 'text-black'} font-extrabold`}>
                     {" "}
                     Construction
                   </span>{" "}
@@ -83,7 +83,7 @@ export default function HomePage() {
                 <div className="mt-4 mb-3 flex gap-3">
                   <Link
                     href="/Booking"
-                    className={`inline-flex items-center text-sm md:text-base lg:text-lg px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 ${isDark ? 'bg-orange-700' : 'bg-blue-500'} hover:text-white ${isDark ? 'hover:bg-green-500' : 'hover:bg-blue-400'} text-gray-50 rounded-md md:rounded-lg font-semibold shadow transition-shadow`}
+                    className={`inline-flex items-center text-sm md:text-base lg:text-lg px-4 py-2 md:px-6 md:py-2 lg:px-8 lg:py-2 ${isDark ? 'bg-yellow-200/80' : 'bg-amber-700'}  ${isDark ? 'hover:bg-yellow-200' : 'hover:bg-amber-600'} ${isDark ? 'text-slate-950' : 'text-white'} rounded-md md:rounded-lg font-semibold shadow transition-shadow`}
                     aria-label="Request a free quote"
                   >
                     Request a Free Quote
@@ -107,7 +107,7 @@ export default function HomePage() {
           {/* Services */}
           <div id="services" className="mt-8  scroll-mt-28 flex flex-col items-center text-center mb-6">
             <h2 className={`mt-2 text-3xl sm:text-2xl font-semibold tracking-tight ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>Our Services</h2>
-            <p className={`mt-3 max-w-2xl mx-auto text-sm ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>We manage every phase of a project with experienced oversight, quality materials, and clear communication so your build is durable and completed on time.</p>
+            <p className={`mt-3 max-w-2xl mx-auto text-sm md:text-base ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>We manage every phase of a project with experienced oversight, quality materials, and clear communication so your build is durable and completed on time.</p>
           </div>
 
           {/* Services grid */}
@@ -148,7 +148,7 @@ export default function HomePage() {
             ].map((s, i) => (
               <article
                 key={i}
-                className={` ${isDark ? 'bg-slate-700' : 'bg-[hsl(20,22%,85%)]'} text-white rounded-sm shadow-lg overflow-hidden border ${isDark ? 'border-slate-600' : 'border-[hsl(20,22%,85%)]'} `}
+                className={` ${isDark ? 'bg-slate-700/40' : 'bg-[hsl(20,22%,85%)]'} text-white rounded-sm shadow-lg overflow-hidden border ${isDark ? 'border-slate-800' : 'border-[hsl(20,22%,85%)]'} `}
               >
                 <div className="relative h-48 w-full  shadow-lg">
                   <Image
@@ -163,7 +163,7 @@ export default function HomePage() {
                       {s.title}
                     </h3>
                     <div className="mt-4">
-                      <button onClick={() => setLightboxSrc(s.img)} className={`inline-flex items-center text-xs md:text-sm lg:text-sm px-3 py-2 md:px-4 md:py-3 lg:px-4 lg:py-3 ${isDark ? 'bg-blue-500' : 'bg-gray-900'} hover:bg-slate-600 rounded-md md:rounded-lg text-white`}>
+                      <button onClick={() => setLightboxSrc(s.img)} className={`inline-flex items-center text-xs md:text-sm lg:text-sm px-3 py-2 md:px-4 md:py-3 lg:px-3 lg:py-2  ${isDark ? 'bg-yellow-200/80' : 'bg-amber-700' } ${isDark ? 'hover:bg-yellow-200' : 'hover:bg-amber-600' }  font-semibold rounded-md md:rounded-lg  ${isDark ? 'text-slate-900' : 'text-white'} hover:cursor-pointer`}>
                         View full image
                       </button>
                     </div>

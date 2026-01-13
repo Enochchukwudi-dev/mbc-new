@@ -1,12 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { MapPinHouse, Mail, Phone } from 'lucide-react';
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+
+  // Track whether the page is in dark mode (derived from <html>.classList)
+  const [isDark, setIsDark] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const update = () => setIsDark(document.documentElement.classList.contains('dark'));
+    update();
+    const observer = new MutationObserver(() => update());
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    const onStorage = (e: StorageEvent) => { if (e.key === 'theme') update(); };
+    window.addEventListener('storage', onStorage);
+    return () => { observer.disconnect(); window.removeEventListener('storage', onStorage); };
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,7 +32,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[hsl(20,22%,95%)]">
+    <footer className={`${isDark ? 'bg-slate-950/96' : 'bg-amber-600/3'}`}>
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand + Description + Socials */}
@@ -25,24 +40,24 @@ export default function Footer() {
             <div className="flex items-start  flex-col pt-0 ">
               <Link
                 href="/"
-                className="flex flex-col items-start text-gray-900"
+                className="flex flex-col items-start  md:mb-5"
               >
                 <Image
-                  src="/gala.png"
+                  src="/buju.png"
                   alt="MyLogo"
                   width={79}
                   height={79}
-                  className="h-9 w-28 object-contain filter brightness-102"
+                  className="h-9 w-28 object-contain filter brightness-97 contrast-150"
                 />
                 <div className="mt-1 text-left md:text-left">
                   <span
-                    className="block font-bold"
+                    className={`block font-extrabold ${isDark ? 'text-blue-200' : 'text-gray-600'}`}
                     style={{ fontSize: "11px", lineHeight: 1 }}
                   >
-                    MAROCK BUILDING CONSTRUCTION
+                    MAROCK BUILDING CONST.
                   </span>
                   <span
-                    className="block font-bold"
+                    className={`block font-bold ${isDark ? 'text-blue-300/60' : 'text-gray-600'}`}
                     style={{ fontSize: "11px", lineHeight: 1 }}
                   >
                     ENTERPRISE
@@ -51,7 +66,7 @@ export default function Footer() {
               </Link>
             </div>
 
-            <p className="mt-3 text-black text-sm max-w-[18rem]">
+            <p className={`mt-3 lg:mr-5 ${isDark ? 'text-gray-400' : 'text-black'} text-sm max-w-[18rem]`}>
               Faith-inspired fashion for everyday wear, shop curated collections
               made with care.
             </p>
@@ -59,38 +74,38 @@ export default function Footer() {
 
           {/* Shop */}
           <div>
-            <h4 className="text-sm font-semibold text-black uppercase">
+            <h4 className={`text-sm font-bold ${isDark ? 'text-white' : 'text-black'} uppercase`}>
               Quick Links
             </h4>
-            <ul className="mt-4 space-y-2 text-gray-600">
+            <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
                   Projects
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underlin hover:font-bold`}>
                   Services
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
                   Contact
                 </a>
               </li>
             </ul>
 
-            <h4 className="mt-6 text-sm font-semibold text-black uppercase">
+            <h4 className={`mt-6 text-sm font-bold ${isDark ? 'text-white' : 'text-black'} uppercase`}>
               Company
             </h4>
-            <ul className="mt-4 space-y-2 text-gray-600">
+            <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
                   About Us
                 </a>
               </li>
@@ -99,12 +114,12 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="text-sm font-semibold text-black uppercase">
+            <h4 className={`text-sm font-bold ${isDark ? 'text-white' : 'text-black'} uppercase`}>
               Support
             </h4>
-            <ul className="mt-4 space-y-2 text-gray-600">
+            <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
                   Contact Us
                 </a>
               </li>
@@ -113,44 +128,30 @@ export default function Footer() {
 
           {/* Contact list */}
           <div>
-            <h4 className="text-sm font-semibold text-black uppercase">
+            <h4 className={`text-sm font-bold ${isDark ? 'text-white' : 'text-black'} uppercase`}>
               Address
             </h4>
-            <ul className="mt-4 space-y-3 text-gray-600 text-sm">
+            <ul className={`mt-4 space-y-3 ${isDark ? 'text-gray-400' : 'text-gray-600'} text-sm`}>
               <li className="flex items-center gap-2">
-                <span className="text-red-400">📍</span>
-                <span>64 NEPA ROAD AWADA OBOSI, ANAMBRA STATE</span>
+                <MapPinHouse className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-4 w-4 md:h-5 md:w-5`} />
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'} `}>64 Nepa road awada obosi, Anambra State</span>
               </li>
               <li className="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 text-white/80"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M21 8V7l-3 2-2-1-4 4 2 2-1 2 2 2 5-3 3 1V8zM8 7a5 5 0 100 10 5 5 0 000-10z" />
-                </svg>
+                <Mail className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-4 w-4 md:h-5 md:w-5`} />
                 <a
                   href="mailto:followgodng01@gmail.com"
-                  className="hover:underline"
+                  className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}
                 >
                   followgodng01@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 text-white/80"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M21 16.5l-4-1.2a2 2 0 00-2 .5L13 18l-2-1.1a11 11 0 01-5.9-5.9L4 7l2.2-2.2a2 2 0 00.5-2L5.5 1H3A1 1 0 002 2c0 10 8 18 18 18a1 1 0 001-1v-2.5z" />
-                </svg>
-                <a href="tel:+2349031161058" className="hover:underline">
+                <Phone className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-4 w-4 md:h-5 md:w-5`} />
+                <a href="tel:+2349031161058" className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
                   08064032113
                 </a>
                 <p>or</p>
-                 <a href="tel:+2349031161058" className="hover:underline">
+                 <a href="tel:+2349031161058" className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
                   08155838597
                 </a>
               </li>
@@ -162,25 +163,25 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4 text-sm text-gray-600">
-            <a href="#" className="hover:underline">
+            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
               Terms
             </a>
-            <a href="#" className="hover:underline">
+            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
               Privacy
             </a>
-            <a href="#" className="hover:underline">
+            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
               Returns
             </a>
           </div>
 
-          <div className="text-sm text-gray-600">© MBC Const. — 2026</div>
+          <div className={`${isDark ? 'text-gray-400' : 'text-gray-600'} hover:underline text-sm`}>© MBC Const. — 2026</div>
 
           <div className="flex items-center gap-4 flex-col">
-            <div className="text-xs text-gray-300">built with -</div>
-            <div className="text-sm font-semibold">Byund Technologies</div>
+            <div className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-xs`}>built with -</div>
+            <div className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-sm`}>Byund Technologies</div>
             <a
               href="#"
-              className="ml-3 rounded-md border border-white/20 px-3 py-1 text-sm hover:bg-white/5"
+              className={`ml-3 ${isDark ? 'bg-yellow-200/80' : 'bg-amber-700'} ${isDark ? 'hover:bg-yellow-200' : 'hover:bg-amber-600' } ${isDark ? 'text-slate-900' : 'text-white'} rounded-md border border-black/10 px-3 py-1 text-sm font-semibold`}
             >
               Reach Us
             </a>
