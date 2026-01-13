@@ -31,8 +31,20 @@ export default function Footer() {
     // In a real app you'd POST to an API here
   };
 
+  const handleServicesClick = (e: React.MouseEvent) => {
+    if (typeof window === 'undefined') return;
+    if (window.location.pathname === '/') {
+      e.preventDefault();
+      const el = document.getElementById('services');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.history.pushState(null, '', '#services');
+      }
+    }
+  };
+
   return (
-    <footer className={`${isDark ? 'bg-slate-950/96' : 'bg-amber-600/3'}`}>
+    <footer className={`${isDark ? 'bg-slate-950/96' : 'bg-[hsl(20,22%,85%)]'}`}>
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand + Description + Socials */}
@@ -51,13 +63,13 @@ export default function Footer() {
                 />
                 <div className="mt-1 text-left md:text-left">
                   <span
-                    className={`block font-extrabold ${isDark ? 'text-blue-200' : 'text-gray-600'}`}
+                    className={`block font-extrabold ${isDark ? 'text-blue-200' : 'text-gray-900'}`}
                     style={{ fontSize: "11px", lineHeight: 1 }}
                   >
                     MAROCK BUILDING CONST.
                   </span>
                   <span
-                    className={`block font-bold ${isDark ? 'text-blue-300/60' : 'text-gray-600'}`}
+                    className={`block font-bold ${isDark ? 'text-blue-300/60' : 'text-gray-700'}`}
                     style={{ fontSize: "11px", lineHeight: 1 }}
                   >
                     ENTERPRISE
@@ -66,47 +78,51 @@ export default function Footer() {
               </Link>
             </div>
 
-            <p className={`mt-3 lg:mr-5 ${isDark ? 'text-gray-400' : 'text-black'} text-sm max-w-[18rem]`}>
-              Mooto: Your home your passion
+            <p className={`mt-3 lg:mr-3 ${isDark ? 'text-gray-300' : 'text-gray-800'} text-sm max-w-[18rem]`}>
+              We Produce and Apply Chemical on Any Leaking Roof, Building Construction, Interior and Exterior Designs
             </p>
           </div>
 
           {/* Shop */}
-          <div>
+          <div className="md:ml-5">
             <h4 className={`text-sm font-bold ${isDark ? 'text-white' : 'text-black'} uppercase`}>
               Quick Links
             </h4>
-            <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+            <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-800'}`}>
               <li>
-                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
+                <Link
+                  href="/"
+                  onClick={() => { if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}
+                >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
+                <Link href="/Gallery" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
                   Projects
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underlin hover:font-bold`}>
+                <Link
+                  href="/#services"
+                  onClick={handleServicesClick}
+                  className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}
+                >
                   Services
-                </a>
+                </Link>
               </li>
-              <li>
-                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
-                  Contact
-                </a>
-              </li>
+           
             </ul>
 
             <h4 className={`mt-6 text-sm font-bold ${isDark ? 'text-white' : 'text-black'} uppercase`}>
               Company
             </h4>
-            <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+            <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-800'}`}>
               <li>
-                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
+                <Link href="/About" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
                   About Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -116,9 +132,14 @@ export default function Footer() {
             <h4 className={`text-sm font-bold ${isDark ? 'text-white' : 'text-black'} uppercase`}>
               Support
             </h4>
-            <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+            <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-800'}`}>
               <li>
-                <a href="#" className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
+                <a
+                  href="https://wa.me/2349162919586?text=Good%20Day%20Mr%20Mbc%20contacting%20from%20your%20website"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}
+                >
                   Contact Us
                 </a>
               </li>
@@ -133,24 +154,24 @@ export default function Footer() {
             <ul className={`mt-4 space-y-3 ${isDark ? 'text-gray-400' : 'text-gray-600'} text-sm`}>
               <li className="flex items-center gap-2">
                 <MapPinHouse className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-4 w-4 md:h-5 md:w-5`} />
-                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'} `}>64 Nepa road awada obosi, Anambra State</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-800'} `}>64 Nepa road awada obosi, Anambra State</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-4 w-4 md:h-5 md:w-5`} />
                 <a
                   href="mailto:followgodng01@gmail.com"
-                  className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}
+                  className={`${isDark ? 'text-gray-400' : 'text-gray-800'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}
                 >
-                  followgodng01@gmail.com
+                  mbcconstruction@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-4 w-4 md:h-5 md:w-5`} />
-                <a href="tel:+2349031161058" className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
+                <a href="tel:+2349031161058" className={`${isDark ? 'text-gray-400' : 'text-gray-800'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
                   08064032113
                 </a>
                 <p>or</p>
-                 <a href="tel:+2349031161058" className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
+                 <a href="tel:+2349031161058" className={`${isDark ? 'text-gray-400' : 'text-gray-800'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
                   08155838597
                 </a>
               </li>
@@ -162,24 +183,26 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4 text-sm text-gray-600">
-            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
+            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-800'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
               Terms
             </a>
-            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
+            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-800'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
               Privacy
             </a>
-            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-600'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
+            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-800'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
               Returns
             </a>
           </div>
 
-          <div className={`${isDark ? 'text-gray-400' : 'text-gray-600'} hover:underline text-sm`}>© MBC Const. — 2026</div>
+          <div className={`${isDark ? 'text-gray-400' : 'text-gray-800'} hover:underline text-sm`}>© MBC Const. — 2026</div>
 
           <div className="flex items-center gap-4 flex-col">
-            <div className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-xs`}>built with -</div>
-            <div className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-sm`}>Byund Technologies</div>
+            <div className={`${isDark ? 'text-gray-400' : 'text-gray-800'} text-xs`}>built with -</div>
+            <div className={`${isDark ? 'text-gray-400' : 'text-gray-800'} text-sm`}>Byund Technologies</div>
             <a
-              href="#"
+              href="https://wa.me/2349162919586?text=Good%20day%2C%20reaching%20out%20from%20mbc-website"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`ml-3 ${isDark ? 'bg-yellow-200/80' : 'bg-amber-700'} ${isDark ? 'hover:bg-yellow-200' : 'hover:bg-amber-600' } ${isDark ? 'text-slate-900' : 'text-white'} rounded-md border border-black/10 px-3 py-1 text-sm font-semibold`}
             >
               Reach Us

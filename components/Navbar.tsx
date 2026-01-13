@@ -104,13 +104,13 @@ function Navbar() {
                 />
                 <div className="mt-1 text-left md:text-left">
                   <span
-                    className={`block font-extrabold ${isDark ? 'text-blue-200' : 'text-gray-600'}`}
+                    className={`block font-extrabold ${isDark ? 'text-blue-200' : 'text-gray-900'}`}
                     style={{ fontSize: "11px", lineHeight: 1 }}
                   >
                     MAROCK BUILDING CONST.
                   </span>
                   <span
-                    className={`block font-bold ${isDark ? 'text-blue-300/60' : 'text-gray-600'}`}
+                    className={`block font-bold ${isDark ? 'text-blue-300/60' : 'text-gray-700'}`}
                     style={{ fontSize: "11px", lineHeight: 1 }}
                   >
                     ENTERPRISE

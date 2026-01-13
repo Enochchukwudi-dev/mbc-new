@@ -148,7 +148,7 @@ export default function HomePage() {
             ].map((s, i) => (
               <article
                 key={i}
-                className={` ${isDark ? 'bg-slate-700/40' : 'bg-[hsl(20,22%,85%)]'} text-white rounded-sm shadow-lg overflow-hidden border ${isDark ? 'border-slate-800' : 'border-[hsl(20,22%,85%)]'} `}
+                className={` ${isDark ? 'bg-slate-900/40' : 'bg-[hsl(20,22%,85%)]'} text-white rounded-sm shadow-lg overflow-hidden border ${isDark ? 'border-slate-900' : 'border-[hsl(20,22%,85%)]'} `}
               >
                 <div className="relative h-48 w-full  shadow-lg">
                   <Image
