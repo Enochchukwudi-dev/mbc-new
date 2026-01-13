@@ -26,3 +26,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Hide vertical scrollbars but keep scrolling functionality */
+/* Apply to root + all elements to be thorough */
+html, body, #__next, * {
+  /* Firefox */
+  scrollbar-width: none !important;
+  /* IE 10+ / Edge */
+  -ms-overflow-style: none !important;
+}
+
+/* WebKit browsers (Chrome, Safari, Edge Chromium) - hide scrollbars */
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  display: none !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: transparent !important;
+  display: none !important;
+}

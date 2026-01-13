@@ -1,7 +1,31 @@
+"use client";
 import { useState, useEffect, MouseEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ChevronRight, Sun, Moon } from "lucide-react";
+
+function ThemeToggle({ isDark, toggleTheme, wrapperClass, buttonClass }: { isDark: boolean; toggleTheme: () => void; wrapperClass?: string; buttonClass?: string }) {
+  return (
+    <div className={wrapperClass}>
+      <button
+        type="button"
+        onClick={(e) => { e.stopPropagation(); toggleTheme(); }}
+        role="switch"
+        aria-checked={isDark}
+        aria-label={isDark ? "Dark mode" : "Light mode"}
+        className={`flex items-center justify-between gap-2 px-4 py-3 rounded-md ${buttonClass}`}
+      >
+        <span className={`font-medium ${isDark ? 'text-amber-300' : 'text-gray-900'}`}>{isDark ? 'Dark mode' : 'Light mode'}</span>
+
+        <div className={`relative inline-flex items-center w-14 h-7 rounded-full p-1 transition-colors duration-300 ${isDark ? 'bg-gray-400/10 ' : 'bg-gray-300'}`}>
+          <Sun className={`absolute left-2 w-4 h-4 text-yellow-400 transform transition-all duration-300 ${isDark ? 'opacity-0 -translate-x-2 scale-75' : 'opacity-100 translate-x-0 scale-100'}`} />
+          <Moon className={`absolute right-2 w-4 h-4 text-white transform transition-all duration-300 ${isDark ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-2 scale-75'}`} />
+          <span className={`inline-block w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-300 ease-in-out ${isDark ? 'translate-x-7' : 'translate-x-0'}`} />
+        </div>
+      </button>
+    </div>
+  );
+}
 
 const menu = [
   { href: '/', label: 'Home' },
@@ -19,17 +43,20 @@ function Navbar() {
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window === 'undefined') return false;
     const stored = localStorage.getItem('theme');
-    if (stored) return stored === 'dark';
-    return typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return stored ? stored === 'dark' : !!prefersDark;
   });
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const stored = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const dark = stored ? stored === 'dark' : prefersDark;
-    document.documentElement.classList.toggle('dark', dark);
-  }, []);
+    // sync document class with state and listen for changes from other tabs
+    document.documentElement.classList.toggle('dark', isDark);
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'theme') setIsDark(e.newValue === 'dark');
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, [isDark]);
 
   const toggleTheme = () =>
     setIsDark((prev) => {
@@ -50,10 +77,12 @@ function Navbar() {
     }
   };
 
-  const linkClass = "text-gray-900 hover:text-gray-900";
+  const linkClass = `inline-block px-3 py-2 rounded-md font-medium text-sm transition duration-150 ease-in-out ${isDark ? 'text-slate-200 hover:bg-slate-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-500 active:scale-95' : 'text-gray-900 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-300 active:scale-95'}`;
+
+
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 h-22 z-40 ${isDark ? 'bg-[hsl(230,21%,18%)]' : 'bg-[hsl(20,22%,94%)]'} shadow-sm`}>
+    <nav className={`fixed top-0 left-0 right-0 h-22 z-40 ${isDark ? 'bg-slate-950 shadow-[0_2px_8px_rgba(255,255,255,0.06)]' : 'bg-[hsl(20,22%,94%)] shadow-sm'}`}>
       <div className="container mx-auto px-4">
         <div className="flex  items-center justify-between h-16">
           {/* Logo (left) */}
@@ -77,26 +106,9 @@ function Navbar() {
       
           {/* Links (hidden on small, shown on md+) */}
           <div className="hidden md:flex items-center space-x-6">
-            <div className="mr-4">
-              <button
-                type="button"
-                onClick={(e) => { e.stopPropagation(); toggleTheme(); }}
-                role="switch"
-                aria-checked={isDark}
-                aria-label={isDark ? "Dark mode" : "Light mode"}
-                className="flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-gray-200/1 dark:bg-slate-200/2"
-              >
-                <span className={`font-medium ${isDark ? 'text-cyan-400' : 'text-gray-900'}`}>{isDark ? 'Dark mode' : 'Light mode'}</span>
-
-                <div className={`relative inline-flex items-center w-14 h-7 rounded-full p-1 transition-colors duration-300 ${isDark ? 'bg-gradient-to-r from-slate-600 to-slate-600' : 'bg-gray-300'}`}>
-                  <Sun className={`absolute left-2 w-4 h-4 text-yellow-400 transform transition-all duration-300 ${isDark ? 'opacity-0 -translate-x-2 scale-75' : 'opacity-100 translate-x-0 scale-100'}`} />
-                  <Moon className={`absolute right-2 w-4 h-4 text-white transform transition-all duration-300 ${isDark ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-2 scale-75'}`} />
-                  <span className={`inline-block w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-300 ease-in-out ${isDark ? 'translate-x-7' : 'translate-x-0'}`} />
-                </div>
-              </button>
-            </div>
+            <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} wrapperClass="mr-4" buttonClass="bg-gray-200/1 dark:bg-slate-200/2" />
             {menu.map(item => (
-              <Link key={item.href} href={item.href} className={linkClass}>{item.label}</Link>
+              <Link key={item.href} href={item.href} className={linkClass} onClick={(e) => handleAnchorClick(e, item.href)}>{item.label}</Link>
             ))}
           </div>
 
@@ -118,7 +130,7 @@ function Navbar() {
 
         {/* Mobile menu (md:hidden) - fixed off-canvas panel that slides in from the right */}
         <div
-          className={`md:hidden fixed top-0  pt-15 right-0 z-50 w-full  bottom-0 ${isDark ? 'bg-slate-900' : 'bg-[hsl(20,22%,94%)]'} shadow-lg transform transition-transform  duration-700 ease-in-out ${
+          className={`md:hidden fixed top-0  pt-15 right-0 z-50 w-full  bottom-0 ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,94%)]'} shadow-lg transform transition-transform  duration-700 ease-in-out ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
           aria-hidden={!open}
@@ -140,30 +152,13 @@ function Navbar() {
 
 
 
-              <div className="mt-4 px-4">
-                <button
-                  type="button"
-                  onClick={(e) => { e.stopPropagation(); toggleTheme(); }}
-                  role="switch"
-                  aria-checked={isDark}
-                  aria-label={isDark ? "Dark mode" : "Light mode"}
-                  className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-md bg-gray-200 dark:bg-slate-800"
-                >
-                  <span className={`font-medium ${isDark ? 'text-amber-300' : 'text-gray-900'}`}>{isDark ? 'Dark mode' : 'Light mode'}</span>
-
-                  <div className={`relative inline-flex items-center w-14 h-7 rounded-full p-1 transition-colors duration-300 ${isDark ? 'bg-gradient-to-r from-indigo-600 to-purple-600' : 'bg-gray-300'}`}>
-                    <Sun className={`absolute left-2 w-4 h-4 text-yellow-400 transform transition-all duration-300 ${isDark ? 'opacity-0 -translate-x-2 scale-75' : 'opacity-100 translate-x-0 scale-100'}`} />
-                    <Moon className={`absolute right-2 w-4 h-4 text-white transform transition-all duration-300 ${isDark ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-2 scale-75'}`} />
-                    <span className={`inline-block w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-300 ease-in-out ${isDark ? 'translate-x-7' : 'translate-x-0'}`} />
-                  </div>
-                </button>
-              </div>
+              <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} wrapperClass="mt-4 px-4" buttonClass={isDark ? "w-full bg-slate-950/10" : "w-full bg-gray-200 dark:bg-slate-800"} />
 
               <div className="mt-6">
               <Link
                 href="/Booking"
                 onClick={() => setOpen(false)}
-                className={`block w-full text-white ${isDark ? 'bg-slate-700' : 'bg-gray-900'} py-3 rounded-md text-center font-semibold shadow-sm`}
+                className={`block w-full text-white ${isDark ? 'bg-slate-900' : 'bg-gray-900'} py-3 rounded-md text-center font-semibold shadow-sm`}
               >
                 Book Us
               </Link>

@@ -1,26 +1,26 @@
-"use client";
-export const dynamic = "force-dynamic";
+"use client"; //Runs in browser no the server
+export const dynamic = "force-dynamic"; //Always render this page fresh
 
-
-import Carousel1 from "./Carousel1";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 
+
+import Carousel1 from "./Carousel1";
 import Navbar from "../components/Navbar";
-import Footer from "../pages/Footer";
-import Trust from "@/pages/Trust";
+import Footer from "../components/Footer";
+import Trust from "@/components/Trust";
 import Featured from "@/pages/Featured";
 
 export default function HomePage() {
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null)
-  const lightboxOverlayRef = useRef<HTMLDivElement | null>(null)
+  const lightboxOverlayRef = useRef<HTMLDivElement | null>(null)  // detect clicks outside image
   const lightboxCloseRef = useRef<HTMLButtonElement | null>(null)
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') setLightboxSrc(null)
-    }
+    } // close on ESC key
     if (lightboxSrc) document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [lightboxSrc])
@@ -29,13 +29,9 @@ export default function HomePage() {
     if (lightboxSrc) lightboxCloseRef.current?.focus()
   }, [lightboxSrc])
 
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    const stored = localStorage.getItem('theme');
-    if (stored) return stored === 'dark';
-    return typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
-
+  const [isDark, setIsDark] = useState<boolean>(false);  // start false to avoid hydration mismatch
+  
+ 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const update = () => setIsDark(document.documentElement.classList.contains('dark'));
@@ -44,7 +40,7 @@ export default function HomePage() {
 
     // observe class changes on <html> so we pick up toggles from Navbar
     const observer = new MutationObserver(() => update());
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] }); //sync navbar toggles
 
     // also handle theme changes from other tabs
     const onStorage = (e: StorageEvent) => {
@@ -61,17 +57,18 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main className={`min-h-screen py-8 pt-28 ${isDark ? 'bg-slate-900' : 'bg-amber-600/3'}`}>
+      <main className={`min-h-screen py-8 pt-28 ${isDark ? 'bg-slate-950' : 'bg-amber-600/3'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="mt-5 mb-4 md:mt-7 grid md:grid-cols-2 md:gap-2 gap-6 items-start">
+            {/*   Hero Section */}
             <section className="grid md:grid-cols-1 gap-6 items-center">
               <div className="max-w-xl">
                 <h1
-                  className={`text-3xl sm:text-4xl md:text-4xl  lg:text-5xl font-semibold ${isDark ? 'text-gray-200' : 'text-gray-900'}`}
+                  className={`text-3xl sm:text-4xl md:text-4xl  lg:text-5xl font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}
                   style={{ lineHeight: "1.05" }}
                 >
                   Quality
-                  <span className={`${isDark ? 'text-blue-400' : 'text-black'} font-extrabold`}>
+                  <span className={`${isDark ? 'text-orange-500' : 'text-black'} font-extrabold`}>
                     {" "}
                     Construction
                   </span>{" "}
@@ -86,7 +83,8 @@ export default function HomePage() {
                 <div className="mt-4 mb-3 flex gap-3">
                   <Link
                     href="/Booking"
-                    className={`inline-flex items-center px-4 py-2 ${isDark ? 'bg-blue-500' : 'bg-blue-700'} hover:text-green-900  hover:border-green-900 text-gray-50 rounded-md font-semibold shadow`}
+                    className={`inline-flex items-center text-sm md:text-base lg:text-lg px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 ${isDark ? 'bg-orange-700' : 'bg-blue-500'} hover:text-white ${isDark ? 'hover:bg-green-500' : 'hover:bg-blue-400'} text-gray-50 rounded-md md:rounded-lg font-semibold shadow transition-shadow`}
+                    aria-label="Request a free quote"
                   >
                     Request a Free Quote
                   </Link>
@@ -165,7 +163,7 @@ export default function HomePage() {
                       {s.title}
                     </h3>
                     <div className="mt-4">
-                      <button onClick={() => setLightboxSrc(s.img)} className={`inline-flex items-center px-3 py-2 ${isDark ? 'bg-blue-500' : 'bg-gray-900'} hover:bg-slate-600 rounded-md text-xs text-white`}>
+                      <button onClick={() => setLightboxSrc(s.img)} className={`inline-flex items-center text-xs md:text-sm lg:text-sm px-3 py-2 md:px-4 md:py-3 lg:px-4 lg:py-3 ${isDark ? 'bg-blue-500' : 'bg-gray-900'} hover:bg-slate-600 rounded-md md:rounded-lg text-white`}>
                         View full image
                       </button>
                     </div>

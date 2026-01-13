@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import Navbar from "../components/Navbar";
 import Image from "next/image";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 
 type MediaItem =
   | {
