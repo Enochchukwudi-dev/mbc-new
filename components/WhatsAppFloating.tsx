@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image' 
 
-const PHONE = '2349162919586'
+const PHONE = '2348064032113'
 const MESSAGE = 'Greetings, Mr. Mbc Reaching out from the MBC website'
 
 const clamp = (v: number, a: number, b: number) => Math.min(Math.max(v, a), b)

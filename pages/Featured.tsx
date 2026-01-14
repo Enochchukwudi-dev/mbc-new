@@ -1,6 +1,7 @@
 
 
 import React, { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 export default function Featured() {
   const projects = [
@@ -18,6 +19,12 @@ export default function Featured() {
   const startX = useRef<number | null>(null)
   const isDown = useRef(false)
   const [dragOffset, setDragOffset] = useState(0)
+
+  // derived boolean for whether a drag is active (fixes missing reference)
+  const isDraggingState = isDown.current
+
+  // small local state for "coming soon" dialog (prevents ReferenceError when button is clicked)
+  const [showComingSoon, setShowComingSoon] = useState(false)
 
   // track whether page is in dark mode (from document class or prefers-color-scheme)
   const [isDark, setIsDark] = useState(false)
@@ -94,41 +101,97 @@ export default function Featured() {
           <h2 className={`mt-2 text-3xl sm:text-2xl font-semibold tracking-tight ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>Featured Projects</h2>
           <p className={`mt-3 max-w-2xl mx-auto text-sm ${isDark ? 'text-gray-400' : 'text-gray-900'}`}>Real projects that reflect our attention to detail, clear communication, and the measurable value we deliver from first sketch to final handover.</p>
         </div>
-
-        <div ref={sliderRef} className="relative">
-          <div className="overflow-hidden rounded-2xl touch-pan-y" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerCancel}>
-            <div className="flex transition-transform duration-500" style={{ transform: `translateX(calc(-${index * 100}% + ${dragOffset}px))` }}>
-              {projects.map((p) => (
-                <figure key={p.src} className="min-w-full flex-shrink-0 p-4">
-                  <div className={`relative overflow-hidden rounded-2xl ${isDark ? 'bg-slate-900/40' : 'bg-[hsl(20,22%,85%)]'}  shadow-md`}>
-                    <img src={p.src} alt={p.title} className="w-full h-72 object-cover" draggable={false} />
-                    <div className="p-4">
-                      <div className="font-semibold text-lg text-gray-900 ">{p.title}</div>
-                      <div className="text-sm text-gray-500  mt-1">{p.desc}</div>
-                      <div className="mt-4">
-                        <a href={p.src} target="_blank" rel="noopener noreferrer" className={`inline-block px-4 py-2  ${isDark ? 'bg-yellow-200/80' : 'bg-amber-700'} ${isDark ? 'text-slate-950' : 'text-white'} ${isDark ? 'hover:bg-yellow-200' : 'hover:bg-amber-600' } rounded-md font-semibold`}>View project</a>
-                      </div>
-                    </div>
-                  </div>
-                </figure>
-              ))}
-            </div>
-
-            {/* overlay controls */}
-            <button aria-label="Previous" onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80  shadow z-10 hover:bg-white ">
-              ‹
-            </button>
-            <button aria-label="Next" onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80 shadow z-10 hover:bg-white d">
-              ›
-            </button>
-          </div>
-
-          <div className="flex justify-center gap-2 mt-4">
-            {projects.map((_, i) => (
-              <button key={i} onClick={() => setIndex(i)} aria-label={`Go to slide ${i + 1}`} className={`w-2 h-2 rounded-full ${i === index ? (isDark ? 'bg-yellow-200/80' : 'bg-amber-700') : 'bg-gray-300'}`}></button>
-            ))}
-          </div>
-        </div>
+         <section className={`py-12 ${isDark ? 'bg-slate-900/70' : 'bg-[hsl(20,22%,85%)]'} rounded-2xl `}>
+                     <div className="w-full">
+                       <div ref={sliderRef} className="relative">
+                         <div
+                           className="overflow-hidden rounded-2xl touch-pan-y"
+                           onPointerDown={onPointerDown}
+                           onPointerMove={onPointerMove}
+                           onPointerUp={onPointerUp}
+                           onPointerCancel={onPointerCancel}
+                         >
+                           <div
+                             className="flex transition-transform duration-500"
+                             style={{
+                               transform: `translateX(calc(-${
+                                 index * 100
+                               }% + ${dragOffset}px))`,
+                               transition: isDraggingState ? "none" : undefined,
+                             }}
+                           >
+                             {projects.map((p) => (
+                               <figure
+                                 key={p.src}
+                                 className="min-w-full flex-shrink-0 p-4 flex justify-center"
+                               >
+                                 <div className="relative overflow-hidden rounded-2xl bg-white  shadow-md w-full max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto">
+                                   <div className="relative h-48 sm:h-56 md:h-72 lg:h-96">
+                                     <Image
+                                       src={p.src}
+                                       alt={p.title}
+                                       fill
+                                       className="object-cover"
+                                       draggable={false}
+                                     />
+                                   </div>
+         
+                                   <div className={`p-4 ${isDark ? 'bg-slate-300' : 'bg-white'}`}>
+                                     <div className="font-bold text-lg md:text-xl lg:text-2xl text-gray-900">
+                                       {p.title}
+                                     </div>
+                                     <div className={`text-sm text-gray-500 ${isDark ? 'text-gray-700' : 'text-gray-500'} mt-1`}>
+                                       {p.desc}
+                                     </div>
+                                     <div className="mt-4">
+                                       <button
+                                         onClick={() => setShowComingSoon(true)}
+                                         className={`inline-block px-4 py-2 md:px-6 md:py-3 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'}  ${isDark ? 'bg-slate-900' : 'text-white'} font-semibold rounded-md hover:bg-green-700`}
+                                         aria-haspopup="dialog"
+                                       >
+                                         View project
+                                       </button>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </figure>
+                             ))}
+                           </div>
+         
+                           {/* overlay controls */}
+                           <button
+                             aria-label="Previous"
+                             onClick={prev}
+                             className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 md:p-4 lg:p-5 bg-white/80  shadow z-10 hover:bg-white "
+                           >
+                             ‹
+                           </button>
+                           <button
+                             aria-label="Next"
+                             onClick={next}
+                             className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 md:p-4 lg:p-5 bg-white/80  shadow z-10 hover:bg-white "
+                           >
+                             ›
+                           </button>
+                         </div>
+         
+                         <div className="flex justify-center gap-2 mt-4">
+                           {projects.map((_, i) => (
+                             <button
+                               key={i}
+                               onClick={() => setIndex(i)}
+                               aria-label={`Go to slide ${i + 1}`}
+                               className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${
+                                 i === index
+                                   ? (isDark ? "bg-yellow-200/80 " : "bg-amber-700 ")
+                             : (isDark ? "bg-gray-600" : "bg-gray-400")
+                               }`}
+                             ></button>
+                           ))}
+                         </div>
+                       </div>
+                     </div>
+                   </section>
 
         
       </div>

@@ -410,7 +410,7 @@ function Gallery() {
       <Navbar />
 
       <main
-        className={`min-h-screen pt-20 ${selectedVideo ? "filter blur-sm" : ""} ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,92%)]'}`}
+        className={`min-h-screen pt-20 ${selectedVideo ? "filter blur-sm" : ""} ${isDark ? 'bg-slate-95np0' : 'bg-[hsl(20,22%,92%)]'}`}
       >
         <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,92%)]'}`}>
           <div className="flex flex-col items-center text-center mb-6">

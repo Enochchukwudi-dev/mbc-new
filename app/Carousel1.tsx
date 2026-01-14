@@ -7,7 +7,7 @@ const slides = [
     title: "Marock  Construction Enterprise",
     title2: "CAC Registered • 3492332",
     subtitle1:
-      "Led by Engr.  Uchemba",
+      "Led by Engr.  Marshal Uzor",
     image: "/enginner.jpeg",
     alt: "Aurora Retreat",
   },
