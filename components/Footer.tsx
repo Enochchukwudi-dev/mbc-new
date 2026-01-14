@@ -157,10 +157,12 @@ export default function Footer() {
               <li className="flex items-center gap-2">
                 <Mail className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} h-4 w-4 md:h-5 md:w-5`} />
                 <a
-                  href="mailto:followgodng01@gmail.com"
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=marshaluzor4@gmail.com`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`${isDark ? 'text-gray-400' : 'text-gray-800'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}
                 >
-                  mbcconstruction@gmail.com
+                  marshaluzor4@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2">
@@ -180,18 +182,7 @@ export default function Footer() {
         <hr className="my-8 border-white/10" />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4 text-sm text-gray-600">
-            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-800'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
-              Terms
-            </a>
-            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-800'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
-              Privacy
-            </a>
-            <a href="#" className={`${isDark ? 'text-gray-400' : 'text-gray-800'} ${isDark ? 'hover:text-yellow-200/80' : 'hover:text-amber-700'} hover:underline hover:font-bold`}>
-              Returns
-            </a>
-          </div>
-
+      
           <div className={`${isDark ? 'text-gray-400' : 'text-gray-800'} hover:underline text-sm`}>© MBC Const. — 2026</div>
 
           <div className="flex items-center gap-4 flex-col">

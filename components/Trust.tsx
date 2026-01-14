@@ -97,7 +97,7 @@ export default function Trust() {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (
-            <div key={f.id} className={`relative ${isDark ? 'bg-slate-900/40' : 'bg-[hsl(20,22%,85%)]'} border-gray-100 dark:border-gray-700 rounded-lg p-5 shadow hover:shadow-lg transition-shadow`}>
+            <div key={f.id} className={`relative ${isDark ? 'bg-slate-900/40' : 'bg-[hsl(20,22%,85%)]'} border-gray-100  rounded-lg p-5 shadow hover:shadow-lg transition-shadow`}>
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
                   <div className={`w-12 h-12 flex items-center justify-center rounded-full ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,95%)]'} text-xl shadow-inner`}>{f.icon}</div>

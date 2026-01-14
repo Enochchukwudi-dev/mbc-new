@@ -103,8 +103,8 @@ export default function Featured() {
                   <div className={`relative overflow-hidden rounded-2xl ${isDark ? 'bg-slate-900/40' : 'bg-[hsl(20,22%,85%)]'}  shadow-md`}>
                     <img src={p.src} alt={p.title} className="w-full h-72 object-cover" draggable={false} />
                     <div className="p-4">
-                      <div className="font-semibold text-lg text-gray-900 dark:text-white">{p.title}</div>
-                      <div className="text-sm text-gray-500 dark:text-gray-300 mt-1">{p.desc}</div>
+                      <div className="font-semibold text-lg text-gray-900 ">{p.title}</div>
+                      <div className="text-sm text-gray-500  mt-1">{p.desc}</div>
                       <div className="mt-4">
                         <a href={p.src} target="_blank" rel="noopener noreferrer" className={`inline-block px-4 py-2  ${isDark ? 'bg-yellow-200/80' : 'bg-amber-700'} ${isDark ? 'text-slate-950' : 'text-white'} ${isDark ? 'hover:bg-yellow-200' : 'hover:bg-amber-600' } rounded-md font-semibold`}>View project</a>
                       </div>
@@ -115,10 +115,10 @@ export default function Featured() {
             </div>
 
             {/* overlay controls */}
-            <button aria-label="Previous" onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80  shadow z-10 hover:bg-white dark:hover:bg-gray-700">
+            <button aria-label="Previous" onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80  shadow z-10 hover:bg-white ">
               ‹
             </button>
-            <button aria-label="Next" onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80 shadow z-10 hover:bg-white dark:hover:bg-gray-700">
+            <button aria-label="Next" onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80 shadow z-10 hover:bg-white d">
               ›
             </button>
           </div>

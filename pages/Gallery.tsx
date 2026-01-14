@@ -209,6 +209,20 @@ function Gallery() {
   const videoOverlayRef = useRef<HTMLDivElement | null>(null);
   const videoCloseRef = useRef<HTMLButtonElement | null>(null);
 
+  // track dark mode
+  const [isDark, setIsDark] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const update = () => setIsDark(document.documentElement.classList.contains('dark'));
+    update();
+    const observer = new MutationObserver(() => update());
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    const onStorage = (e: StorageEvent) => { if (e.key === 'theme') update(); };
+    window.addEventListener('storage', onStorage);
+    return () => { observer.disconnect(); window.removeEventListener('storage', onStorage); };
+  }, []);
+
   useEffect(() => {
     if (selectedVideo || lightboxSrc) {
       document.body.style.overflow = "hidden";
@@ -245,6 +259,28 @@ function Gallery() {
   useEffect(() => {
     if (selectedVideo) videoCloseRef.current?.focus()
   }, [selectedVideo])
+
+  // Coming Soon modal state + accessibility
+  const [showComingSoon, setShowComingSoon] = useState<boolean>(false);
+  const comingSoonCloseRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setShowComingSoon(false)
+    }
+    if (showComingSoon) document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [showComingSoon])
+
+  useEffect(() => {
+    if (showComingSoon) {
+      comingSoonCloseRef.current?.focus();
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = "" }
+  }, [showComingSoon])
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#videos") {
@@ -374,16 +410,14 @@ function Gallery() {
       <Navbar />
 
       <main
-        className={`min-h-screen pt-20  ${
-          selectedVideo ? "filter blur-sm" : ""
-        } bg-gray-100 dark:bg-gray-900`}
+        className={`min-h-screen pt-20 ${selectedVideo ? "filter blur-sm" : ""} ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,92%)]'}`}
       >
-        <div className="max-w-7xl mx-auto px-4 py-8 bg-amber-600/4">
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,92%)]'}`}>
           <div className="flex flex-col items-center text-center mb-6">
-            <h2 className="mt-2 text-3xl sm:text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            <h2 className={`mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight ${isDark ? 'text-gray-300' : 'text-gray-900'} `}>
               My Projects
             </h2>
-            <p className="mt-3 max-w-2xl mx-auto text-sm text-gray-500 dark:text-gray-300">
+            <p className={`mt-3 max-w-2xl mx-auto text-sm md:text-base ${isDark ? 'text-gray-400' : 'text-gray-700'} `}>
               Real projects that reflect our attention to detail, clear
               communication, and the measurable value we deliver from first
               sketch to final handover.
@@ -391,14 +425,14 @@ function Gallery() {
           </div>
 
           {/* Toggle */}
-          <div className="mt-6 flex">
-            <div className="inline-flex items-center rounded-full bg-gray-200 dark:bg-gray-800 p-1">
+          <div className="mt-6  mb-4 flex">
+            <div className={`inline-flex items-center rounded-full ${isDark ? 'bg-slate-900' : 'bg-gray-300'} p-1`}>
               <button
                 onClick={() => setFilter("images")}
                 className={`px-4 py-2 rounded-full ${
                   filter === "images"
-                    ? "bg-gray-900 text-white shadow"
-                    : "text-gray-600 dark:text-gray-300"
+                ? (isDark ? "bg-yellow-200/80 text-slate-900 font-semibold shadow" : "bg-amber-700 text-white font-semibold shadow")
+                    : (isDark ? "text-gray-500" : "text-gray-500")
                 }`}
               >
                 My project
@@ -408,8 +442,8 @@ function Gallery() {
                 onClick={() => setFilter("videos")}
                 className={`ml-1 px-4 py-2 rounded-full ${
                   filter === "videos"
-                    ? "bg-gray-900 text-white shadow"
-                    : "text-gray-600 dark:text-gray-300"
+                    ? (isDark ? "bg-yellow-200/80 text-slate-900 font-semibold shadow" : "bg-amber-700 text-white font-semibold shadow")
+                    : (isDark ? "text-gray-500" : "text-gray-500")
                 }`}
               >
                 Gallery
@@ -419,7 +453,7 @@ function Gallery() {
           
 {filter === 'images' && (
             <>
-          <section className="py-12 bg-gray-50/40 dark:bg-gray-900 rounded-2xl ">
+          <section className={`py-12 ${isDark ? 'bg-slate-900/70' : 'bg-[hsl(20,22%,85%)]'} rounded-2xl `}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div ref={sliderRef} className="relative">
                 <div
@@ -443,8 +477,8 @@ function Gallery() {
                         key={p.src}
                         className="min-w-full flex-shrink-0 p-4 flex justify-center"
                       >
-                        <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-md w-full max-w-xl mx-auto">
-                          <div className="relative h-56 sm:h-64">
+                        <div className="relative overflow-hidden rounded-2xl bg-white  shadow-md w-full max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto">
+                          <div className="relative h-48 sm:h-56 md:h-72 lg:h-96">
                             <Image
                               src={p.src}
                               alt={p.title}
@@ -454,22 +488,21 @@ function Gallery() {
                             />
                           </div>
 
-                          <div className="p-4">
-                            <div className="font-semibold text-lg text-gray-900 dark:text-white">
+                          <div className={`p-4 ${isDark ? 'bg-slate-300' : 'bg-white'}`}>
+                            <div className="font-bold text-lg md:text-xl lg:text-2xl text-gray-900">
                               {p.title}
                             </div>
-                            <div className="text-sm text-gray-500 dark:text-gray-300 mt-1">
+                            <div className={`text-sm text-gray-500 ${isDark ? 'text-gray-700' : 'text-gray-500'} mt-1`}>
                               {p.desc}
                             </div>
                             <div className="mt-4">
-                              <a
-                                href={p.src}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-block px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-green-700"
+                              <button
+                                onClick={() => setShowComingSoon(true)}
+                                className={`inline-block px-4 py-2 md:px-6 md:py-3 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'}  ${isDark ? 'bg-slate-900' : 'text-white'} font-semibold rounded-md hover:bg-green-700`}
+                                aria-haspopup="dialog"
                               >
                                 View project
-                              </a>
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -481,14 +514,14 @@ function Gallery() {
                   <button
                     aria-label="Previous"
                     onClick={prev}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80 dark:bg-gray-800/80 shadow z-10 hover:bg-white dark:hover:bg-gray-700"
+                    className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 md:p-4 lg:p-5 bg-white/80  shadow z-10 hover:bg-white "
                   >
                     ‹
                   </button>
                   <button
                     aria-label="Next"
                     onClick={next}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80 dark:bg-gray-800/80 shadow z-10 hover:bg-white dark:hover:bg-gray-700"
+                    className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 md:p-4 lg:p-5 bg-white/80  shadow z-10 hover:bg-white "
                   >
                     ›
                   </button>
@@ -500,10 +533,10 @@ function Gallery() {
                       key={i}
                       onClick={() => setIndex(i)}
                       aria-label={`Go to slide ${i + 1}`}
-                      className={`w-2 h-2 rounded-full ${
+                      className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${
                         i === index
-                          ? "bg-green-600"
-                          : "bg-gray-300 dark:bg-gray-600"
+                          ? (isDark ? "bg-yellow-200/80 " : "bg-amber-700 ")
+                    : (isDark ? "bg-gray-600" : "bg-gray-400")
                       }`}
                     ></button>
                   ))}
@@ -511,8 +544,11 @@ function Gallery() {
               </div>
             </div>
           </section>
+
+
+
             {/* Second Crousel (independent) */}
-           <section className="py-12 bg-gray-50/40 dark:bg-gray-900 rounded-2xl ">
+           <section className={`py-12 ${isDark ? 'bg-slate-900/70' : 'bg-[hsl(20,22%,85%)]'}  rounded-2xl mt-5`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div ref={slider2Ref} className="relative">
                 <div
@@ -536,8 +572,8 @@ function Gallery() {
                         key={p.src}
                         className="min-w-full flex-shrink-0 p-4 flex justify-center"
                       >
-                        <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-md w-full max-w-xl mx-auto">
-                          <div className="relative h-56 sm:h-64">
+                        <div className="relative overflow-hidden rounded-2xl bg-white shadow-md w-full max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto">
+                          <div className="relative h-48 sm:h-56 md:h-72 lg:h-96">
                             <Image
                               src={p.src}
                               alt={p.title}
@@ -547,22 +583,21 @@ function Gallery() {
                             />
                           </div>
 
-                          <div className="p-4">
-                            <div className="font-semibold text-lg text-gray-900 dark:text-white">
+                         <div className={`p-4 ${isDark ? 'bg-slate-300' : 'bg-white'}`}>
+                            <div className="font-bold text-lg md:text-xl lg:text-2xl text-gray-900">
                               {p.title}
                             </div>
-                            <div className="text-sm text-gray-500 dark:text-gray-300 mt-1">
+                            <div className={`text-sm text-gray-500 ${isDark ? 'text-gray-700' : 'text-gray-500'} mt-1`}>
                               {p.desc}
                             </div>
                             <div className="mt-4">
-                              <a
-                                href={p.src}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-block px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-green-700"
+                              <button
+                                onClick={() => setShowComingSoon(true)}
+                                className={`inline-block px-4 py-2 md:px-6 md:py-3 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'}  ${isDark ? 'bg-slate-900' : 'text-white'} font-semibold rounded-md hover:bg-green-700`}
+                                aria-haspopup="dialog"
                               >
                                 View project
-                              </a>
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -574,29 +609,29 @@ function Gallery() {
                   <button
                     aria-label="Previous"
                     onClick={prev2}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80 dark:bg-gray-800/80 shadow z-10 hover:bg-white dark:hover:bg-gray-700"
+                    className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 md:p-4 lg:p-5 bg-white/80  shadow z-10 hover:bg-white "
                   >
                     ‹
                   </button>
                   <button
                     aria-label="Next"
                     onClick={next2}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 bg-white/80 dark:bg-gray-800/80 shadow z-10 hover:bg-white dark:hover:bg-gray-700"
+                    className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 md:p-4 lg:p-5 bg-white/80 shadow z-10 hover:bg-white "
                   >
                     ›
                   </button>
                 </div>
 
-                <div className="flex justify-center gap-2 mt-4">
-                  {projects2.map((_, i) => (
+               <div className="flex justify-center gap-2 mt-4">
+                  {projects.map((_, i) => (
                     <button
                       key={i}
-                      onClick={() => setIndex2(i)}
+                      onClick={() => setIndex(i)}
                       aria-label={`Go to slide ${i + 1}`}
-                      className={`w-2 h-2 rounded-full ${
-                        i === index2
-                          ? "bg-green-600"
-                          : "bg-gray-300 dark:bg-gray-600"
+                      className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${
+                        i === index
+                          ? (isDark ? "bg-yellow-200/80 " : "bg-amber-700 ")
+                    : (isDark ? "bg-gray-600" : "bg-gray-400")
                       }`}
                     ></button>
                   ))}
@@ -608,19 +643,19 @@ function Gallery() {
           )}
 
           {filter === 'videos' && (
-            <section id="videos" ref={videosRef} className="py-12 bg-gray-50/40 dark:bg-gray-900 rounded-2xl ">
+            <section id="videos" ref={videosRef} className={`py-12 ${isDark ? 'bg-slate-900/70' : 'bg-[hsl(20,22%,85%)]'} rounded-2xl `}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-4 flex items-center justify-between">
-                  <h2 className="text-xl font-semibold">Gallery</h2>
-                  <p className="text-sm text-gray-500 dark:text-gray-300">Random Multimedia from projects</p>
+                  <h2 className={`text-xl font-semibold ${isDark ? 'text-gray-100' : 'text-gray-900'}`}>Gallery</h2>
+                  <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>Random Multimedia from projects</p>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                   {shuffledMedia
                     .filter((m) => m.type === 'image' || m.type === 'video')
                     .map((m, i) => (
-                      <article key={i} className="rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-sm">
-                        <div className="relative h-48 w-full bg-black">
+                      <article key={i} className="rounded-lg overflow-hidden bg-gray-100  shadow-sm">
+                        <div className="relative h-48 md:h-56 lg:h-64 w-full bg-black">
                           {m.type === 'image' ? (
                             <Image src={m.src} alt={m.alt} fill className="object-cover" />
                           ) : (
@@ -635,21 +670,21 @@ function Gallery() {
                                 aria-label={`Play video ${i + 1}`}
                                 className="absolute inset-0 flex items-center justify-center text-white"
                               >
-                                <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black/50 backdrop-blur text-2xl">▶</span>
+                                <span className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-black/50 backdrop-blur text-2xl md:text-3xl lg:text-3xl">▶</span>
                               </button>
                             </>
                           )}
                         </div>
 
-                        <div className="p-3">
-                          <h3 className="text-xs font-semibold text-black dark:text-white">{m.type === 'image' ? m.alt : 'Video'}</h3>
+                        <div className={`p-3 ${isDark ? 'bg-slate-400' : 'bg-white'}`}>
+                          <h3 className="text-xs font-semibold text-black ">{m.type === 'image' ? m.alt : 'Video'}</h3>
                           <div className="mt-4">
                             {m.type === 'image' ? (
-                              <button onClick={() => setLightboxSrc(m.src)} className="inline-flex items-center px-3 py-2 bg-gray-900 hover:bg-slate-600 rounded-md text-xs text-white">
+                              <button onClick={() => setLightboxSrc(m.src)} className={`inline-flex items-center px-3 py-2 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'} ${isDark ? 'text-slate-900' : 'text-white'} hover:bg-slate-600 rounded-md text-xs md:text-sm font-semibold`}>
                                 View full image
                               </button>
                             ) : (
-                              <button onClick={() => setSelectedVideo(m.src)} className="inline-flex items-center px-3 py-2 bg-gray-900 hover:bg-slate-600 rounded-md text-xs text-white">
+                              <button onClick={() => setSelectedVideo(m.src)} className={`inline-flex items-center px-3 py-2 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'} ${isDark ? 'text-slate-900' : 'text-white'} hover:bg-slate-600 rounded-md text-xs font-semibold`}>
                                 Play video
                               </button>
                             )}
@@ -675,13 +710,13 @@ function Gallery() {
             if (e.target === lightboxOverlayRef.current) setLightboxSrc(null);
           }}
         >
-          <div className="max-w-4xl w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+          <div className="max-w-4xl w-full bg-white  rounded-lg shadow-lg overflow-hidden">
             <div className="flex justify-end p-2">
               <button
                 ref={lightboxCloseRef}
                 onClick={() => setLightboxSrc(null)}
                 aria-label="Close image"
-                className="px-3 py-1 text-sm rounded bg-red-400 text-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none"
+                className="px-3 py-1 text-sm rounded bg-red-400 text-white hover:bg-gray-200 focus:outline-none"
               >
                 Close
               </button>
@@ -722,6 +757,33 @@ function Gallery() {
                 className="w-full h-auto rounded"
                 aria-label="open video"
               />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Coming Soon Modal */}
+      {showComingSoon && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) setShowComingSoon(false); }}
+        >
+          <div className={`rounded-lg shadow-lg max-w-sm md:max-w-md lg:max-w-lg w-full p-6 ${isDark ? 'bg-slate-800 text-gray-100' : 'bg-white text-gray-900'}`}>
+            <div className="flex justify-end">
+              <button
+                ref={comingSoonCloseRef}
+                onClick={() => setShowComingSoon(false)}
+                aria-label="Close"
+                className="px-3 py-1 text-sm rounded bg-red-400 text-white hover:bg-red-300 focus:outline-none"
+              >
+                Close
+              </button>
+            </div>
+            <div className="mt-2 text-center">
+              <h3 className="text-lg font-semibold">Projects coming soon</h3>
+              <p className="mt-2 text-sm text-gray-500">We're working to add detailed project pages. Stay tuned!</p>
             </div>
           </div>
         </div>

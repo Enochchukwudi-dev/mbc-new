@@ -83,7 +83,7 @@ export default function HomePage() {
                 <div className="mt-4 mb-3 flex gap-3">
                   <Link
                     href="/Booking"
-                    className={`inline-flex items-center text-sm md:text-base lg:text-lg px-4 py-2 md:px-6 md:py-2 lg:px-8 lg:py-2 ${isDark ? 'bg-yellow-200/80' : 'bg-amber-700'}  ${isDark ? 'hover:bg-yellow-200' : 'hover:bg-amber-600'} ${isDark ? 'text-slate-950' : 'text-white'} rounded-md md:rounded-lg font-semibold shadow transition-shadow`}
+                    className={`inline-flex items-center text-sm md:text-base lg:text-lg px-4 py-2 md:px-6 md:py-2 lg:px-8 lg:py-2 ${isDark ? 'bg-yellow-200/80' : 'bg-amber-600'}  ${isDark ? 'hover:bg-yellow-200' : 'hover:bg-amber-500'} ${isDark ? 'text-slate-950' : 'text-white'} rounded-md md:rounded-lg font-semibold shadow transition-shadow`}
                     aria-label="Request a free quote"
                   >
                     Request a Free Quote
