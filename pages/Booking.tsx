@@ -218,7 +218,7 @@ function Booking() {
     setTimeout(() => {
       setSubmitting(false)
       // Prepare message and open WhatsApp with prefilled text
-      const phoneNumber = '2349162919586'
+      const phoneNumber = '2348064032113'
       const text = `Booking request\nName: ${name}\nPhone: ${phone}\nService: ${service}`
       const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`
       // Open WhatsApp in a new tab/window (fallback if popup is blocked)

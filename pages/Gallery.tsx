@@ -32,7 +32,7 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
       return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
     };
 
-    const v = document.createElement("video");
+    const v = document.createElement("video") as HTMLVideoElement;
     v.preload = "metadata";
     v.muted = true;
     v.playsInline = true;
@@ -40,8 +40,8 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
 
     const drawFrame = (): string | null => {
       try {
-        const w = (v as any).videoWidth || 480;
-        const h = (v as any).videoHeight || 270;
+        const w = v.videoWidth || 480;
+        const h = v.videoHeight || 270;
         if (!w || !h) return null;
         const canvas = document.createElement("canvas");
         canvas.width = w;
@@ -51,10 +51,10 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
         ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
         // toDataURL may throw if canvas is tainted by cross-origin video
         return canvas.toDataURL("image/jpeg", 0.8);
-      } catch (err) {
+      } catch {
         return null;
       }
-    };
+    }; 
 
     const attemptCapture = async (url: string) => {
       return new Promise<string | null>((resolve) => {
@@ -85,7 +85,7 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
           // try seeking slightly to ensure a frame is available
           try {
             v.currentTime = Math.min(0.1, (v.duration || 0) / 2 || 0.1);
-          } catch (e) {
+          } catch {
             // ignore
           }
         };
@@ -107,7 +107,9 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
         // try to trigger loading
         try {
           v.load();
-        } catch {}
+        } catch {
+          // ignore
+        }
       });
     };
 
@@ -124,7 +126,7 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
             objectUrl = URL.createObjectURL(blob);
             data = await attemptCapture(objectUrl);
           }
-        } catch (err) {
+        } catch {
           // fetch may fail due to CORS; fall through to placeholder
         }
       }
@@ -150,8 +152,9 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
   }, [src, poster]);
 
   return thumb ? (
-    // Use a plain <img> for data URLs / generated thumbnails
-    <img src={thumb} alt={alt ?? "video thumbnail"} className="w-full h-full object-cover" />
+    <div className="w-full h-full relative">
+      <Image src={thumb} alt={alt ?? "video thumbnail"} fill className="object-cover" unoptimized />
+    </div>
   ) : (
     <div className="w-full h-full bg-gray-800" />
   );
@@ -410,7 +413,7 @@ function Gallery() {
       <Navbar />
 
       <main
-        className={`min-h-screen pt-20 ${selectedVideo ? "filter blur-sm" : ""} ${isDark ? 'bg-slate-95np0' : 'bg-[hsl(20,22%,92%)]'}`}
+        className={`min-h-screen pt-20 ${selectedVideo ? "filter blur-sm" : ""} ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,92%)]'}`}
       >
         <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ${isDark ? 'bg-slate-950' : 'bg-[hsl(20,22%,92%)]'}`}>
           <div className="flex flex-col items-center text-center mb-6">
@@ -783,7 +786,7 @@ function Gallery() {
             </div>
             <div className="mt-2 text-center">
               <h3 className="text-lg font-semibold">Projects coming soon</h3>
-              <p className="mt-2 text-sm text-gray-500">We're working to add detailed project pages. Stay tuned!</p>
+              <p className="mt-2 text-sm text-gray-500">We are working to add detailed project pages. Stay tuned!</p>
             </div>
           </div>
         </div>
