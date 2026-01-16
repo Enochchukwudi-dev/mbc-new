@@ -132,12 +132,10 @@ export default function HomePage() {
           <div>
             <Trust />
           </div>
-          <div>
-            <Featured />
-          </div>
+         
 
           {/* Services */}
-          <div id="services" className="mt-8  scroll-mt-28 flex flex-col items-center text-center mb-6">
+          <div id="services" className="mt-12  scroll-mt-28 flex flex-col items-center text-center mb-6">
             <h2 className={`mt-2 text-3xl sm:text-2xl font-semibold tracking-tight ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>Our Services</h2>
             <p className={`mt-3 max-w-2xl mx-auto text-sm md:text-base ${isDark ? 'text-gray-400' : 'text-gray-700'}`}>We manage every phase of a project with experienced oversight, quality materials, and clear communication so your build is durable and completed on time.</p>
           </div>

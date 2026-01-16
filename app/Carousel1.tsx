@@ -15,7 +15,7 @@ const slides = [
   {
     id: 2,
     title: "Marock  Construction Enterprise",
-    title2: "Tolo Project",
+    title2: "CAC Registered • 3492332",
     subtitle1: "Led by Engr.  Marshal Uzor",
     image: "/tolo.jpeg",
     alt: "Tolo",
@@ -23,7 +23,7 @@ const slides = [
   {
     id: 3,
     title: "Marock  Construction Enterprise",
-    title2: "Tolo Project",
+    title2: "CAC Registered • 3492332",
     subtitle1: "Led by Engr.  Marshal Uzor",
     image: "/s7.jpeg",
     alt: "Tolo",
@@ -94,7 +94,19 @@ export default function Carousel() {
              className={`mt-1 mb-4 pb-2 text-base font-normal shadow-sm shadow-amber-900/20 flex items-center mx-auto justify-center gap-1 ${isDark ? 'text-white' : ' text-gray-800'}`}
            >
              <FileText className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} w-6 h-6`} />
-             {s.title2}
+             {(() => {
+               const m = s.title2.match(/(.*?)(\d+)(.*)/);
+               if (m) {
+                 return (
+                   <>
+                     <span>{m[1]}</span>
+                     <strong className={isDark ? 'text-blue-300 font-bold' : 'text-amber-700 font-semibold'}>{m[2]}</strong>
+                     <span>{m[3]}</span>
+                   </>
+                 );
+               }
+               return <span>{s.title2}</span>;
+             })()}
            </p>
           )}
            
