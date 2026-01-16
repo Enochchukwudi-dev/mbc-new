@@ -506,7 +506,7 @@ function Gallery() {
                 {shuffledMedia
                   .filter((m) => m.type === 'image')
                   .map((m, i) => (
-                    <article key={i} className="rounded-lg overflow-hidden shadow shadow-slate-800 ">
+                    <article key={i} className="rounded-lg overflow-hidden shadow-sm ">
                         <div className={`relative h-48 md:h-56 lg:h-64 w-full ${isDark ? 'bg-slate-900/40' : 'bg-[hsl(20,22%,85%)]'}`}>
                         <Image
                           src={m.src}
@@ -548,7 +548,7 @@ function Gallery() {
                   {shuffledMedia
                     .filter((m) => m.type === 'video')
                     .map((m, i) => (
-                      <article key={i} className="rounded-lg overflow-hidden shadow shadow-slate-800">
+                      <article key={i} className="rounded-lg overflow-hidden shadow-sm">
                         <div className="relative h-48 md:h-56 lg:h-64 w-full">
                           <VideoThumbnail src={m.src} poster={m.poster} alt={m.alt ?? `video thumbnail ${i + 1}`} />
 
