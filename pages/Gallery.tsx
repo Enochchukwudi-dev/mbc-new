@@ -170,17 +170,17 @@ function Gallery() {
   const media = useMemo<MediaItem[]>(
     () => [
       { type: "image", src: "/w6.jpeg", alt: "Image 1" },
-      { type: "image", src: "/w7.jpeg", alt: "Image 2" },
+  
       { type: "image", src: "/w8.jpeg", alt: "Image 3" },
-      { type: "image", src: "/w9.jpeg", alt: "Image 4" },
+      
       { type: "image", src: "/w10.jpeg", alt: "Image 5" },
       { type: "image", src: "/w11.jpeg", alt: "Image 6" },
-      { type: "image", src: "/w12.jpeg", alt: "Image 7" },
-      { type: "image", src: "/w13.jpeg", alt: "Image 8" },
+
+   
       { type: "image", src: "/w13.jpeg", alt: "Image 9" },
       { type: "image", src: "/w2copy.jpeg", alt: "Image 10" },
       { type: "image", src: "/w4copy.jpeg", alt: "Image 11" },
-      { type: "image", src: "/hello.jpeg", alt: "Image 12" },
+      
       { type: "image", src: "/s1.jpeg", alt: "Image 13" },
       { type: "image", src: "/s2.jpeg", alt: "Image 14" },
       { type: "image", src: "/s3.jpeg", alt: "Image 15" },
@@ -507,8 +507,15 @@ function Gallery() {
                   .filter((m) => m.type === 'image')
                   .map((m, i) => (
                     <article key={i} className="rounded-lg overflow-hidden bg-gray-100  shadow-sm">
-                      <div className="relative h-48 md:h-56 lg:h-64 w-full bg-transparent">
-                        <Image src={m.src} alt={m.alt} fill className="object-cover" />
+                        <div className="relative h-48 md:h-56 lg:h-64 w-full bg-transparent">
+                        <Image
+                          src={m.src}
+                          alt={m.alt}
+                          fill
+                          className="object-cover"
+                          loading={m.src === '/w11.jpeg' || m.src === '/w12.jpeg' ? 'eager' : 'lazy'}
+                          priority={m.src === '/w11.jpeg' || m.src === '/w12.jpeg'}
+                        />
                       </div>
 
                       <div className={`p-3 ${isDark ? 'bg-slate-400' : 'bg-white'}`}>
