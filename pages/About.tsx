@@ -31,7 +31,7 @@ function About() {
 
               <div className={`md:w-1/2 px-6 md:px-8 lg:px-10 py-8 md:py-10 lg:py-12 ${isDark ? 'bg-slate-900' : 'bg-[hsl(20,22%,85%)]'} text-left`}>
                <h2 className={`text-lg md:text-xl font-medium ${isDark ? 'text-yellow-100' : 'text-gray-700'}`}>MBC group, Anambra State, 2024</h2>
-                <h1 className={`mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold ${isDark ? 'text-gray-100' : 'text-gray-900'}`}>About Us</h1>
+                <h1 className={`mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold ${isDark ? 'text-purple-100' : 'text-gray-900'}`}>About Us</h1>
                 <p className={`mt-3 text-sm sm:text-base md:text-base lg:text-lg ${isDark ? 'text-gray-400' : 'text-gray-800'}`}>
                   Marock Building Construction Enterprise (MBC) is a full-service construction firm with over a decade of experience delivering high-quality residential and commercial projects across Anambra State and the surrounding regions.<br /><br />
                   We manage every phase of the build process, from initial planning and permitting through structural works, roofing, waterproofing, interior/exterior finishing, and final inspections, ensuring projects are completed on time and within budget.<br /><br />

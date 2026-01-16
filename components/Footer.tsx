@@ -63,7 +63,7 @@ export default function Footer() {
                 />
                 <div className="mt-1 text-left md:text-left">
                   <span
-                    className={`block font-extrabold ${isDark ? 'text-gray-200' : 'text-gray-900'}`}
+                    className={`block font-extrabold ${isDark ? 'text-purple-100' : 'text-gray-900'}`}
                     style={{ fontSize: "10px", lineHeight: 1 }}
                   >
                     MAROCK BUILDING CONST.
@@ -85,7 +85,7 @@ export default function Footer() {
 
           {/* Shop */}
           <div className="md:ml-5">
-            <h4 className={`text-sm font-bold ${isDark ? 'text-white' : 'text-black'} uppercase`}>
+            <h4 className={`text-sm font-bold ${isDark ? 'text-purple-100' : 'text-black'} uppercase`}>
               Quick Links
             </h4>
             <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-800'}`}>
@@ -115,7 +115,7 @@ export default function Footer() {
            
             </ul>
 
-            <h4 className={`mt-6 text-sm font-bold ${isDark ? 'text-white' : 'text-black'} uppercase`}>
+            <h4 className={`mt-6 text-sm font-bold ${isDark ? 'text-purple-100' : 'text-black'} uppercase`}>
               Company
             </h4>
             <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-800'}`}>
@@ -129,7 +129,7 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className={`text-sm font-bold ${isDark ? 'text-white' : 'text-black'} uppercase`}>
+            <h4 className={`text-sm font-bold ${isDark ? 'text-purple-100' : 'text-black'} uppercase`}>
               Support
             </h4>
             <ul className={`mt-4 space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-800'}`}>
@@ -146,7 +146,7 @@ export default function Footer() {
 
           {/* Contact list */}
           <div>
-            <h4 className={`text-sm font-bold ${isDark ? 'text-white' : 'text-black'} uppercase`}>
+            <h4 className={`text-sm font-bold ${isDark ? 'text-purple-100' : 'text-black'} uppercase`}>
               Address
             </h4>
             <ul className={`mt-4 space-y-3 ${isDark ? 'text-gray-400' : 'text-gray-600'} text-sm`}>

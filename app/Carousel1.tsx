@@ -79,28 +79,28 @@ export default function Carousel() {
         </button>
       </div>
       
-      <div className="mt-4 px-1 w-full z-20 md:mt-6 lg:mt-10">
+      <div className="mt-4   px-1 w-full z-20 md:mt-6 lg:mt-10">
         <div
           className={
-            `mx-auto text-center px-2 md:px-10 lg:px-14 py-2 md:py-3 lg:py-4 rounded-2xl shadow-lg backdrop-blur-md w-full max-w-3xl ${isDark ? 'bg-slate-900 text-white' : 'bg-amber-900/5 text-black/90'}`
+            `mx-auto text-center px-2 md:px-10 lg:px-14 py-2 md:py-3 lg:py-4 rounded-2xl shadow-lg backdrop-blur-md w-full max-w-3xl ${isDark ? 'bg-slate-950 text-white' : 'bg-amber-900/5 text-black/90'}`
           }
         >
-          <h3 className={`text-base mb-4 md:text-lg shadow-amber-900/40 lg:text-xl font-semibold ${isDark ? 'text-white' : ' text-black'} py-1 md:py-2 rounded-lg shadow-sm`}>
-            <Building2 className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} w-5 h-5 inline-block mr-2`} />
+          <h3 className={`text-base mb- md:text-lg  lg:text-xl font-semibold ${isDark ? 'text-purple-100 shadow-yellow-200/20' : ' text-black'} py-1 md:py-2 rounded-lg shadow-sm`}>
+            <Building2 className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} w-5 mb-3 h-5 inline-block mr-2`} />
             {s.title}
           </h3>
           {s.title2 && (
            <p
-             className={`mt-1 mb-4 pb-2 text-base font-normal shadow-sm shadow-amber-900/20 flex items-center mx-auto justify-center gap-1 ${isDark ? 'text-white' : ' text-gray-800'}`}
+             className={`mt-1 mb-4 pb-2 text-base font-normal shadow-sm  flex items-center mx-auto justify-center gap-1 ${isDark ? 'text-white shadow-yellow-200/10' : ' text-gray-800'}`}
            >
-             <FileText className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} w-6 h-6`} />
+             <FileText className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} w-6 mt-4  mb-2 h-6`} />
              {(() => {
                const m = s.title2.match(/(.*?)(\d+)(.*)/);
                if (m) {
                  return (
                    <>
                      <span>{m[1]}</span>
-                     <strong className={isDark ? 'text-blue-300 font-bold' : 'text-amber-700 font-semibold'}>{m[2]}</strong>
+                     <strong className={isDark ? 'text-purple-100 font-bold' : 'text-amber-700 font-semibold'}>{m[2]}</strong>
                      <span>{m[3]}</span>
                    </>
                  );
@@ -110,7 +110,7 @@ export default function Carousel() {
            </p>
           )}
            
-          <p className={`mt-4 text-sm font-light flex items-center justify-center gap-2 ${isDark ? 'text-gray-400' : 'text-gray-900'}`}>
+          <p className={`mt-4 text-sm font-light flex items-center justify-center gap-2 ${isDark ? 'text-purple-100 shadow-yellow-200/70' : 'text-gray-900'}`}>
             <UserStar className={`${isDark ? 'text-yellow-200/80' : 'text-amber-700'} w-6 h-6 mr-2`} />
             {s.subtitle1}
           </p>

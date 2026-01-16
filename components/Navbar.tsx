@@ -104,7 +104,7 @@ function Navbar() {
                 />
                 <div className="mt-1 text-left md:text-left">
                   <span
-                    className={`block font-extrabold ${isDark ? 'text-gray-200' : 'text-gray-900'}`}
+                    className={`block font-extrabold ${isDark ? 'text-purple-100' : 'text-gray-900'}`}
                     style={{ fontSize: "10px", lineHeight: 1 }}
                   >
                     MAROCK BUILDING CONST.

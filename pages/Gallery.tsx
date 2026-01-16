@@ -502,12 +502,12 @@ function Gallery() {
                 <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>Project images</p>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6 ">
                 {shuffledMedia
                   .filter((m) => m.type === 'image')
                   .map((m, i) => (
-                    <article key={i} className="rounded-lg overflow-hidden bg-gray-100  shadow-sm">
-                        <div className="relative h-48 md:h-56 lg:h-64 w-full bg-transparent">
+                    <article key={i} className="rounded-lg overflow-hidden shadow shadow-slate-800 ">
+                        <div className={`relative h-48 md:h-56 lg:h-64 w-full ${isDark ? 'bg-slate-900/40' : 'bg-[hsl(20,22%,85%)]'}`}>
                         <Image
                           src={m.src}
                           alt={m.alt}
@@ -518,10 +518,13 @@ function Gallery() {
                         />
                       </div>
 
-                      <div className={`p-3 ${isDark ? 'bg-slate-400' : 'bg-white'}`}>
-                        <h3 className="text-xs font-semibold text-black ">{m.alt ?? `Image ${i + 1}`}</h3>
+                      <div className={`p-3 ${isDark ? 'bg-slate-950/95' : 'bg-[hsl(20,22%,85%)]'}`}>
+                        <h3 className={`text-xs font-semibold ${isDark ? 'text-white' : 'text-black'} `}>{m.alt ?? `Image ${i + 1}`}</h3>
                         <div className="mt-4">
-                          <button onClick={() => setLightboxSrc(m.src)} className={`inline-flex items-center px-3 py-2 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'} ${isDark ? 'text-slate-900' : 'text-white'} hover:bg-slate-600 rounded-md text-xs md:text-sm font-semibold`}>
+                          <button
+                            onClick={() => setLightboxSrc(m.src)}
+                            className={`inline-flex items-center text-xs md:text-sm lg:text-sm px-3 py-2 md:px-4 md:py-3 lg:px-3 lg:py-2 border ${isDark ? 'bg-slate-950 text-purple-100 border-purple-100/15' : 'bg-white/2 border-1 border-amber-700 text-amber-700'} font-semibold rounded-md md:rounded-lg hover:cursor-pointer`}
+                          >
                             View full image
                           </button>
                         </div>
@@ -545,11 +548,9 @@ function Gallery() {
                   {shuffledMedia
                     .filter((m) => m.type === 'video')
                     .map((m, i) => (
-                      <article key={i} className="rounded-lg overflow-hidden bg-gray-100  shadow-sm">
-                        <div className="relative h-48 md:h-56 lg:h-64 w-full bg-transparent">
-                          <div className="w-full h-full">
-                            <VideoThumbnail src={m.src} poster={m.poster} alt={m.alt ?? `video thumbnail ${i + 1}`} />
-                          </div>
+                      <article key={i} className="rounded-lg overflow-hidden shadow shadow-slate-800">
+                        <div className="relative h-48 md:h-56 lg:h-64 w-full">
+                          <VideoThumbnail src={m.src} poster={m.poster} alt={m.alt ?? `video thumbnail ${i + 1}`} />
 
                           {/* Play overlay */}
                           <button
@@ -561,10 +562,13 @@ function Gallery() {
                           </button>
                         </div>
 
-                        <div className={`p-3 ${isDark ? 'bg-slate-400' : 'bg-white'}`}>
-                          <h3 className="text-xs font-semibold text-black ">{m.alt ?? `Video ${i + 1}`}</h3>
+                        <div className={`p-3 ${isDark ? 'bg-slate-950/95' : 'bg-[hsl(20,22%,85%)]'}`}>
+                          <h3 className={`text-xs font-semibold ${isDark ? 'text-white' : 'text-black'}`}>{m.alt ?? `Video ${i + 1}`}</h3>
                           <div className="mt-4">
-                            <button onClick={() => setSelectedVideo(m.src)} className={`inline-flex items-center px-3 py-2 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'} ${isDark ? 'text-slate-900' : 'text-white'} hover:bg-slate-600 rounded-md text-xs font-semibold`}>
+                            <button
+                              onClick={() => setSelectedVideo(m.src)}
+                              className={`inline-flex items-center text-xs md:text-sm lg:text-sm px-3 py-2 md:px-4 md:py-3 lg:px-3 lg:py-2 border ${isDark ? 'bg-slate-950 text-purple-100 border-purple-100/15' : 'bg-white/2 border-1 border-amber-700 text-amber-700'} font-semibold rounded-md md:rounded-lg hover:cursor-pointer`}
+                            >
                               Play video
                             </button>
                           </div>
@@ -578,7 +582,6 @@ function Gallery() {
         </div>
       </main>
 
-      {/* Image Lightbox */}
       {lightboxSrc && (
         <div
           ref={lightboxOverlayRef}
@@ -589,19 +592,17 @@ function Gallery() {
             if (e.target === lightboxOverlayRef.current) setLightboxSrc(null);
           }}
         >
-          <div className="max-w-4xl w-full bg-white  rounded-lg shadow-lg overflow-hidden">
-            <div className="flex justify-end p-2">
-              <button
-                ref={lightboxCloseRef}
-                onClick={() => setLightboxSrc(null)}
-                aria-label="Close image"
-                className="px-3 py-1 text-sm rounded bg-red-400 text-white hover:bg-gray-200 focus:outline-none"
-              >
-                Close
-              </button>
-            </div>
+          <div className={`max-w-4xl w-full ${isDark ? 'bg-slate-800/10' : 'bg-white/5'}  rounded-lg shadow-lg overflow-hidden relative`}>
+            <button
+              ref={lightboxCloseRef}
+              onClick={() => setLightboxSrc(null)}
+              aria-label="Close image"
+              className="absolute top-3 right-3 z-50 px-3 py-1 text-sm rounded bg-red-500 text-white hover:bg-red-600 focus:outline-none"
+            >
+              Close
+            </button>
             <div className="p-4 flex items-center justify-center">
-              <Image src={lightboxSrc!} alt="Gallery image" width={1200} height={800} className="w-full h-auto object-contain max-h-[80vh]" />
+              <img src={lightboxSrc!} alt="Service image" className="w-full h-auto object-contain max-h-[80vh]" />
             </div>
           </div>
         </div>
@@ -641,32 +642,7 @@ function Gallery() {
         </div>
       )}
 
-      {/* Coming Soon Modal */}
-      {showComingSoon && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
-          onClick={(e) => { if (e.target === e.currentTarget) setShowComingSoon(false); }}
-        >
-          <div className={`rounded-lg shadow-lg max-w-sm md:max-w-md lg:max-w-lg w-full p-6 ${isDark ? 'bg-slate-800 text-gray-100' : 'bg-white text-gray-900'}`}>
-            <div className="flex justify-end">
-              <button
-                ref={comingSoonCloseRef}
-                onClick={() => setShowComingSoon(false)}
-                aria-label="Close"
-                className="px-3 py-1 text-sm rounded bg-red-400 text-white hover:bg-red-300 focus:outline-none"
-              >
-                Close
-              </button>
-            </div>
-            <div className="mt-2 text-center">
-              <h3 className="text-lg font-semibold">Projects coming soon</h3>
-              <p className="mt-2 text-sm text-gray-500">We are working to add detailed project pages. Stay tuned!</p>
-            </div>
-          </div>
-        </div>
-      )}
+     
 
       <Footer />
     </>
