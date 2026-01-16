@@ -18,7 +18,12 @@ type MediaItem =
 
 // Component: extract first video frame to use as a thumbnail when a poster isn't provided
 function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; alt?: string }) {
-  const [thumb, setThumb] = useState<string | null>(poster ?? null);
+  const makePlaceholder = () => {
+    const svg = `<?xml version='1.0' encoding='utf-8'?><svg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360'><rect width='100%' height='100%' fill='%23f3f4f6'/><circle cx='320' cy='180' r='44' fill='%23ffffff' fill-opacity='0.6'/><polygon points='300,160 300,200 340,180' fill='%232b2b2b' /></svg>`;
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  };
+
+  const [thumb, setThumb] = useState<string | null>(poster ?? makePlaceholder());
 
   useEffect(() => {
     if (poster) return; // already have a poster image
@@ -502,7 +507,7 @@ function Gallery() {
                   .filter((m) => m.type === 'image')
                   .map((m, i) => (
                     <article key={i} className="rounded-lg overflow-hidden bg-gray-100  shadow-sm">
-                      <div className="relative h-48 md:h-56 lg:h-64 w-full bg-black">
+                      <div className="relative h-48 md:h-56 lg:h-64 w-full bg-transparent">
                         <Image src={m.src} alt={m.alt} fill className="object-cover" />
                       </div>
 
@@ -534,7 +539,7 @@ function Gallery() {
                     .filter((m) => m.type === 'video')
                     .map((m, i) => (
                       <article key={i} className="rounded-lg overflow-hidden bg-gray-100  shadow-sm">
-                        <div className="relative h-48 md:h-56 lg:h-64 w-full bg-black">
+                        <div className="relative h-48 md:h-56 lg:h-64 w-full bg-transparent">
                           <div className="w-full h-full">
                             <VideoThumbnail src={m.src} poster={m.poster} alt={m.alt ?? `video thumbnail ${i + 1}`} />
                           </div>
