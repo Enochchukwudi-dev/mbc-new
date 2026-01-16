@@ -100,7 +100,7 @@ export default function HomePage() {
                   style={{ lineHeight: "1.05" }}
                 >
                   Quality
-                  <span className={`${isDark ? 'text-purple-300/90' : 'text-purple-600'} font-extrabold`}> 
+                  <span className={`${isDark ? 'text-purple-300/90' : 'text-amber-600'} font-extrabold`}> 
                     {" "}
                     Construction
                   </span>{" "}
