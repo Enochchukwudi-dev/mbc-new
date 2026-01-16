@@ -15,6 +15,7 @@ function Booking() {
     "Interior & Exterior Finishing",
     "Flooring, Tiling & Paving",
     "Construction Project Supervision",
+    "Architectural Drawing",
   ]
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [success, setSuccess] = useState(false)

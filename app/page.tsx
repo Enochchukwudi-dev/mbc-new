@@ -57,8 +57,40 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main className={`min-h-screen py-8 pt-28 ${isDark ? 'bg-slate-950' : 'bg-amber-600/3'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+      <main className={`min-h-screen py-8 pt-28 relative overflow-hidden ${isDark ? 'bg-slate-950' : 'bg-amber-600/3'}`}>
+        {/* Mobile: subtle, full-width faded gradient (soft edges) */}
+        <div
+          aria-hidden
+          className="absolute left-0 top-0 h-full w-full sm:hidden pointer-events-none z-0"
+          style={isDark ? {
+            top: '-32px',
+            background: 'radial-gradient(circle at 10% 50%, rgba(124,58,237,0.28) 0%, rgba(139,92,246,0.16) 20%, rgba(139,92,246,0.06) 40%, transparent 45%)',
+            filter: 'blur(28px)',
+            transform: 'scale(1.05)',
+            opacity: 0.95,
+          } : {
+            top: '-32px',
+            background: 'radial-gradient(circle at 20% 50%, rgba(245,155,2,0.35) 0%, rgba(245,155,2,0.20) 12%, transparent 60%)',
+            filter: 'blur(28px)',
+            transform: 'scale(1.05)',
+            opacity: 0.95,
+          }}
+        />
+        {/* Desktop: stronger left-side gradient */}
+        <div aria-hidden className="hidden sm:block absolute left-0 top-0 h-full w-1/2 pointer-events-none z-0" style={isDark ? {
+          top: '-32px',
+          background: 'radial-gradient(circle at 10% 50%, rgba(124,58,237,0.28) 0%, rgba(139,92,246,0.16) 20%, rgba(139,92,246,0.06) 40%, transparent 45%)',
+          filter: 'blur(36px)',
+          transform: 'scale(1.05)',
+          opacity: 0.95,
+        } : {
+          top: '-32px',
+          background: 'radial-gradient(circle at 20% 50%, rgba(245,155,2,0.35) 0%, rgba(245,155,2,0.20) 12%, transparent 60%)',
+          filter: 'blur(36px)',
+          transform: 'scale(1.05)',
+          opacity: 0.95,
+        }} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mt-5 mb-4 md:mt-7 grid md:grid-cols-2 md:gap-2 gap-6 items-start">
             {/*   Hero Section */}
             <section className="grid md:grid-cols-1 gap-6 items-center">
@@ -68,7 +100,7 @@ export default function HomePage() {
                   style={{ lineHeight: "1.05" }}
                 >
                   Quality
-                  <span className={`${isDark ? 'text-blue-300/90' : 'text-amber-600'} font-extrabold`}>
+                  <span className={`${isDark ? 'text-purple-300/90' : 'text-purple-600'} font-extrabold`}> 
                     {" "}
                     Construction
                   </span>{" "}
@@ -144,6 +176,10 @@ export default function HomePage() {
               {
                 img: "/inte6.jpeg",
                 title: "Construction Project Supervision",
+              },
+               {
+                img: "/hello.jpeg",
+                title: "Architectural Drawing",
               },
             ].map((s, i) => (
               <article

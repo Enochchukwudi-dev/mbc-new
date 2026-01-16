@@ -25,7 +25,7 @@ function About() {
             <div className="md:flex md:items-stretch md:gap-0 lg:gap-0">
               <div className={`md:w-1/2 ${isDark ? 'bg-slate-900' : 'bg-[hsl(20,22%,80%)]'} p-6 md:p-8 lg:p-12 flex items-center justify-center`}>
                 <div className="w-full max-w-sm overflow-hidden rounded-xl shadow-md">
-                  <Image src="/team.jpeg" alt="hero" width={640} height={480} className="w-full h-64 sm:h-72 md:h-80 lg:h-96 object-cover" />
+                  <Image src="/s2.jpeg" alt="hero" width={640} height={480} className="w-full h-64 sm:h-72 md:h-80 lg:h-96 object-cover" />
                 </div>
               </div>
 

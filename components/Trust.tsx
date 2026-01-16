@@ -44,7 +44,7 @@ export default function Trust() {
 
   return (
     <section aria-labelledby={`trust-heading" className="py-8   ${isDark ? 'bg-slate-900/40' : 'bg-[hsl(20,22%,85%)]'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mt-45 mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`mx-auto mb-9 w-45 h-68 overflow-hidden border ${isDark ? 'border-gray-900' : 'border-gray-200'}  bg-white/6 p-3 shadow-md flex flex-col items-center justify-center`}>
           <div className="w-full flex-1 flex items-center justify-center">
             <button onClick={() => setShowCerts(true)} aria-label="Open certificates" className="w-full h-full flex items-center justify-center">

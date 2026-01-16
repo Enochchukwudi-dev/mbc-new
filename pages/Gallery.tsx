@@ -13,7 +13,8 @@ type MediaItem =
       type: "video";
       src: string;
       poster?: string;
-    };
+      alt?: string;
+    }; 
 
 // Component: extract first video frame to use as a thumbnail when a poster isn't provided
 function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; alt?: string }) {
@@ -163,26 +164,60 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
 function Gallery() {
   const media = useMemo<MediaItem[]>(
     () => [
-      { type: "image", src: "/w6.jpeg", alt: "Construction 1" },
-      { type: "image", src: "/w7.jpeg", alt: "Construction 2" },
-      { type: "image", src: "/w8.jpeg", alt: "Construction 3" },
-      { type: "image", src: "/w9.jpeg", alt: "Construction 4" },
-      { type: "image", src: "/w10.jpeg", alt: "Construction 5" },
-      { type: "image", src: "/w11.jpeg", alt: "Construction 6" },
-      { type: "image", src: "/w12.jpeg", alt: "Construction 7" },
-      { type: "image", src: "/w13.jpeg", alt: "Construction 8" },
-      { type: "image", src: "/w13.jpeg", alt: "Construction 9" },
-      { type: "image", src: "/w2copy.jpeg", alt: "Construction 10" },
-      { type: "image", src: "/w4copy.jpeg", alt: "Construction 11" },
-      { type: "image", src: "/w5copy.jpeg", alt: "Construction 12" },
+      { type: "image", src: "/w6.jpeg", alt: "Image 1" },
+      { type: "image", src: "/w7.jpeg", alt: "Image 2" },
+      { type: "image", src: "/w8.jpeg", alt: "Image 3" },
+      { type: "image", src: "/w9.jpeg", alt: "Image 4" },
+      { type: "image", src: "/w10.jpeg", alt: "Image 5" },
+      { type: "image", src: "/w11.jpeg", alt: "Image 6" },
+      { type: "image", src: "/w12.jpeg", alt: "Image 7" },
+      { type: "image", src: "/w13.jpeg", alt: "Image 8" },
+      { type: "image", src: "/w13.jpeg", alt: "Image 9" },
+      { type: "image", src: "/w2copy.jpeg", alt: "Image 10" },
+      { type: "image", src: "/w4copy.jpeg", alt: "Image 11" },
+      { type: "image", src: "/hello.jpeg", alt: "Image 12" },
+      { type: "image", src: "/s1.jpeg", alt: "Image 13" },
+      { type: "image", src: "/s2.jpeg", alt: "Image 14" },
+      { type: "image", src: "/s3.jpeg", alt: "Image 15" },
+      { type: "image", src: "/s4.jpeg", alt: "Image 16" },
+      { type: "image", src: "/s5.jpeg", alt: "Image 17" },
+      { type: "image", src: "/s6.jpeg", alt: "Image 18" },
+      { type: "image", src: "/s7.jpeg", alt: "Image 19" },
 
-      { type: "video", src: "/v1.mp4" },
-      { type: "video", src: "/v2.mp4" },
-      { type: "video", src: "/v3.mp4" },
-      { type: "video", src: "/v4.mp4" },
-      { type: "video", src: "/v5.mp4" },
-      { type: "video", src: "/v6.mp4" },
-      { type: "video", src: "/v7.mp4" },
+      { type: "video", src: "/v1.mp4", alt: "Video 1" },
+      { type: "video", src: "/v2.mp4", alt: "Video 2" },
+      { type: "video", src: "/v3.mp4", alt: "Video 3" },
+      { type: "video", src: "/v4.mp4", alt: "Video 4" },
+      { type: "video", src: "/v5.mp4", alt: "Video 5" },
+      { type: "video", src: "/v6.mp4", alt: "Video 6" },
+      { type: "video", src: "/v7.mp4", alt: "Video 7" },
+      { type: "video", src: "/v8.mp4", alt: "Video 8" },
+      { type: "video", src: "/v9.mp4", alt: "Video 9" },
+      { type: "video", src: "/v10.mp4", alt: "Video 10" },
+      { type: "video", src: "/v11.mp4", alt: "Video 11" },
+      { type: "video", src: "/v12.mp4", alt: "Video 12" },
+      { type: "video", src: "/v13.mp4", alt: "Video 13" },
+      { type: "video", src: "/v14.mp4", alt: "Video 14" },
+      { type: "video", src: "/v15.mp4", alt: "Video 15" },
+      { type: "video", src: "/v16.mp4", alt: "Video 16" },
+      { type: "video", src: "/v17.mp4", alt: "Video 17" },
+      { type: "video", src: "/v18.mp4", alt: "Video 18" },
+      { type: "video", src: "/v19.mp4", alt: "Video 19" },
+      { type: "video", src: "/v20.mp4", alt: "Video 20" },
+      { type: "video", src: "/v21.mp4", alt: "Video 21" },
+      { type: "video", src: "/v22.mp4", alt: "Video 22" },
+      { type: "video", src: "/v23.mp4", alt: "Video 23" },
+      { type: "video", src: "/v24.mp4", alt: "Video 24" },
+      { type: "video", src: "/v25.mp4", alt: "Video 25" },
+      { type: "video", src: "/v26.mp4", alt: "Video 26" },
+      { type: "video", src: "/v27.mp4", alt: "Video 27" },
+      { type: "video", src: "/b1.mp4", alt: "Video 28" },
+      { type: "video", src: "/b2.mp4", alt: "Video 29" },
+      { type: "video", src: "/b3.mp4", alt: "Video 30" },
+      { type: "video", src: "/b4.mp4", alt: "Video 31" },
+      { type: "video", src: "/b5.mp4", alt: "Video 32" },
+      { type: "video", src: "/b6.mp4", alt: "Video 33" },
+      { type: "video", src: "/b7.mp4", alt: "Video 34" },
     ],
     []
   );
@@ -438,7 +473,7 @@ function Gallery() {
                     : (isDark ? "text-gray-500" : "text-gray-500")
                 }`}
               >
-                My project
+                Images
               </button>
 
               <button
@@ -449,248 +484,77 @@ function Gallery() {
                     : (isDark ? "text-gray-500" : "text-gray-500")
                 }`}
               >
-                Gallery
+                Videos
               </button>
             </div>
-          </div>
+          </div> 
           
 {filter === 'images' && (
-            <>
           <section className={`py-12 ${isDark ? 'bg-slate-900/70' : 'bg-[hsl(20,22%,85%)]'} rounded-2xl `}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div ref={sliderRef} className="relative">
-                <div
-                  className="overflow-hidden rounded-2xl touch-pan-y"
-                  onPointerDown={onPointerDown}
-                  onPointerMove={onPointerMove}
-                  onPointerUp={onPointerUp}
-                  onPointerCancel={onPointerCancel}
-                >
-                  <div
-                    className="flex transition-transform duration-500"
-                    style={{
-                      transform: `translateX(calc(-${
-                        index * 100
-                      }% + ${dragOffset}px))`,
-                      transition: isDraggingState ? "none" : undefined,
-                    }}
-                  >
-                    {projects.map((p) => (
-                      <figure
-                        key={p.src}
-                        className="min-w-full flex-shrink-0 p-4 flex justify-center"
-                      >
-                        <div className="relative overflow-hidden rounded-2xl bg-white  shadow-md w-full max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto">
-                          <div className="relative h-48 sm:h-56 md:h-72 lg:h-96">
-                            <Image
-                              src={p.src}
-                              alt={p.title}
-                              fill
-                              className="object-cover"
-                              draggable={false}
-                            />
-                          </div>
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className={`text-xl font-semibold ${isDark ? 'text-gray-100' : 'text-gray-900'}`}>Images</h2>
+                <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>Project images</p>
+              </div>
 
-                          <div className={`p-4 ${isDark ? 'bg-slate-300' : 'bg-white'}`}>
-                            <div className="font-bold text-lg md:text-xl lg:text-2xl text-gray-900">
-                              {p.title}
-                            </div>
-                            <div className={`text-sm text-gray-500 ${isDark ? 'text-gray-700' : 'text-gray-500'} mt-1`}>
-                              {p.desc}
-                            </div>
-                            <div className="mt-4">
-                              <button
-                                onClick={() => setShowComingSoon(true)}
-                                className={`inline-block px-4 py-2 md:px-6 md:py-3 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'}  ${isDark ? 'bg-slate-900' : 'text-white'} font-semibold rounded-md hover:bg-green-700`}
-                                aria-haspopup="dialog"
-                              >
-                                View project
-                              </button>
-                            </div>
-                          </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                {shuffledMedia
+                  .filter((m) => m.type === 'image')
+                  .map((m, i) => (
+                    <article key={i} className="rounded-lg overflow-hidden bg-gray-100  shadow-sm">
+                      <div className="relative h-48 md:h-56 lg:h-64 w-full bg-black">
+                        <Image src={m.src} alt={m.alt} fill className="object-cover" />
+                      </div>
+
+                      <div className={`p-3 ${isDark ? 'bg-slate-400' : 'bg-white'}`}>
+                        <h3 className="text-xs font-semibold text-black ">{m.alt ?? `Image ${i + 1}`}</h3>
+                        <div className="mt-4">
+                          <button onClick={() => setLightboxSrc(m.src)} className={`inline-flex items-center px-3 py-2 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'} ${isDark ? 'text-slate-900' : 'text-white'} hover:bg-slate-600 rounded-md text-xs md:text-sm font-semibold`}>
+                            View full image
+                          </button>
                         </div>
-                      </figure>
-                    ))}
-                  </div>
-
-                  {/* overlay controls */}
-                  <button
-                    aria-label="Previous"
-                    onClick={prev}
-                    className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 md:p-4 lg:p-5 bg-white/80  shadow z-10 hover:bg-white "
-                  >
-                    ‹
-                  </button>
-                  <button
-                    aria-label="Next"
-                    onClick={next}
-                    className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 md:p-4 lg:p-5 bg-white/80  shadow z-10 hover:bg-white "
-                  >
-                    ›
-                  </button>
-                </div>
-
-                <div className="flex justify-center gap-2 mt-4">
-                  {projects.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setIndex(i)}
-                      aria-label={`Go to slide ${i + 1}`}
-                      className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${
-                        i === index
-                          ? (isDark ? "bg-yellow-200/80 " : "bg-amber-700 ")
-                    : (isDark ? "bg-gray-600" : "bg-gray-400")
-                      }`}
-                    ></button>
+                      </div>
+                    </article>
                   ))}
-                </div>
               </div>
             </div>
           </section>
-
-
-
-            {/* Second Crousel (independent) */}
-           <section className={`py-12 ${isDark ? 'bg-slate-900/70' : 'bg-[hsl(20,22%,85%)]'}  rounded-2xl mt-5`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div ref={slider2Ref} className="relative">
-                <div
-                  className="overflow-hidden rounded-2xl touch-pan-y"
-                  onPointerDown={onPointerDown2}
-                  onPointerMove={onPointerMove2}
-                  onPointerUp={onPointerUp2}
-                  onPointerCancel={onPointerCancel2}
-                >
-                  <div
-                    className="flex transition-transform duration-500"
-                    style={{
-                      transform: `translateX(calc(-${
-                        index2 * 100
-                      }% + ${dragOffset2}px))`,
-                      transition: isDraggingState2 ? "none" : undefined,
-                    }}
-                  >
-                    {projects2.map((p) => (
-                      <figure
-                        key={p.src}
-                        className="min-w-full flex-shrink-0 p-4 flex justify-center"
-                      >
-                        <div className="relative overflow-hidden rounded-2xl bg-white shadow-md w-full max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto">
-                          <div className="relative h-48 sm:h-56 md:h-72 lg:h-96">
-                            <Image
-                              src={p.src}
-                              alt={p.title}
-                              fill
-                              className="object-cover"
-                              draggable={false}
-                            />
-                          </div>
-
-                         <div className={`p-4 ${isDark ? 'bg-slate-300' : 'bg-white'}`}>
-                            <div className="font-bold text-lg md:text-xl lg:text-2xl text-gray-900">
-                              {p.title}
-                            </div>
-                            <div className={`text-sm text-gray-500 ${isDark ? 'text-gray-700' : 'text-gray-500'} mt-1`}>
-                              {p.desc}
-                            </div>
-                            <div className="mt-4">
-                              <button
-                                onClick={() => setShowComingSoon(true)}
-                                className={`inline-block px-4 py-2 md:px-6 md:py-3 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'}  ${isDark ? 'bg-slate-900' : 'text-white'} font-semibold rounded-md hover:bg-green-700`}
-                                aria-haspopup="dialog"
-                              >
-                                View project
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </figure>
-                    ))}
-                  </div>
-
-                  {/* overlay controls */}
-                  <button
-                    aria-label="Previous"
-                    onClick={prev2}
-                    className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 md:p-4 lg:p-5 bg-white/80  shadow z-10 hover:bg-white "
-                  >
-                    ‹
-                  </button>
-                  <button
-                    aria-label="Next"
-                    onClick={next2}
-                    className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full p-3 md:p-4 lg:p-5 bg-white/80 shadow z-10 hover:bg-white "
-                  >
-                    ›
-                  </button>
-                </div>
-
-               <div className="flex justify-center gap-2 mt-4">
-                  {projects.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setIndex(i)}
-                      aria-label={`Go to slide ${i + 1}`}
-                      className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${
-                        i === index
-                          ? (isDark ? "bg-yellow-200/80 " : "bg-amber-700 ")
-                    : (isDark ? "bg-gray-600" : "bg-gray-400")
-                      }`}
-                    ></button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-            </>
-          )}
+        )} 
 
           {filter === 'videos' && (
             <section id="videos" ref={videosRef} className={`py-12 ${isDark ? 'bg-slate-900/70' : 'bg-[hsl(20,22%,85%)]'} rounded-2xl `}>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-4 flex items-center justify-between">
-                  <h2 className={`text-xl font-semibold ${isDark ? 'text-gray-100' : 'text-gray-900'}`}>Gallery</h2>
+                  <h2 className={`text-xl font-semibold ${isDark ? 'text-gray-100' : 'text-gray-900'}`}>Videos</h2>
                   <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>Random Multimedia from projects</p>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                   {shuffledMedia
-                    .filter((m) => m.type === 'image' || m.type === 'video')
+                    .filter((m) => m.type === 'video')
                     .map((m, i) => (
                       <article key={i} className="rounded-lg overflow-hidden bg-gray-100  shadow-sm">
                         <div className="relative h-48 md:h-56 lg:h-64 w-full bg-black">
-                          {m.type === 'image' ? (
-                            <Image src={m.src} alt={m.alt} fill className="object-cover" />
-                          ) : (
-                            <>
-                              <div className="w-full h-full">
-                                <VideoThumbnail src={m.src} poster={m.poster} alt={`video thumbnail ${i + 1}`} />
-                              </div>
+                          <div className="w-full h-full">
+                            <VideoThumbnail src={m.src} poster={m.poster} alt={m.alt ?? `video thumbnail ${i + 1}`} />
+                          </div>
 
-                              {/* Play overlay */}
-                              <button
-                                onClick={() => setSelectedVideo(m.src)}
-                                aria-label={`Play video ${i + 1}`}
-                                className="absolute inset-0 flex items-center justify-center text-white"
-                              >
-                                <span className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-black/50 backdrop-blur text-2xl md:text-3xl lg:text-3xl">▶</span>
-                              </button>
-                            </>
-                          )}
+                          {/* Play overlay */}
+                          <button
+                            onClick={() => setSelectedVideo(m.src)}
+                            aria-label={m.alt ?? `Play video ${i + 1}`}
+                            className="absolute inset-0 flex items-center justify-center text-white"
+                          >
+                            <span className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-black/50 backdrop-blur text-2xl md:text-3xl lg:text-3xl">▶</span>
+                          </button>
                         </div>
 
                         <div className={`p-3 ${isDark ? 'bg-slate-400' : 'bg-white'}`}>
-                          <h3 className="text-xs font-semibold text-black ">{m.type === 'image' ? m.alt : 'Video'}</h3>
+                          <h3 className="text-xs font-semibold text-black ">{m.alt ?? `Video ${i + 1}`}</h3>
                           <div className="mt-4">
-                            {m.type === 'image' ? (
-                              <button onClick={() => setLightboxSrc(m.src)} className={`inline-flex items-center px-3 py-2 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'} ${isDark ? 'text-slate-900' : 'text-white'} hover:bg-slate-600 rounded-md text-xs md:text-sm font-semibold`}>
-                                View full image
-                              </button>
-                            ) : (
-                              <button onClick={() => setSelectedVideo(m.src)} className={`inline-flex items-center px-3 py-2 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'} ${isDark ? 'text-slate-900' : 'text-white'} hover:bg-slate-600 rounded-md text-xs font-semibold`}>
-                                Play video
-                              </button>
-                            )}
+                            <button onClick={() => setSelectedVideo(m.src)} className={`inline-flex items-center px-3 py-2 ${isDark ? 'bg-yellow-200/70' : 'bg-amber-700'} ${isDark ? 'text-slate-900' : 'text-white'} hover:bg-slate-600 rounded-md text-xs font-semibold`}>
+                              Play video
+                            </button>
                           </div>
                         </div>
                       </article>
