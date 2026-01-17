@@ -115,7 +115,7 @@ export default function HomePage() {
                 <div className="mt-8 mb-3 flex gap-3">
                   <Link
                     href="/Booking"
-                    className={`inline-flex items-center text-base md:text-base lg:text-lg px-4 py-2 md:px-6 md:py-2 lg:px-8 lg:py-2 ${isDark ? 'bg-slate-950 border-1 border-amber-200/60' : 'bg-white/2 border-1 border-amber-700 text-amber-700'}  ${isDark ? 'hover:bg-yellow-200' : 'hover:bg-amber-500'} ${isDark ? 'text-yellow-200/80' : 'text-amber-700'} rounded-md md:rounded-lg font-semibold shadow transition-shadow`}
+                    className={`inline-flex items-center text-base md:text-base lg:text-lg px-4 py-2 md:px-6 md:py-2 lg:px-8 lg:py-2 ${isDark ? 'bg-slate-950 border-1 border-amber-200/60' : 'bg-white/2 border-1 border-amber-700 text-amber-700'}   ${isDark ? 'text-yellow-200/80' : 'text-amber-700'} rounded-full md:rounded-full font-semibold shadow transition-shadow`}
                     aria-label="Request a free quote"
                   >
                     Request a Free Quote
