@@ -178,6 +178,9 @@ function Gallery() {
 
    
       { type: "image", src: "/w13.jpeg", alt: "Image 9" },
+      { type: "image", src: "/damp.jpeg", alt: "📌 Featured 1" },
+      { type: "image", src: "/damp2.jpeg", alt: "📌 Featured 2" },
+      { type: "image", src: "/damp3.jpeg", alt: "📌 Featured 3" },
       { type: "image", src: "/w2copy.jpeg", alt: "Image 10" },
       { type: "image", src: "/w4copy.jpeg", alt: "Image 11" },
       
@@ -239,7 +242,18 @@ function Gallery() {
   const [shuffledMedia, setShuffledMedia] = useState<MediaItem[]>(media);
   useEffect(() => {
     // Defer shuffling to avoid synchronous setState inside effect
-    const t = setTimeout(() => setShuffledMedia(shuffle([...media])), 0);
+    const t = setTimeout(() => {
+      // Pinned items that should always be at the top
+      const pinnedSrcs = ["/damp.jpeg", "/damp2.jpeg", "/damp3.jpeg"];
+      const pinnedItems = media.filter((m) => pinnedSrcs.includes(m.src));
+      const unpinnedItems = media.filter((m) => !pinnedSrcs.includes(m.src));
+      
+      // Shuffle only the unpinned items
+      const shuffledUnpinned = shuffle([...unpinnedItems]);
+      
+      // Combine pinned items first, then shuffled items
+      setShuffledMedia([...pinnedItems, ...shuffledUnpinned]);
+    }, 0);
     return () => clearTimeout(t);
   }, [media]);
 
